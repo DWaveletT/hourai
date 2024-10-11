@@ -1,0 +1,103 @@
+title:
+  1-dp: 动态规划
+  bag-multi: 多重背包
+  bag-tree: 树形背包
+  dp-ddp1: 动态动态规划 1
+  dp-plug: 插头 dp
+  2-ds: 数据结构
+  balanced-tree: 平衡树
+  ds-fhq-treap: 无旋 Treap
+  ds-rbtree: 红黑树
+  ds-splay1: Splay 1
+  ds-splay2: Splay 2
+  ds-treap: Treap
+  per-fhq-treap1: 可持久化无旋 Treap 1
+  per-fhq-treap2: 可持久化无旋 Treap 2
+  ds-odtree: 珂朵莉树
+  heap-merge: 可并堆
+  linear-basis: 线性基
+  link-cut-tree: Link Cut 树
+  segment-tree: 线段树
+  ds-lc-seg: 李超树
+  ds-segtree1: 线段树 1
+  ds-segtree2: 线段树 2
+  ds-segtree3: 线段树 3
+  scanning-line: 扫描线
+  sqrt: 根号数据结构
+  block-list-1: 块状链表
+  block-value: 分块（权值）
+  mo-offline-twice: 莫队二次离线
+  5-flow: 网络流
+  flow-cost: 费用流
+  flow-ghtree: 最小割树
+  flow-max: 最大流
+  flow-range-cost: 上下界费用流
+  flow-range-max: 上下界最大流
+  9-geometry: 计算几何
+  2d-convex: 二维凸包
+  2d-minimal-circle: 最小圆覆盖
+  2d-planer-duel: 最左转线
+  2d: 二维基础
+  4-graph: 图论
+  cactus: 仙人掌
+  count-circle-3: 三元环计数
+  count-circle-4: 四元环计数
+  graph-base-circle-tree: 基环树
+  path-johnson: 全源最短路
+  tarjan-2sat: 2-SAT
+  tarjan-cut-vertex: 割点
+  tarjan-edge-ecc: 边双连通分量
+  tarjan-point-ecc: 点双连通分量
+  tarjan-scc: 强连通分量
+  6-math: 数学
+  linear: 线性代数
+  mat-det: 行列式
+  mat-gauss1: 高斯消元（整数）
+  mat-gauss2: 高斯消元（实数）
+  mat-inv: 矩阵求逆
+  mat-tree: 矩阵树
+  math-bsgs: 大步小步
+  math-common: 数学基础
+  math-dirichlet: 狄利克雷前缀和
+  math-fast-dlog: 快速离散对数
+  math-fast-gcd: 快速最大公约数
+  math-genshin: 原根
+  math-inv-offline: 快速乘法逆元（离线）
+  math-inv-online: 快速乘法逆元（在线）
+  math-mod: Barrett 取模
+  math-pollards-rho: Pollard's Rho
+  math-seive-min25: min25 筛
+  math-sieve-du: 杜教筛
+  math-sieve-pn: PN 筛
+  math-twice: 二次剩余
+  10-other: 其他
+  cartesian-tree: 笛卡尔树
+  cdq: CDQ 分治
+  general: 快速读入
+  simpson: 自适应辛普森
+  simulate-anneal: 模拟退火
+  xor-shift: 伪随机生成
+  7-poly: 多项式
+  poly-family: NTT 全家桶
+  poly-fwt: FWT 全家桶
+  poly-mtt: 任意模数 NTT
+  8-string: 字符串
+  acam: AC 自动机
+  kmp-ex: 扩展 KMP
+  manacher: Manacher
+  pam: 回文自动机
+  sa-balanced-tree: 后缀平衡树
+  sa-mul: 后缀数组（倍增）
+  sa-sais: 后缀数组（SAIS）
+  sam-general-offline: 广义后缀自动机（离线）
+  sam-general-online: 广义后缀自动机（在线）
+  sam: 后缀自动机
+  trie: 字典树
+  3-tree: 树论
+  ds-ptree: 点分树
+  lca: 最近公共祖先
+  tree-divide-length: 长链剖分
+  tree-divide-weight: 重链剖分
+  tree-hash: 树哈希
+  tree-prufer: Prufer 序列
+  virtual-tree: 虚树

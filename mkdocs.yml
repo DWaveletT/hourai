@@ -1,0 +1,182 @@
+site_name: Hourai's Template
+site_description: 哈尔滨工业大学蓬莱人形算法程序设计竞赛模板归档
+site_author: Hourai Ningyou
+site_url: https://hourai.nanani-fan.club
+
+# Repository
+repo_name: 'DWaveletT/hourai'
+repo_url: 'https://github.com/DWaveletT/hourai'
+
+theme:
+  name: material
+  static_templates:
+    - 404.html
+  language: 'zh'
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+      accent: red
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+  include_search_page: false
+  search_index_only: true
+  favicon: 'favicon.ico'
+  icon:
+    logo: 'material/school'
+  features:
+    - navigation.tabs
+    - navigation.instant
+  font:
+    text: 'Fira Sans'
+    code: 'Fira Mono'
+  
+# Extensions
+markdown_extensions:
+  - admonition
+  - def_list
+  - footnotes
+  - meta
+  - toc:
+      permalink: ""
+      slugify: !!python/name:pymdownx.slugs.uslugify
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.highlight:
+      linenums: true
+  - pymdownx.inlinehilite
+  # - pymdownx.keys
+  # - pymdownx.magiclink
+  # - pymdownx.mark
+  # - pymdownx.snippets:
+  #     check_paths: true
+  - pymdownx.progressbar
+  # - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: math
+          class: arithmatex
+          format: !!python/name:pymdownx.arithmatex.fence_mathjax_format
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  # - pymdownx.tabbed:
+  #     alternate_style: true
+
+nav:
+  - 介绍: index.md
+  - 动态规划: 
+    - 多重背包: code/bag-multi.md
+    - 树形背包: code/bag-tree.md
+    - 动态动态规划 1: code/dp-ddp1.md
+    - 插头 dp: code/dp-plug.md
+  - 其他: 
+    - 笛卡尔树: code/cartesian-tree.md
+    - CDQ 分治: code/cdq.md
+    - 快速读入: code/general.md
+    - 自适应辛普森: code/simpson.md
+    - 模拟退火: code/simulate-anneal.md
+    - 伪随机生成: code/xor-shift.md
+  - 数据结构: 
+    - 平衡树: 
+      - 无旋 Treap: code/ds-fhq-treap.md
+      - 红黑树: code/ds-rbtree.md
+      - Splay 1: code/ds-splay1.md
+      - Splay 2: code/ds-splay2.md
+      - Treap: code/ds-treap.md
+      - 可持久化无旋 Treap 1: code/per-fhq-treap1.md
+      - 可持久化无旋 Treap 2: code/per-fhq-treap2.md
+    - 珂朵莉树: code/ds-odtree.md
+    - 可并堆: code/heap-merge.md
+    - 线性基: code/linear-basis.md
+    - Link Cut 树: code/link-cut-tree.md
+    - 线段树: 
+      - 李超树: code/ds-lc-seg.md
+      - 线段树 1: code/ds-segtree1.md
+      - 线段树 2: code/ds-segtree2.md
+      - 线段树 3: code/ds-segtree3.md
+      - 扫描线: code/scanning-line.md
+    - 根号数据结构: 
+      - 块状链表: code/block-list-1.md
+      - 分块（权值）: code/block-value.md
+      - 莫队二次离线: code/mo-offline-twice.md
+  - 树论: 
+    - 点分树: code/ds-ptree.md
+    - 最近公共祖先: code/lca.md
+    - 长链剖分: code/tree-divide-length.md
+    - 重链剖分: code/tree-divide-weight.md
+    - 树哈希: code/tree-hash.md
+    - Prufer 序列: code/tree-prufer.md
+    - 虚树: code/virtual-tree.md
+  - 图论: 
+    - 仙人掌: code/cactus.md
+    - 三元环计数: code/count-circle-3.md
+    - 四元环计数: code/count-circle-4.md
+    - 基环树: code/graph-base-circle-tree.md
+    - 全源最短路: code/path-johnson.md
+    - 2-SAT: code/tarjan-2sat.md
+    - 割点: code/tarjan-cut-vertex.md
+    - 边双连通分量: code/tarjan-edge-ecc.md
+    - 点双连通分量: code/tarjan-point-ecc.md
+    - 强连通分量: code/tarjan-scc.md
+  - 网络流: 
+    - 费用流: code/flow-cost.md
+    - 最小割树: code/flow-ghtree.md
+    - 最大流: code/flow-max.md
+    - 上下界费用流: code/flow-range-cost.md
+    - 上下界最大流: code/flow-range-max.md
+  - 数学: 
+    - 线性代数: 
+      - 行列式: code/mat-det.md
+      - 高斯消元（整数）: code/mat-gauss1.md
+      - 高斯消元（实数）: code/mat-gauss2.md
+      - 矩阵求逆: code/mat-inv.md
+      - 矩阵树: code/mat-tree.md
+    - 大步小步: code/math-bsgs.md
+    - 数学基础: code/math-common.md
+    - 狄利克雷前缀和: code/math-dirichlet.md
+    - 快速离散对数: code/math-fast-dlog.md
+    - 快速最大公约数: code/math-fast-gcd.md
+    - 原根: code/math-genshin.md
+    - 快速乘法逆元（离线）: code/math-inv-offline.md
+    - 快速乘法逆元（在线）: code/math-inv-online.md
+    - Barrett 取模: code/math-mod.md
+    - Pollard's Rho: code/math-pollards-rho.md
+    - min25 筛: code/math-seive-min25.md
+    - 杜教筛: code/math-sieve-du.md
+    - PN 筛: code/math-sieve-pn.md
+    - 二次剩余: code/math-twice.md
+  - 多项式: 
+    - NTT 全家桶: code/poly-family.md
+    - FWT 全家桶: code/poly-fwt.md
+    - 任意模数 NTT: code/poly-mtt.md
+  - 字符串: 
+    - AC 自动机: code/acam.md
+    - 扩展 KMP: code/kmp-ex.md
+    - Manacher: code/manacher.md
+    - 回文自动机: code/pam.md
+    - 后缀平衡树: code/sa-balanced-tree.md
+    - 后缀数组（倍增）: code/sa-mul.md
+    - 后缀数组（SAIS）: code/sa-sais.md
+    - 广义后缀自动机（离线）: code/sam-general-offline.md
+    - 广义后缀自动机（在线）: code/sam-general-online.md
+    - 后缀自动机: code/sam.md
+    - 字典树: code/trie.md
+  - 计算几何: 
+    - 二维凸包: code/2d-convex.md
+    - 最小圆覆盖: code/2d-minimal-circle.md
+    - 最左转线: code/2d-planer-duel.md
+    - 二维基础: code/2d.md
