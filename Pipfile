@@ -8,6 +8,7 @@ mkdocs = "*"
 pymdown-extensions = "*"
 pygments = "*"
 markdown = "*"
+mkdocs-material = "*"
 
 [dev-packages]
 
