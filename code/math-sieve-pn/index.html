@@ -52,6 +52,8 @@
       
     
     
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -76,6 +78,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#用法" class="md-skip">
+          跳转至
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -693,27 +700,6 @@
   
   <span class="md-ellipsis">
     CDQ 分治
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../general/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    快速读入
   </span>
   
 
@@ -2085,7 +2071,7 @@
         
   
   <span class="md-ellipsis">
-    高斯消元（整数）
+    高斯消元与求秩（实数）
   </span>
   
 
@@ -2106,7 +2092,7 @@
         
   
   <span class="md-ellipsis">
-    高斯消元（实数）
+    高斯消元与求秩（整数）
   </span>
   
 
@@ -2432,6 +2418,17 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    PN 筛
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -2441,6 +2438,41 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#用法" class="md-nav__link">
+    <span class="md-ellipsis">
+      用法
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#例题" class="md-nav__link">
+    <span class="md-ellipsis">
+      例题
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -3006,6 +3038,32 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#用法" class="md-nav__link">
+    <span class="md-ellipsis">
+      用法
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#例题" class="md-nav__link">
+    <span class="md-ellipsis">
+      例题
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -3024,6 +3082,18 @@
 
   <h1>PN 筛</h1>
 
+<h2 id="用法">用法<a class="headerlink" href="#用法" title="Permanent link"></a></h2>
+<p>对于积性函数 <span class="arithmatex">\(f(x)\)</span>，寻找积性函数 <span class="arithmatex">\(g(x)\)</span> 使得 <span class="arithmatex">\(g(p) = f(p)\)</span>，且 <span class="arithmatex">\(g\)</span> 易求前缀和 <span class="arithmatex">\(G\)</span>。</p>
+<p>令 <span class="arithmatex">\(h = f * g^{-1}\)</span>，可以证明只有 PN 处 <span class="arithmatex">\(h\)</span> 的函数值非 <span class="arithmatex">\(0\)</span>，PN 指每个素因子幂次都不小于 <span class="arithmatex">\(2\)</span> 的数。同时可以证明 <span class="arithmatex">\(n\)</span> 以内的 PN 只有 <span class="arithmatex">\(\mathcal O(\sqrt n)\)</span> 个，且可以暴力枚举质因子幂次得到所有 PN。</p>
+<p>可利用下面公式计算 <span class="arithmatex">\(h(p^c)\)</span>：</p>
+<div class="arithmatex">\[
+h(p^c) = f(p^c) - \sum_{i = 1}^c g(p^i) \times h(p^{c - i})
+\]</div>
+<h2 id="例题">例题<a class="headerlink" href="#例题" title="Permanent link"></a></h2>
+<blockquote>
+<p>定义积性函数 <span class="arithmatex">\(f(x)\)</span> 满足 <span class="arithmatex">\(f(p^k) = p^k(p^k - 1)\)</span>，计算 <span class="arithmatex">\(\sum f(i)\)</span>。</p>
+</blockquote>
+<p>取 <span class="arithmatex">\(g(p) = \mathrm{id}(p)\varphi(p) = f(p)\)</span>，根据 <span class="arithmatex">\(g * \mathrm{id} = \mathrm{id}_2\)</span> 利用杜教筛求解。<span class="arithmatex">\(h(p^c)\)</span> 的值利用递推式进行计算。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
 <span class="normal">  2</span>
 <span class="normal">  3</span>
@@ -3125,32 +3195,8 @@
 <span class="normal"> 99</span>
 <span class="normal">100</span>
 <span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
+<span class="normal">102</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;bits/stdc++.h&gt;</span>
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
-
-<span class="c1">// Pn Sieve:</span>
-<span class="c1">// Find g that g(p) = f(p) and easy to calc G(n)</span>
-<span class="c1">// Let h = f / g, h(p^c) = f(p^c) - sum(g(p^i) * h(p^{c - i}), i = 1, 2, ..., c))</span>
-<span class="c1">// Dfs Pn numbers(c_i &gt;= 2)</span>
-<span class="c1">// Ans = sum(h(x) * G(n / x), x is Pn number)</span>
-
-<span class="c1">// Code for [template] Min_25:</span>
-<span class="c1">// &gt; f(p^k) = p^k(p^k - 1)</span>
-<span class="c1">// &gt; f(a*b) = f(a) * (b), gcd(a, b) = 1</span>
-<span class="c1">// f(p) = p(p - 1) = id(p) * phi(p) = g(n)</span>
-<span class="c1">// g * id = id_2 (P.S. id_2(n) = n^2), so we can du sieve it.</span>
 
 <span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAXN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e7</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAXM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
@@ -3302,6 +3348,12 @@
     
     
       <script src="../../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
       
     
   </body>
