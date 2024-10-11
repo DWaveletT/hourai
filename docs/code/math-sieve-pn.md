@@ -1,18 +1,23 @@
+## 用法
+对于积性函数 $f(x)$，寻找积性函数 $g(x)$ 使得 $g(p) = f(p)$，且 $g$ 易求前缀和 $G$。
+
+令 $h = f * g^{-1}$，可以证明只有 PN 处 $h$ 的函数值非 $0$，PN 指每个素因子幂次都不小于 $2$ 的数。同时可以证明 $n$ 以内的 PN 只有 $\mathcal O(\sqrt n)$ 个，且可以暴力枚举质因子幂次得到所有 PN。
+
+可利用下面公式计算 $h(p^c)$：
+
+$$
+h(p^c) = f(p^c) - \sum_{i = 1}^c g(p^i) \times h(p^{c - i})
+$$
+
+## 例题
+
+> 定义积性函数 $f(x)$ 满足 $f(p^k) = p^k(p^k - 1)$，计算 $\sum f(i)$。
+
+取 $g(p) = \mathrm{id}(p)\varphi(p) = f(p)$，根据 $g * \mathrm{id} = \mathrm{id}_2$ 利用杜教筛求解。$h(p^c)$ 的值利用递推式进行计算。
+
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
-// Pn Sieve:
-// Find g that g(p) = f(p) and easy to calc G(n)
-// Let h = f / g, h(p^c) = f(p^c) - sum(g(p^i) * h(p^{c - i}), i = 1, 2, ..., c))
-// Dfs Pn numbers(c_i >= 2)
-// Ans = sum(h(x) * G(n / x), x is Pn number)
-
-// Code for [template] Min_25:
-// > f(p^k) = p^k(p^k - 1)
-// > f(a*b) = f(a) * (b), gcd(a, b) = 1
-// f(p) = p(p - 1) = id(p) * phi(p) = g(n)
-// g * id = id_2 (P.S. id_2(n) = n^2), so we can du sieve it.
 
 const int MAXN = 1e7 + 3;
 const int MAXM = 1e5 + 3;

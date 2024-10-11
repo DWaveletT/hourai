@@ -1,3 +1,8 @@
+/**
+## 用法
+
+给定 $a, p$ 求出 $x$ 使得 $a^x = y \pmod p$，其中 $p$ 为质数。
+**/
 #include<bits/stdc++.h>
 using namespace std;
 

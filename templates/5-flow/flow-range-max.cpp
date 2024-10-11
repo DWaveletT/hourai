@@ -1,13 +1,14 @@
+/**
+## 用法
+
+- `add(u, v, l, r, c)`：连一条容量在 $[l, r]$ 的从 $u$ 到 $v$ 的边；
+- `solve()`：检查是否存在无源汇可行流；
+- `solve(s, t)`：计算有源汇最大流。
+**/
 #include <bits/stdc++.h>
 using namespace std;
 
-int qread(){
-    int w = 1, c, ret;
-    while((c = getchar()) >  '9' || c <  '0') w = (c == '-' ? -1 : 1); ret = c - '0';
-    while((c = getchar()) >= '0' && c <= '9') ret = ret * 10 + c - '0';
-    return ret * w;
-}
-
+int qread();
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;

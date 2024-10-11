@@ -1,3 +1,8 @@
+/**
+## 例题
+
+给定一棵 $n$ 个点的树，点有点权，求最大独立集。$m$ 次修改，每次把 $x$ 的权值修改成 $y$。
+**/
 #include<bits/stdc++.h>
 #define up(l, r, i) for(int i = l, END##i = r;i <= END##i;++ i)
 #define dn(r, l, i) for(int i = r, END##i = l;i >= END##i;-- i)
@@ -115,12 +120,7 @@ namespace Seg{
         }
     }
 }
-int qread(){
-    int w = 1, c, ret;
-    while((c = getchar()) >  '9' || c <  '0') w = (c == '-' ? -1 : 1); ret = c - '0';
-    while((c = getchar()) >= '0' && c <= '9') ret = ret * 10 + c - '0';
-    return ret * w;
-}
+int qread();
 int main(){
     int n = qread(), m = qread();
     up(1, n, i)

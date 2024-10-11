@@ -1,11 +1,19 @@
+## 用法
+
+对于积性函数 $f$，找到易求前缀和的积性函数 $g, h$ 使得 $h = f*g$，根据递推式计算 $S(n) = \sum_{i=1}^n f(i)$：
+
+$$
+S(n) = H(n) - \sum_{d = 1}^n g(d) \times S(\left\lfloor \frac{n}{d}\right\rfloor)
+$$
+
+## 例题
+
+- 对于 $f = \varphi$，寻找 $g = 1, h = \mathrm{id}$；
+- 对于 $f = \mu$，寻找 $g = 1, h = \varepsilon$。
+
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
-// Du Sieve:
-// S(n) = H(n) - (sum g(d) * S(n / d), d = 2..n)
-// For Phi(n), Id = 1 * Phi
-// For Mu (n),  E = 1 *  Mu
 
 const int MAXN = 1e7 + 3;
 const int H = 1e7;

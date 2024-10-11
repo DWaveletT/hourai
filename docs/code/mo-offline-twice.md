@@ -10,16 +10,8 @@ const int MAXM= (1 << 14) + 3;
 int n, m, k, maxt = 16383, X[MAXM], C[MAXM], t;
 const int BUF_SIZE = 1e6;
 char *p1, *p2, BUF[BUF_SIZE];
-inline char readc(){
-    if(p1 == p2) p1 = BUF, p2 = BUF + fread(BUF, 1, BUF_SIZE, stdin);
-    return p1 == p2 ? EOF : *p1 ++;
-}
-inline int qread(){
-    int w = 1, c, ret;
-    while((c = readc()) >  '9' || c <  '0') w = (c == '-' ? -1 : 1); ret = c - '0';
-    while((c = readc()) >= '0' && c <= '9') ret = ret * 10 + c - '0';
-    return ret * w;
-}
+inline char readc();
+inline int qread();
 int A[MAXN], bsize; i64 B[MAXN], R[MAXN];
 struct Qry1{ int l, r, id; }O[MAXN];
 struct Qry2{ int id, l, r; };

@@ -1,4 +1,9 @@
+## 用法
+
+多次询问，每次询问给定奇素数 $p$ 以及 $y$，在 $\mathcal O(\log p)$ 复杂度计算 $x$ 使得 $x^2 \equiv 0 \pmod p$ 或者无解。
+
 ```cpp
+
 #include<bits/stdc++.h>
 using namespace std;
 

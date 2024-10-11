@@ -1,3 +1,8 @@
+/**
+## 内容
+
+包含快速幂，龟速乘，扩展欧几里得，线性求 $1\sim n$ 的逆元。
+**/
 #include<bits/stdc++.h>
 using namespace std;
 

@@ -41,6 +41,14 @@ theme:
   font:
     text: 'Fira Sans'
     code: 'Fira Mono'
+
+extra_javascript:
+  - javascripts/katex.js
+  - https://unpkg.com/katex@0/dist/katex.min.js
+  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+
+extra_css:
+  - https://unpkg.com/katex@0/dist/katex.min.css
   
 # Extensions
 markdown_extensions:
@@ -86,7 +94,6 @@ nav:
   - 其他: 
     - 笛卡尔树: code/cartesian-tree.md
     - CDQ 分治: code/cdq.md
-    - 快速读入: code/general.md
     - 自适应辛普森: code/simpson.md
     - 模拟退火: code/simulate-anneal.md
     - 伪随机生成: code/xor-shift.md
@@ -141,8 +148,8 @@ nav:
   - 数学: 
     - 线性代数: 
       - 行列式: code/mat-det.md
-      - 高斯消元（整数）: code/mat-gauss1.md
-      - 高斯消元（实数）: code/mat-gauss2.md
+      - 高斯消元与求秩（实数）: code/mat-gauss1.md
+      - 高斯消元与求秩（整数）: code/mat-gauss2.md
       - 矩阵求逆: code/mat-inv.md
       - 矩阵树: code/mat-tree.md
     - 大步小步: code/math-bsgs.md

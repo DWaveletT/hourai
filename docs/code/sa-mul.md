@@ -11,8 +11,6 @@ int n, m;
 int A[MAXN], B[MAXN];
 int C[MAXN], R[MAXN], P[MAXN], Q[MAXN];
 char S[MAXN];
-// R : rank
-// A : suffix array
 int main(){
     scanf("%s", S), n = strlen(S), m = 256;
     for(int i = 0;i < n;++ i) R[i] = S[i];
@@ -42,8 +40,4 @@ int main(){
         printf("%u ", A[i] + 1);
     return 0;
 }
-/*
-aabaaaab
-4 5 6 1 7 2 8 3
-*/
 ```

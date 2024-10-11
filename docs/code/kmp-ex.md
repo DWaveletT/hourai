@@ -1,3 +1,12 @@
+## 定义
+
+$$
+\begin{aligned}
+z^{(1)}_i &= |\mathrm{lcp}(b, \mathrm{suffix}(b, i))| \\
+z^{(2)}_i &= |\mathrm{lcp}(b, \mathrm{suffix}(a, i))| \\
+\end{aligned}
+$$
+
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
@@ -8,7 +17,6 @@ char A[MAXN], B[MAXN * 2];
 int n, m, l, r, Z[MAXN * 2];
 i64 ans1, ans2;
 
-// Z[i] = |lcp(B, suf(B, i))|
 int main(){
     scanf("%s%s", A + 1, B + 1);
     n = strlen(A + 1);

@@ -1,3 +1,9 @@
+/**
+## 用法
+
+- 调用 `test(n)` 判断 $n$ 是否是质数；
+- 调用 `rho(n)` 计算 $n$ 分解质因数后的结果，不保证结果有序。
+**/
 #include<bits/stdc++.h>
 using namespace std;
 

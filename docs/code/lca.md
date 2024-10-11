@@ -1,3 +1,8 @@
+## 用法
+
+- LCA 1：使用 dfs 序查询 LCA；
+- LCA 1：使用重链剖分查询 LCA。
+
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;

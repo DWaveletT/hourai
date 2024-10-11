@@ -1,3 +1,8 @@
+/**
+## 例题
+
+$n$ 个变量 $m$ 个条件，形如若 $x_i = a$ 则 $y_j = b$，找到任意一组可行解或者报告无解。
+**/
 #include<bits/stdc++.h>
 using namespace std;
 

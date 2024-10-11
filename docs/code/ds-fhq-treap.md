@@ -102,12 +102,7 @@ namespace Treap{
 
 // ===== TEST =====
 
-int qread(){
-    int w=1,c,ret;
-    while((c = getchar()) >  '9' || c <  '0') w = (c == '-' ? -1 : 1); ret = c - '0';
-    while((c = getchar()) >= '0' && c <= '9') ret = ret * 10 + c - '0';
-    return ret * w;
-}
+int qread();
 int main(){
     using namespace Treap;
     int n = qread(), m = qread(), root = 0;

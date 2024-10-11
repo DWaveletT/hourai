@@ -1,13 +1,12 @@
+/**
+## 用法
+
+给定无向图求出最小割树，点 $u$ 和 $v$ 作为起点终点的最小割为树上 $u$ 到 $v$ 路径上边权的最小值。
+**/
 #include <bits/stdc++.h>
 using namespace std;
 
-int qread(){
-    int w = 1, c, ret;
-    while((c = getchar()) >  '9' || c <  '0') w = (c == '-' ? -1 : 1); ret = c - '0';
-    while((c = getchar()) >= '0' && c <= '9') ret = ret * 10 + c - '0';
-    return ret * w;
-}
-
+int qread();
 namespace Dinic{
     const long long INF = 1e18;
     const int SIZ = 1e5 + 3;

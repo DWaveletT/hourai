@@ -1,3 +1,10 @@
+/**
+## 用法
+
+计算：
+
+$$s(i) = \sum_{d\mid i} f_{d}$$
+**/
 #include<bits/stdc++.h>
 using namespace std;
 

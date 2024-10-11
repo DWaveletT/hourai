@@ -18,10 +18,13 @@ def make_dir(layer: int, dirname: str):
     
     name = dirname
     nav.append('  ' * layer + '- ' + config['title'][name] + ': ' + '\n')
+    print('make dir:  ', name)
 
 
 def make_file(layer: int, raw_path: str, filename: str):
     name = filename.removesuffix('.cpp')
+
+    print('make file: ', name)
     
     nav.append('  ' * layer + '- ' + config['title'][name] + ': ' + 'code/' + name + '.md' + '\n')
     out_path = MARKDOWN_DIR + '/' + name + '.md'

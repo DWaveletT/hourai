@@ -52,8 +52,8 @@ title:
   6-math: 数学
   linear: 线性代数
   mat-det: 行列式
-  mat-gauss1: 高斯消元（整数）
-  mat-gauss2: 高斯消元（实数）
+  mat-gauss1: 高斯消元与求秩（实数）
+  mat-gauss2: 高斯消元与求秩（整数）
   mat-inv: 矩阵求逆
   mat-tree: 矩阵树
   math-bsgs: 大步小步

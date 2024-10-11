@@ -1,4 +1,8 @@
+## 用法
+$n$ 个物品，$m$ 容量背包，第 $i$ 个物品重量为 $w_i$ 价值为 $v_i$ 共有 $c_i$ 个，计算不超过容量的情况下最多拿多少价值的物品。
+
 ```cpp
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -6,13 +10,7 @@ using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
 
-int qread(){
-    int w = 1, c, ret;
-    while((c = getchar()) >  '9' || c <  '0') w = (c == '-' ? -1 : 1); ret = c - '0';
-    while((c = getchar()) >= '0' && c <= '9') ret = ret * 10 + c - '0';
-    return ret * w;
-}
-
+int qread();
 const int MAXN = 4e4 + 3;
 
 int F[MAXN];

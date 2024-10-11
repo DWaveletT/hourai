@@ -1,3 +1,8 @@
+/**
+## 例题
+
+给出 $n\times m$ 的方格，有些格子不能铺线，其它格子必须铺，形成一个闭合回路。问有多少种铺法？
+**/
 #include<bits/stdc++.h>
 #define up(l, r, i) for(int i = l, END##i = r;i <= END##i;++ i)
 #define dn(r, l, i) for(int i = r, END##i = l;i >= END##i;-- i)
@@ -27,12 +32,7 @@ namespace HashT{
     }
 }
 char S[MAXN][MAXN];
-int qread(){
-    int w = 1, c, ret;
-    while((c = getchar()) >  '9' || c <  '0') w = (c == '-' ? -1 : 1); ret = c - '0';
-    while((c = getchar()) >= '0' && c <= '9') ret = ret * 10 + c - '0';
-    return ret * w;
-}
+int qread();
 int n, m;
 vector <pair<pair<int, bool>, i64> > M[2];
 int getp(int s, int p){

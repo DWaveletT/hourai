@@ -1,3 +1,9 @@
+## 例题
+
+计算
+
+$$\int_{0}^{+\infty} x^{(a/x) - x}$$
+
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;

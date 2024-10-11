@@ -1,3 +1,8 @@
+/**
+## 用法
+
+离线计算 $x = [x_1, x_2, \cdots, x_n]$ 在模 $p$ 意义下的逆元。
+**/
 #include<bits/stdc++.h>
 using namespace std;
 

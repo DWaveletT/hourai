@@ -1,3 +1,7 @@
+## 用法
+
+调用 init 计算出 $S$ 和 $X$，得到计算 $x \bmod P = (x\times X) / 2^{60} + S$。
+
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;

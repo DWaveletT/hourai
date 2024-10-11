@@ -1,3 +1,12 @@
+/**
+## 用法
+
+沃尔什全家桶。
+
+包含与卷积、或卷积、异或卷积，定义分别为二进制与、或、异或带入下式：
+
+$$b_k = \sum_{i \otimes j = k} a_i \times b_j$$
+**/
 #include<bits/stdc++.h>
 #define up(l, r, i) for(int i = l, END##i = r;i <= END##i;++ i)
 #define dn(r, l, i) for(int i = r, END##i = l;i >= END##i;-- i)

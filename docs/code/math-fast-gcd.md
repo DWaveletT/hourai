@@ -1,3 +1,7 @@
+## 用法
+
+已知小值域 $m$ 以及 $n$ 次询问，$\mathcal O(m)$ 预处理，$\mathcal O(1)$ 单次查询 $x, y$ 的最大公约数。
+
 ```cpp
 #include<bits/stdc++.h>
 #define up(l, r, i) for(int i = l, END##i = r;i <= END##i;++ i)

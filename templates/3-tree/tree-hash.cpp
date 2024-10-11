@@ -1,3 +1,8 @@
+/**
+## 用法
+
+给定大小为 $n$ 的以 $1$ 为根的树，计算 $h_i$ 表示子树 $i$ 的哈希值，计算有多少个本质不同的值。
+**/
 #include<bits/stdc++.h>
 using namespace std;
 

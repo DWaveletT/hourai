@@ -1,3 +1,7 @@
+## 例题
+
+给定 $n$ 个物品挂在洞下，第 $i$ 个物品坐标 $(x_i, y_i)$ 重量为 $w_i$。询问平衡点。
+
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
