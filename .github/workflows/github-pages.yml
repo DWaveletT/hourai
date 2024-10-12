@@ -37,7 +37,7 @@ jobs:
         run: |
           wget -O fonts.zip https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansHWSC.zip
           unzip fonts.zip
-          suto mkdir fonts
+          sudo mkdir fonts
           sudo cp -i OTF/SimplifiedChineseHW/SourceHanSansHWSC-Regular.otf fonts
           sudo cp -i OTF/SimplifiedChineseHW/SourceHanSansHWSC-Bold.otf fonts
           ls fonts
