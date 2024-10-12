@@ -38,9 +38,10 @@ jobs:
           wget -O fonts.zip https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansHWSC.zip
           unzip fonts.zip
           sudo mkdir fonts
-          sudo cp -i OTF/SimplifiedChineseHW/SourceHanSansHWSC-Regular.otf fonts
-          sudo cp -i OTF/SimplifiedChineseHW/SourceHanSansHWSC-Bold.otf fonts
-          ls fonts
+          sudo cp -i OTF/SimplifiedChineseHW/SourceHanSansHWSC-Regular.otf /usr/share/fonts
+          sudo cp -i OTF/SimplifiedChineseHW/SourceHanSansHWSC-Bold.otf /usr/share/fonts
+          sudo fc-cache -fv
+          sudo fc-list :lang=zh
 
       - name: Convey
         uses: docker://pandoc/extra:3.5.0.0
