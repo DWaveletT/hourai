@@ -19,31 +19,31 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          cache: pipenv
+      # - name: Setup Python
+      #   uses: actions/setup-python@v5
+      #   with:
+      #     python-version: '3.12'
+      #     cache: pipenv
       
-      - name: Install Python dependencies
-        run: |
-          pip install pipenv
-          pipenv install
+      # - name: Install Python dependencies
+      #   run: |
+      #     pip install pipenv
+      #     pipenv install
 
-      - name: Build
-        run: pipenv run mkdocs build -v
+      # - name: Build
+      #   run: pipenv run mkdocs build -v
 
-      - name: Install Fonts
-        uses: RisingInIris2017/cjk-fonts-action@v1  
+      - name: Test
+        run: fc-list :lang=zh
 
       - name: Convey
         uses: docker://pandoc/extra:3.5.0.0
         with:
           args: docs/print/all.md --output=site/print/all.pdf --template /.pandoc/templates/eisvogel.latex --pdf-engine=xelatex --listings -V block-headings -V lang=zh-CN -V CJKmainfont="Source Han Serif CN"
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
-        if: github.ref == 'refs/heads/master'
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./site
+      # - name: Deploy
+      #   uses: peaceiris/actions-gh-pages@v4
+      #   if: github.ref == 'refs/heads/master'
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./site
