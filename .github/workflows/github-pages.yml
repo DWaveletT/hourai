@@ -34,11 +34,12 @@ jobs:
       #   run: pipenv run mkdocs build -v
 
       - name: Install Font
-        run: wget -O SourceHanSansHWSC.zip https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansHWSC.zip |
-          unzip SourceHanSansHWSC.zip |
-          cp -i OTF/SimplifiedChineseHW/SourceHanSansHWSC-Regular.otf $HOME/share/fonts/SourceHanSans |
-          cp -i OTF/SimplifiedChineseHW/SourceHanSansHWSC-Bold.otf $HOME/share/fonts/SourceHanSans |
-          sudo fc-cache -fv |
+        run: |
+          wget -O SourceHanSansHWSC.zip https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansHWSC.zip
+          unzip SourceHanSansHWSC.zip
+          cp -i OTF/SimplifiedChineseHW/SourceHanSansHWSC-Regular.otf $HOME/share/fonts/SourceHanSans
+          cp -i OTF/SimplifiedChineseHW/SourceHanSansHWSC-Bold.otf $HOME/share/fonts/SourceHanSans
+          sudo fc-cache -fv
           fc-list :lang=zh
 
       - name: Convey
