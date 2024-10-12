@@ -38,7 +38,8 @@ jobs:
           unzip SourceHanSansHWSC.zip |
           cp -i OTF/SimplifiedChineseHW/SourceHanSansHWSC-Regular.otf $HOME/share/fonts/SourceHanSans |
           cp -i OTF/SimplifiedChineseHW/SourceHanSansHWSC-Bold.otf $HOME/share/fonts/SourceHanSans |
-          sudo fc-cache -fv
+          sudo fc-cache -fv |
+          fc-list :lang=zh
 
       - name: Convey
         uses: docker://pandoc/extra:3.5.0.0
