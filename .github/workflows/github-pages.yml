@@ -33,8 +33,12 @@ jobs:
       # - name: Build
       #   run: pipenv run mkdocs build -v
 
-      - name: Test
-        run: fc-list :lang=zh
+      - name: Install Font
+        run: wget -O SourceHanSansHWSC.zip https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansHWSC.zip |
+          unzip SourceHanSansHWSC.zip |
+          cp -i OTF/SimplifiedChineseHW/SourceHanSansHWSC-Regular.otf $HOME/share/fonts/SourceHanSans |
+          cp -i OTF/SimplifiedChineseHW/SourceHanSansHWSC-Bold.otf $HOME/share/fonts/SourceHanSans |
+          sudo fc-cache -fv
 
       - name: Convey
         uses: docker://pandoc/extra:3.5.0.0
