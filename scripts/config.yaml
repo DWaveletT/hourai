@@ -1,10 +1,10 @@
 title:
-  1-dp: 动态规划
+  01-dp: 动态规划
   bag-multi: 多重背包
   bag-tree: 树形背包
   dp-ddp1: 动态动态规划 1
   dp-plug: 插头 dp
-  2-ds: 数据结构
+  02-ds: 数据结构
   balanced-tree: 平衡树
   ds-fhq-treap: 无旋 Treap
   ds-rbtree: 红黑树
@@ -27,18 +27,18 @@ title:
   block-list-1: 块状链表
   block-value: 分块（权值）
   mo-offline-twice: 莫队二次离线
-  5-flow: 网络流
+  05-flow: 网络流
   flow-cost: 费用流
   flow-ghtree: 最小割树
   flow-max: 最大流
   flow-range-cost: 上下界费用流
   flow-range-max: 上下界最大流
-  9-geometry: 计算几何
+  09-geometry: 计算几何
   2d-convex: 二维凸包
   2d-minimal-circle: 最小圆覆盖
   2d-planer-duel: 最左转线
   2d: 二维基础
-  4-graph: 图论
+  04-graph: 图论
   cactus: 仙人掌
   count-circle-3: 三元环计数
   count-circle-4: 四元环计数
@@ -49,7 +49,7 @@ title:
   tarjan-edge-ecc: 边双连通分量
   tarjan-point-ecc: 点双连通分量
   tarjan-scc: 强连通分量
-  6-math: 数学
+  06-math: 数学
   linear: 线性代数
   mat-det: 行列式
   mat-gauss1: 高斯消元与求秩（实数）
@@ -77,11 +77,11 @@ title:
   simpson: 自适应辛普森
   simulate-anneal: 模拟退火
   xor-shift: 伪随机生成
-  7-poly: 多项式
+  07-poly: 多项式
   poly-family: NTT 全家桶
   poly-fwt: FWT 全家桶
   poly-mtt: 任意模数 NTT
-  8-string: 字符串
+  08-string: 字符串
   acam: AC 自动机
   kmp-ex: 扩展 KMP
   manacher: Manacher
@@ -93,7 +93,7 @@ title:
   sam-general-online: 广义后缀自动机（在线）
   sam: 后缀自动机
   trie: 字典树
-  3-tree: 树论
+  03-tree: 树论
   ds-ptree: 点分树
   lca: 最近公共祖先
   tree-divide-length: 长链剖分

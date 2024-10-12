@@ -1,4 +1,4 @@
-name: Hourai Deploy
+name: Hourai Build
  
 on:
   push:
@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-22.04
     permissions:
       contents: write
@@ -33,6 +33,27 @@ jobs:
       - name: Build
         run: pipenv run mkdocs build -v
 
+  produce:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+      packages: read
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - name: Convey
+        uses: docker://pandoc/extra:3.5.0.0
+        with:
+          args: ./docs/print/all.md --output=./docs/print/all.pdf --template /.pandoc/templates/eisvogel.latex --listings -V block-headings
+
+  deploy:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+      packages: read
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         if: github.ref == 'refs/heads/master'

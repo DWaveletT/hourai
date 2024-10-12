@@ -1,7 +1,4 @@
 ```cpp
-/* <guide> **
-
-** <guide> */
 #include<bits/stdc++.h>
 using namespace std;
 
