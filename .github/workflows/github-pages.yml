@@ -36,7 +36,7 @@ jobs:
       - name: Convey
         uses: docker://pandoc/extra:3.5.0.0
         with:
-          args: docs/print/all.md --output=docs/print/all.pdf --template /.pandoc/templates/eisvogel.latex --listings -V block-headings -V lang=zh-CN
+          args: docs/print/all.md --output=docs/print/all.pdf --template /.pandoc/templates/eisvogel.latex --latex-engine=xelatex --listings -V block-headings -V lang=zh-CN
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
