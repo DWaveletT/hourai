@@ -35,17 +35,17 @@ jobs:
 
       - name: Install Font
         run: |
-          wget -O SourceHanSansHWSC.zip https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansHWSC.zip
-          unzip SourceHanSansHWSC.zip
-          sudo cp -i OTF/SimplifiedChineseHW/SourceHanSansHWSC-Regular.otf $HOME/share/fonts
-          sudo cp -i OTF/SimplifiedChineseHW/SourceHanSansHWSC-Bold.otf $HOME/share/fonts
-          sudo fc-cache -fv
-          sudo fc-list :lang=zh
+          wget -O fonts.zip https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansHWSC.zip
+          unzip fonts.zip
+          suto makedir fonts
+          sudo cp -i OTF/SimplifiedChineseHW/SourceHanSansHWSC-Regular.otf fonts
+          sudo cp -i OTF/SimplifiedChineseHW/SourceHanSansHWSC-Bold.otf fonts
+          ls fonts
 
       - name: Convey
         uses: docker://pandoc/extra:3.5.0.0
         with:
-          args: docs/print/all.md --output=site/print/all.pdf --template /.pandoc/templates/eisvogel.latex --pdf-engine=xelatex --listings -V block-headings -V lang=zh-CN -V CJKmainfont="Source Han Serif CN"
+          args: docs/print/all.md --output=site/print/all.pdf --template /.pandoc/templates/eisvogel.latex --pdf-engine=xelatex --listings -V block-headings -V lang=zh-CN -V CJKmainfont="SourceHanSansHWSC-Regular.otf"
 
       # - name: Deploy
       #   uses: peaceiris/actions-gh-pages@v4
