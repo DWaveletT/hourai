@@ -33,18 +33,14 @@ jobs:
       # - name: Build
       #   run: pipenv run mkdocs build -v
 
-      - name: Download Font
+      - name: Install Font
         run: |
-          sudo mkdir temp
-          wget -O temp/simsun.ttf https://pfh-file-store.oss-cn-hangzhou.aliyuncs.com/simsun.ttf
-          cp docs/print/all.md temp/all.md
+          wget -O simsun.ttf https://pfh-file-store.oss-cn-hangzhou.aliyuncs.com/simsun.ttf
 
       - name: Convey
         uses: docker://pandoc/extra:3.5.0.0
         with:
-          args: temp/all.md --output=temp/all.pdf --template /.pandoc/templates/eisvogel.latex --pdf-engine=xelatex --listings -V block-headings -V lang=zh-CN -V CJKmainfont="SimSun"
-      
-      - run: cp temp/all.pdf site/print/all.pdf
+          args: docs/print/all.md --output=site/print/all.pdf --template /.pandoc/templates/eisvogel.latex --pdf-engine=xelatex --listings -V block-headings -V lang=zh-CN -V CJKmainfont="simsun.ttf"
 
       # - name: Deploy
       #   uses: peaceiris/actions-gh-pages@v4
