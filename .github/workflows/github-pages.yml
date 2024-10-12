@@ -35,17 +35,14 @@ jobs:
 
       - name: Install Font
         run: |
-          wget -O fonts.zip https://github.com/adobe-fonts/source-han-sans/releases/download/2.004R/SourceHanSansHWSC.zip
-          unzip fonts.zip
-          sudo cp -i OTF/SimplifiedChineseHW/SourceHanSansHWSC-Regular.otf /usr/share/fonts
-          sudo cp -i OTF/SimplifiedChineseHW/SourceHanSansHWSC-Bold.otf /usr/share/fonts
+          wget -O /usr/share/fonts/simsun.ttf https://pfh-file-store.oss-cn-hangzhou.aliyuncs.com/simsun.ttf
           sudo fc-cache -fv
           sudo fc-list :lang=zh
 
       - name: Convey
         uses: docker://pandoc/extra:3.5.0.0
         with:
-          args: docs/print/all.md --output=site/print/all.pdf --template /.pandoc/templates/eisvogel.latex --pdf-engine=xelatex --listings -V block-headings -V lang=zh-CN -V CJKmainfont="SourceHanSansHWSC-Regular"
+          args: docs/print/all.md --output=site/print/all.pdf --template /.pandoc/templates/eisvogel.latex --pdf-engine=xelatex --listings -V block-headings -V lang=zh-CN -V CJKmainfont="SimSun"
 
       # - name: Deploy
       #   uses: peaceiris/actions-gh-pages@v4
