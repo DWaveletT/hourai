@@ -9,6 +9,7 @@ pymdown-extensions = "*"
 pygments = "*"
 markdown = "*"
 mkdocs-material = "*"
+latexminted = "*"
 
 [dev-packages]
 

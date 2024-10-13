@@ -1,0 +1,220 @@
+%
+% Copyright (C) 2018 by Ruixi Zhang <ruixizhang42@gmail.com>
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3c
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%    https://www.latex-project.org/lppl.txt
+% and version 1.3c or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainer of this work is Ruixi Zhang.
+%
+% This work consists of the files lstfiracode.sty,
+%                                 lstfiracode.tex,
+%                                 README.md
+%           and the derived file  lstfiracode.pdf.
+%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{lstfiracode}[%
+  2018/12/24 v0.1c Use Fira Code font for listings]
+
+\RequirePackage{kvoptions}
+\RequirePackage{listings}
+
+\DeclareBoolOption[false]{verbatim}
+\DeclareDefaultOption{%
+  \PackageError{\@currname}{%
+    Unknown option `\CurrentOption'%
+  }{%
+    Available package options are:\MessageBreak
+    \space\space`verbatim=true' and\MessageBreak
+    \space\space`verbatim=false'%
+  }%
+}
+\ProcessKeyvalOptions*
+
+\let\lstfiracode@verbatim@nolig@list\verbatim@nolig@list
+\newcommand*\ActivateVerbatimLigatures{%
+  \def\verbatim@nolig@list{\do\`\do\,\do\'}%
+}
+\newcommand*\DeactivateVerbatimLigatures{%
+  \def\verbatim@nolig@list{%
+    \do\`\do\<\do\>\do\,\do\'\do\-%
+    \do\w\do\*\do\/\do\:\do\=\do\!\do\~\do\[%
+    \do\#\do\(\do\?\do\_\do\.\do\;\do\&\do\|%
+    \do\+\do\$\do\@\do\%\do\]% Do "7B and "7D, impossible?
+  }%
+}
+\newcommand*\RestoreVerbatimBehavior{%
+  \let\verbatim@nolig@list\lstfiracode@verbatim@nolig@list
+}
+
+\iflstfiracode@verbatim
+  \ActivateVerbatimLigatures
+\fi
+
+\def\lstfiracode@lst@Literatekey#1\@nil@{%
+  \let\lst@ifxliterate\lst@if
+  \expandafter\def\expandafter\lst@literate\expandafter{\lst@literate#1}%
+}
+\lst@Key{moreliterate}{}{%
+  \@ifstar{\lst@true \lstfiracode@lst@Literatekey}
+          {\lst@false\lstfiracode@lst@Literatekey}#1\@nil@
+}
+
+\lstdefinestyle{FiraCodeStyle}{
+  basewidth=0.6em,
+  literate=
+    {www}{{www}}3
+    {**}{{**}}2
+    {***}{{***}}3
+%    {**/}{{**/}}3 % Removed in Fira Code v1.206
+    {*>}{{*>}}2
+%    {*/}{{*/}}2 % Interferes with comment highlighting
+%    {\\\\}{{\textbackslash\textbackslash}}2 % Removed in Fira Code v1.206
+%    {\\\\\\}{{\textbackslash\textbackslash\textbackslash}}3 % Removed in Fira Code v1.206
+%    {\{-}{{\{-}}2 % Removed in Fira Code v1.206
+%    {[]}{{[]}}2 % Removed in Fira Code v1.206
+    {::}{{::}}2
+    {:::}{{:::}}3
+    {:=}{{:=}}2
+    {!!}{{!!}}2
+%    {!!!}{{!!!}}3 % Removed in Fira Code v1.206
+    {!=}{{!=}}2
+    {!==}{{!==}}3
+%    {-\}}{{-\}}}2 % Removed in Fira Code v1.206
+    {--}{{--}}2
+    {---}{{---}}3
+    {-->}{{-->}}3
+    {->}{{->}}2
+    {->>}{{->>}}3
+    {-<}{{-<}}2
+    {-<<}{{-<<}}3
+    {-~}{{-\textasciitilde}}2
+    {\#\{}{{\#\{}}2
+    {\#[}{{\#[}}2
+    {\#\#}{{\#\#}}2
+    {\#\#\#}{{\#\#\#}}3
+    {\#\#\#\#}{{\#\#\#\#}}4
+    {\#(}{{\#(}}2
+    {\#?}{{\#?}}2
+    {\#_}{{\#\_}}2
+    {\#_(}{{\#\_(}}3
+    {.-}{{.-}}2
+    {.=}{{.=}}2
+    {..}{{..}}2
+    {..<}{{..<}}3
+    {...}{{...}}3
+    {?=}{{?=}}2
+    {??}{{??}}2
+%    {???}{{???}}3 % Removed in Fira Code v1.206
+%    {;;}{{;;}}2 % Interferes with comment highlighting
+%    {;;;}{{;;;}}3 % Removed in Fira Code v1.206
+%    {/*}{{/*}}2 % Interferes with comment highlighting
+%    {/**}{{/**}}3 % Removed in Fira Code v1.206
+    {/=}{{/=}}2
+    {/==}{{/==}}3
+    {/>}{{/>}}2
+%    {//}{{//}}2 % Interferes with comment highlighting
+%    {///}{{///}}3 % Interferes with comment highlighting
+    {\&\&}{{\&\&}}2
+%    {\&\&\&}{{\&\&\&}}3 % Removed in Fira Code v1.206
+    {||}{{||}}2
+%    {|||}{{|||}}3 % Removed in Fira Code v1.206
+    {||=}{{||=}}3
+    {|=}{{|=}}2
+    {|>}{{|>}}2
+    {^=}{{\textasciicircum=}}2
+    {$>}{{\$>}}2
+    {++}{{++}}2
+    {+>}{{+>}}2
+    {=:=}{{=:=}}3
+    {==}{{==}}2
+    {===}{{===}}3
+    {==>}{{==>}}3
+    {=>}{{=>}}2
+    {=>>}{{=>>}}3
+%    {=<}{{=<}}2 % Removed in Fira Code v1.206
+    {=<<}{{=<<}}3
+%    {=~}{{=\textasciitilde}}2 % Removed in Fira Code v1.206
+    {=/=}{{=/=}}3
+    {>-}{{>-}}2
+    {>=}{{>=}}2
+    {>=>}{{>=>}}3
+    {>>}{{>>}}2
+    {>>-}{{>>-}}3
+    {>>=}{{>>=}}3
+    {>>>}{{>>>}}3
+    {<*}{{<*}}2
+    {<*>}{{<*>}}3
+    {<|}{{<|}}2
+    {<|>}{{<|>}}3
+    {<$}{{<\$}}2
+    {<$>}{{<\$>}}3
+    {<!--}{{<!--}}4
+    {<-}{{<-}}2
+    {<--}{{<--}}3
+    {<->}{{<->}}3
+    {<+}{{<+}}2
+    {<+>}{{<+>}}3
+    {<=}{{<=}}2
+    {<==}{{<==}}3
+    {<=>}{{<=>}}3
+    {<=<}{{<=<}}3
+    {<>}{{<>}}2
+    {<<}{{<<}}2
+    {<<-}{{<<-}}3
+    {<<=}{{<<=}}3
+    {<<<}{{<<<}}3
+    {<~}{{<\textasciitilde}}2
+    {<~~}{{<\textasciitilde\textasciitilde}}3
+    {</}{{</}}2
+    {~@}{{\textasciitilde @}}2
+    {~-}{{\textasciitilde-}}2
+    {~=}{{\textasciitilde=}}2
+    {~>}{{\textasciitilde>}}2
+    {~~}{{\textasciitilde\textasciitilde}}2
+    {~~>}{{\textasciitilde\textasciitilde>}}3
+%    {~~~}{{\textasciitilde\textasciitilde\textasciitilde}}3 % Removed in Fira Code v1.206
+    {\%\%}{{\%\%}}2
+%    {\%\%\%}{{\%\%\%}}3 % Removed in Fira Code v1.206
+    {<==>}{{<==>}}4
+    {<||}{{<||}}3
+    {<|||}{{<|||}}4
+    {|||>}{{|||>}}4
+    {</>}{{</>}}3
+    {<~>}{{<\textasciitilde>}}3
+    {<-<}{{<-<}}3
+    {>->}{{>->}}3
+    {=!=}{{=!=}}3
+    {+++}{{+++}}3
+    {||>}{{||>}}3
+    {_|_}{{\_|\_}}3
+    {..=}{{..=}}3
+    {!!.}{{!!.}}3
+    {::=}{{::=}}3
+    {<:}{{<:}}2
+    {>:}{{>:}}2
+    {|-}{{|-}}2
+    {|]}{{|]}}2
+    {|\}}{{|\}}}2
+    {__}{{\_\_}}2
+    {?.}{{?.}}2
+    {?:}{{?:}}2
+    {.?}{{.?}}2
+    {\#=}{{\#=}}2
+    {\#!}{{\#!}}2
+    {\#:}{{\#:}}2
+    {-|}{{-|}}2
+    {:<}{{:<}}2
+    {:>}{{:>}}2
+    {]\#}{{]\#}}2
+    {[|}{{[|}}2
+    {\{|}{{\{|}}2
+}
+
+\endinput

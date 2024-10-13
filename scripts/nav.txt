@@ -60,8 +60,8 @@ nav:
       - 矩阵求逆: code/mat-inv.md
       - 矩阵树: code/mat-tree.md
     - 大步小步: code/math-bsgs.md
-    - 数学基础: code/math-common.md
     - 狄利克雷前缀和: code/math-dirichlet.md
+    - 扩展欧几里得: code/math-exgcd.md
     - 快速离散对数: code/math-fast-dlog.md
     - 快速最大公约数: code/math-fast-gcd.md
     - 原根: code/math-genshin.md

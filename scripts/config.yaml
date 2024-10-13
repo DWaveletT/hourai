@@ -57,7 +57,7 @@ title:
   mat-inv: 矩阵求逆
   mat-tree: 矩阵树
   math-bsgs: 大步小步
-  math-common: 数学基础
+  math-exgcd: 扩展欧几里得
   math-dirichlet: 狄利克雷前缀和
   math-fast-dlog: 快速离散对数
   math-fast-gcd: 快速最大公约数

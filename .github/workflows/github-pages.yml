@@ -30,18 +30,22 @@ jobs:
           pip install pipenv
           pipenv install
 
-      - name: Build
+      - name: Build Markdown
         run: pipenv run mkdocs build -v
 
-      - name: Install Font
-        run: |
-          wget -O simsun.ttf https://pfh-file-store.oss-cn-hangzhou.aliyuncs.com/simsun.ttf
-
-      - name: Convey
+      - name: Build LaTeX
         uses: docker://pandoc/extra:3.5.0.0
         with:
-          args: docs/print/all.md --output=site/print/all.pdf --template /.pandoc/templates/eisvogel.latex --pdf-engine=xelatex --listings -V block-headings -V lang=zh-CN -V CJKmainfont="simsun.ttf"
-
+          args: <-
+            docs/print/all.md -o site/print/all.pdf
+            --template=utils/hourai.tex
+            --filter=pandoc-minted
+            --pdf-engine=latexmk
+            --pdf-engine-opt=-xelatex
+            --pdf-engine-opt=--shell-escape
+            --pdf-engine-opt=-aux-directory=temp
+            # https://github.com/jgm/pandoc/issues/4721
+ 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         if: github.ref == 'refs/heads/master'

@@ -1,8 +1,8 @@
-## 动态规划
+# 动态规划
 
-### 多重背包
+## 多重背包
 
-#### 用法
+### 用法
 
 $n$ 个物品，$m$ 容量背包，第 $i$ 个物品重量为 $w_i$ 价值为 $v_i$ 共有 $c_i$ 个，计算不超过容量的情况下最多拿多少价值的物品。
 
@@ -45,7 +45,7 @@ int main(){
     return 0;
 }
 ```
-### 树形背包
+## 树形背包
 
 ```cpp
 #include<bits/stdc++.h>
@@ -83,9 +83,9 @@ int main(){
     return 0;
 }
 ```
-### 动态动态规划 1
+## 动态动态规划 1
 
-#### 例题
+### 例题
 
 给定一棵 $n$ 个点的树，点有点权，求最大独立集。$m$ 次修改，每次把 $x$ 的权值修改成 $y$。
 
@@ -250,9 +250,9 @@ int main(){
     return 0;
 }
 ```
-### 插头 dp
+## 插头 dp
 
-#### 例题
+### 例题
 
 给出 $n\times m$ 的方格，有些格子不能铺线，其它格子必须铺，形成一个闭合回路。问有多少种铺法？
 
@@ -412,7 +412,7 @@ int main(){
     return 0;
 }
 ```
-## 数据结构
+# 数据结构
 
 ## 平衡树
 
@@ -1381,7 +1381,7 @@ int main(){ // 可持久化文艺平衡树
     return 0;
 }
 ```
-### 珂朵莉树
+## 珂朵莉树
 
 ```cpp
 #include<bits/stdc++.h>
@@ -1528,7 +1528,7 @@ int main(){
     return 0;
 }
 ```
-### 可并堆
+## 可并堆
 
 ```cpp
 #include <bits/stdc++.h>
@@ -1627,7 +1627,7 @@ int main(){
     return 0;
 }
 ```
-### 线性基
+## 线性基
 
 ```cpp
 #include <bits/stdc++.h>
@@ -1725,7 +1725,7 @@ int main(){
     return 0;
 }
 ```
-### Link Cut 树
+## Link Cut 树
 
 ```cpp
 #include<bits/stdc++.h>
@@ -2735,11 +2735,11 @@ int main(){
     return 0;
 }
 ```
-## 树论
+# 树论
 
-### 点分树
+## 点分树
 
-#### 例题
+### 例题
 
 给定 $n$ 个点组成的树，点有点权 $v_i$。$m$ 个操作，分为两种：
 
@@ -2951,9 +2951,9 @@ int main(){
     return 0;
 }
 ```
-### 最近公共祖先
+## 最近公共祖先
 
-#### 用法
+### 用法
 
 - LCA 1：使用 dfs 序查询 LCA；
 - LCA 1：使用重链剖分查询 LCA。
@@ -3064,7 +3064,7 @@ int main(){
     return 0;
 }
 ```
-### 长链剖分
+## 长链剖分
 
 ```cpp
 #include<bits/stdc++.h>
@@ -3162,7 +3162,7 @@ int main(){
     return 0;
 }
 ```
-### 重链剖分
+## 重链剖分
 
 ```cpp
 #include<bits/stdc++.h>
@@ -3302,9 +3302,9 @@ int main(){
     return 0;
 }
 ```
-### 树哈希
+## 树哈希
 
-#### 用法
+### 用法
 
 给定大小为 $n$ 的以 $1$ 为根的树，计算 $h_i$ 表示子树 $i$ 的哈希值，计算有多少个本质不同的值。
 
@@ -3349,9 +3349,9 @@ int main(){
     return 0;
 }
 ```
-### Prufer 序列
+## Prufer 序列
 
-#### 用法
+### 用法
 
 给定大小为 $n$ 的以 $1$ 为根的树，计算 $h_i$ 表示子树 $i$ 的哈希值，计算有多少个本质不同的值。
 
@@ -3409,7 +3409,7 @@ int main(){
     return 0;
 }
 ```
-### 虚树
+## 虚树
 
 ```cpp
 #include<bits/stdc++.h>
@@ -3514,11 +3514,11 @@ void solve(vector <int> &V){
 }
 
 ```
-## 图论
+# 图论
 
-### 仙人掌
+## 仙人掌
 
-#### 例题
+### 例题
 
 给定一个仙人掌，多组询问 $u, v$ 之间最短路长度。
 
@@ -3616,7 +3616,7 @@ int main(){
     return 0;
 }
 ```
-### 三元环计数
+## 三元环计数
 
 ```cpp
 #include<bits/stdc++.h>
@@ -3662,12 +3662,12 @@ int main(){
     return 0;
 }
 ```
-### 四元环计数
+## 四元环计数
 
 ```cpp
 
 ```
-### 基环树
+## 基环树
 
 ```cpp
 #include<bits/stdc++.h>
@@ -3907,7 +3907,7 @@ int main(){
     return Problem3 :: main();
 }
 ```
-### 全源最短路
+## 全源最短路
 
 ```cpp
 #include <bits/stdc++.h>
@@ -4000,9 +4000,9 @@ bool johnson(int n){
     }
 }
 ```
-### 2-SAT
+## 2-SAT
 
-#### 例题
+### 例题
 
 $n$ 个变量 $m$ 个条件，形如若 $x_i = a$ 则 $y_j = b$，找到任意一组可行解或者报告无解。
 
@@ -4083,7 +4083,7 @@ int main(){
     return 0;
 }
 ```
-### 割点
+## 割点
 
 ```cpp
 #include<bits/stdc++.h>
@@ -4127,7 +4127,7 @@ int main(){
     return 0;
 }
 ```
-### 边双连通分量
+## 边双连通分量
 
 ```cpp
 #include<bits/stdc++.h>
@@ -4167,7 +4167,7 @@ void dfs(int u, int l){
 }
 
 ```
-### 点双连通分量
+## 点双连通分量
 
 ```cpp
 #include<bits/stdc++.h>
@@ -4207,7 +4207,7 @@ void dfs(int u, int f){
 }
 
 ```
-### 强连通分量
+## 强连通分量
 
 ```cpp
 #include<bits/stdc++.h>
@@ -4271,9 +4271,9 @@ int main(){
     return 0;
 }
 ```
-## 网络流
+# 网络流
 
-### 费用流
+## 费用流
 
 ```cpp
 #include<bits/stdc++.h>
@@ -4371,9 +4371,9 @@ int main(){
     return 0;
 }
 ```
-### 最小割树
+## 最小割树
 
-#### 用法
+### 用法
 
 给定无向图求出最小割树，点 $u$ 和 $v$ 作为起点终点的最小割为树上 $u$ 到 $v$ 路径上边权的最小值。
 
@@ -4508,7 +4508,7 @@ namespace GHTree{
 }
 
 ```
-### 最大流
+## 最大流
 
 ```cpp
 #include <bits/stdc++.h>
@@ -4597,9 +4597,9 @@ int main(){
     return 0;
 }
 ```
-### 上下界费用流
+## 上下界费用流
 
-#### 用法
+### 用法
 
 - `add(u, v, l, r, c)`：连一条容量在 $[l, r]$ 的从 $u$ 到 $v$ 的费用为 $c$ 的边；
 - `solve()`：计算无源汇最小费用可行流；
@@ -4735,9 +4735,9 @@ int main(){
     return 0;
 }
 ```
-### 上下界最大流
+## 上下界最大流
 
-#### 用法
+### 用法
 
 - `add(u, v, l, r, c)`：连一条容量在 $[l, r]$ 的从 $u$ 到 $v$ 的边；
 - `solve()`：检查是否存在无源汇可行流；
@@ -4902,7 +4902,7 @@ int main(){
 }
 
 ```
-## 数学
+# 数学
 
 ## 线性代数
 
@@ -5389,9 +5389,9 @@ int main(){
     return 0;
 }
 ```
-### 大步小步
+## 大步小步
 
-#### 用法
+### 用法
 
 给定 $a, p$ 求出 $x$ 使得 $a^x = y \pmod p$，其中 $p$ 为质数。
 
@@ -5441,70 +5441,9 @@ int main(){
     return 0;
 }
 ```
-### 数学基础
+## 狄利克雷前缀和
 
-#### 内容
-
-包含快速幂，龟速乘，扩展欧几里得，线性求 $1\sim n$ 的逆元。
-
-```cpp
-#include<bits/stdc++.h>
-using namespace std;
-
-using i64 = long long;
-const int INF  =  1e9;
-const i64 INFL = 1e18;
-
-const int MOD = 998244353;
-
-int power(int a, int b){
-    int r = 1;
-    while(b){
-        if(b & 1) r = 1ll * r * a % MOD;
-        b >>= 1,  a = 1ll * a * a % MOD;
-    }
-    return r;
-}
-
-int power(int a, int b, int m){
-    int r = 1;
-    while(b){
-        if(b & 1) r = 1ll * r * a % m;
-        b >>= 1,  a = 1ll * a * a % m;
-    }
-    return r;
-}
-
-int multi(int a, int b, int m){
-    int r = 1;
-    while(b){
-        if(b & 1) r = (r + a) % m;
-        b >>= 1,  a = (a + a) % m;
-    }
-    return r;
-}
-
-int exgcd(int a, int b, int &x, int &y){
-    if(a == 0){
-        x = 0, y = 1; return b;
-    } else {
-        int x0 = 0, y0 = 0;
-        int d = exgcd(b % a, a, x0, y0);
-        x = y0 - (b / a) * x0;
-        y = x0;
-        return d;
-    }
-}
-
-void inv(int n, int T[]){
-    T[1] = 1;
-    for(int i = 2;i <= n;++ i)
-        T[i] = 1ll * (MOD - MOD / i) * T[MOD % i] % MOD;
-}
-```
-### 狄利克雷前缀和
-
-#### 用法
+### 用法
 
 计算：
 
@@ -5560,9 +5499,29 @@ int main(){
     return 0;
 }
 ```
-### 快速离散对数
+## 扩展欧几里得
 
-#### 用法
+### 内容
+
+给定 $a, b$，求出 $ax+by=\gcd(a, b)$ 的一组 $x, y$。
+
+```cpp
+int exgcd(int a, int b, int &x, int &y){
+    if(a == 0){
+        x = 0, y = 1; return b;
+    } else {
+        int x0 = 0, y0 = 0;
+        int d = exgcd(b % a, a, x0, y0);
+        x = y0 - (b / a) * x0;
+        y = x0;
+        return d;
+    }
+}
+
+```
+## 快速离散对数
+
+### 用法
 
 给定原根 $g$ 以及模数 $\mathrm{mod}$，$T$ 次询问 $x$ 的离散对数。
 
@@ -5657,9 +5616,9 @@ int main(){
     return 0;
 }
 ```
-### 快速最大公约数
+## 快速最大公约数
 
-#### 用法
+### 用法
 
 已知小值域 $m$ 以及 $n$ 次询问，$\mathcal O(m)$ 预处理，$\mathcal O(1)$ 单次查询 $x, y$ 的最大公约数。
 
@@ -5755,13 +5714,13 @@ int main(){
     return 0;
 }
 ```
-### 原根
+## 原根
 
-#### 用法
+### 用法
 
 计算 $P$ 的最小原根。
 
-#### 附注
+### 附注
 
 原根表，其中 $P = r\times 2^{k}$，对应原根为 $g$。
 
@@ -5857,9 +5816,9 @@ int main(){
     return 0;
 }
 ```
-### 快速乘法逆元（离线）
+## 快速乘法逆元（离线）
 
-#### 用法
+### 用法
 
 离线计算 $x = [x_1, x_2, \cdots, x_n]$ 在模 $p$ 意义下的逆元。
 
@@ -5906,9 +5865,9 @@ int main(){
     return 0;
 }
 ```
-### 快速乘法逆元（在线）
+## 快速乘法逆元（在线）
 
-#### 用法
+### 用法
 
 在线计算 $x = [x_1, x_2, \cdots, x_n]$ 在模 $p$ 意义下的逆元。
 
@@ -5976,9 +5935,9 @@ int main(){
     return 0;
 }
 ```
-### Barrett 取模
+## Barrett 取模
 
-#### 用法
+### 用法
 
 调用 init 计算出 $S$ 和 $X$，得到计算 $x \bmod P = (x\times X) / 2^{60} + S$。
 
@@ -6021,9 +5980,9 @@ int main(){
     return 0;
 }
 ```
-### Pollard's Rho
+## Pollard's Rho
 
-#### 用法
+### 用法
 
 - 调用 `test(n)` 判断 $n$ 是否是质数；
 - 调用 `rho(n)` 计算 $n$ 分解质因数后的结果，不保证结果有序。
@@ -6122,14 +6081,14 @@ int main(){
     return 0;
 }
 ```
-### min25 筛
+## min25 筛
 
 ```cpp
 
 ```
-### 杜教筛
+## 杜教筛
 
-#### 用法
+### 用法
 
 对于积性函数 $f$，找到易求前缀和的积性函数 $g, h$ 使得 $h = f*g$，根据递推式计算 $S(n) = \sum_{i=1}^n f(i)$：
 
@@ -6137,7 +6096,7 @@ $$
 S(n) = H(n) - \sum_{d = 1}^n g(d) \times S(\left\lfloor \frac{n}{d}\right\rfloor)
 $$
 
-#### 例题
+### 例题
 
 - 对于 $f = \varphi$，寻找 $g = 1, h = \mathrm{id}$；
 - 对于 $f = \mu$，寻找 $g = 1, h = \varepsilon$。
@@ -6224,9 +6183,9 @@ int main(){
     return 0;
 }
 ```
-### PN 筛
+## PN 筛
 
-#### 用法
+### 用法
 对于积性函数 $f(x)$，寻找积性函数 $g(x)$ 使得 $g(p) = f(p)$，且 $g$ 易求前缀和 $G$。
 
 令 $h = f * g^{-1}$，可以证明只有 PN 处 $h$ 的函数值非 $0$，PN 指每个素因子幂次都不小于 $2$ 的数。同时可以证明 $n$ 以内的 PN 只有 $\mathcal O(\sqrt n)$ 个，且可以暴力枚举质因子幂次得到所有 PN。
@@ -6237,7 +6196,7 @@ $$
 h(p^c) = f(p^c) - \sum_{i = 1}^c g(p^i) \times h(p^{c - i})
 $$
 
-#### 例题
+### 例题
 
 > 定义积性函数 $f(x)$ 满足 $f(p^k) = p^k(p^k - 1)$，计算 $\sum f(i)$。
 
@@ -6347,9 +6306,9 @@ int main(){
     return 0;
 }
 ```
-### 二次剩余
+## 二次剩余
 
-#### 用法
+### 用法
 
 多次询问，每次询问给定奇素数 $p$ 以及 $y$，在 $\mathcal O(\log p)$ 复杂度计算 $x$ 使得 $x^2 \equiv 0 \pmod p$ 或者无解。
 
@@ -6433,11 +6392,11 @@ int main(){
     return 0;
 }
 ```
-## 多项式
+# 多项式
 
-### NTT 全家桶
+## NTT 全家桶
 
-#### 用法
+### 用法
 
 多项式全家桶。
 
@@ -6633,9 +6592,9 @@ namespace Poly{
     }
 }
 ```
-### FWT 全家桶
+## FWT 全家桶
 
-#### 用法
+### 用法
 
 沃尔什全家桶。
 
@@ -6707,7 +6666,7 @@ namespace Solve3{   // xor 卷积
     }
 }
 ```
-### 任意模数 NTT
+## 任意模数 NTT
 
 ```cpp
 #include<bits/stdc++.h>
@@ -6828,9 +6787,9 @@ int main(){
     return 0;
 }
 ```
-## 字符串
+# 字符串
 
-### AC 自动机
+## AC 自动机
 
 ```cpp
 #include<bits/stdc++.h>
@@ -6877,9 +6836,9 @@ namespace ACAM{
     }
 }
 ```
-### 扩展 KMP
+## 扩展 KMP
 
-#### 定义
+### 定义
 
 $$
 \begin{aligned}
@@ -6929,7 +6888,7 @@ int main(){
     return 0;
 }
 ```
-### Manacher
+## Manacher
 
 ```cpp
 #include<bits/stdc++.h>
@@ -6965,7 +6924,7 @@ int main(){
     return 0;
 }
 ```
-### 回文自动机
+## 回文自动机
 
 ```cpp
 #include<bits/stdc++.h>
@@ -7024,14 +6983,14 @@ azzzyyzyyx
 1 2 1 2 3 2 2 2 3 3
 */
 ```
-### 后缀平衡树
+## 后缀平衡树
 
-#### 本代码尚未完成
+### 本代码尚未完成
 
 ```cpp
 
 ```
-### 后缀数组（倍增）
+## 后缀数组（倍增）
 
 ```cpp
 #include<bits/stdc++.h>
@@ -7076,7 +7035,7 @@ int main(){
     return 0;
 }
 ```
-### 后缀数组（SAIS）
+## 后缀数组（SAIS）
 
 ```cpp
 #include<bits/stdc++.h>
@@ -7179,7 +7138,7 @@ int main(){
     return 0;
 }
 ```
-### 广义后缀自动机（离线）
+## 广义后缀自动机（离线）
 
 ```cpp
 #include<bits/stdc++.h>
@@ -7282,7 +7241,7 @@ int main(){
 }
 
 ```
-### 广义后缀自动机（在线）
+## 广义后缀自动机（在线）
 
 ```cpp
 #include<bits/stdc++.h>
@@ -7372,7 +7331,7 @@ int main(){
 }
 
 ```
-### 后缀自动机
+## 后缀自动机
 
 ```cpp
 #include<bits/stdc++.h>
@@ -7447,7 +7406,7 @@ int main(){
 }
 
 ```
-### 字典树
+## 字典树
 
 ```cpp
 #include<bits/stdc++.h>
@@ -7483,9 +7442,9 @@ namespace Trie{
     }
 }
 ```
-## 计算几何
+# 计算几何
 
-### 二维凸包
+## 二维凸包
 
 ```cpp
 #include "2d.cpp"
@@ -7527,7 +7486,7 @@ poly convex(vector <point> V){
     return res;
 }
 ```
-### 最小圆覆盖
+## 最小圆覆盖
 
 ```cpp
 #include "2d.cpp"
@@ -7581,7 +7540,7 @@ circ minimal(vector <point> V){
     return res;
 }
 ```
-### 最左转线
+## 最左转线
 
 ```cpp
 #include "2d.cpp"
@@ -7900,7 +7859,7 @@ int main(){
     return 0;
 }
 ```
-### 二维基础
+## 二维基础
 
 ```cpp
 #include <bits/stdc++.h>
@@ -8053,9 +8012,9 @@ double area(const poly &P){
 
 
 ```
-## 其他
+# 其他
 
-### 笛卡尔树
+## 笛卡尔树
 
 ```cpp
 #include <bits/stdc++.h>
@@ -8101,9 +8060,9 @@ int main(){
     return 0;
 }
 ```
-### CDQ 分治
+## CDQ 分治
 
-#### 例题
+### 例题
 给定三元组序列 $(a_i, b_i, c_i)$，求解 $f(i) = \sum_{j} [a_j \le a_i \land b_j\le b_i \land c_j\le c_i]$。
 
 ```cpp
@@ -8168,9 +8127,9 @@ int main(){
     return 0;
 }
 ```
-### 自适应辛普森
+## 自适应辛普森
 
-#### 例题
+### 例题
 
 计算
 
@@ -8217,9 +8176,9 @@ int main(){
     }
 }
 ```
-### 模拟退火
+## 模拟退火
 
-#### 例题
+### 例题
 
 给定 $n$ 个物品挂在洞下，第 $i$ 个物品坐标 $(x_i, y_i)$ 重量为 $w_i$。询问平衡点。
 
@@ -8277,7 +8236,7 @@ int main(){
     return 0;
 }
 ```
-### 伪随机生成
+## 伪随机生成
 
 ```cpp
 #include<bits/stdc++.h>

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "25969023249049440dfc2fc772151c9dc2bd10ee7e1b56b514a11f30eac25fdc"
+            "sha256": "3c53f8d7696c658187df0aa630a811e0d213a872dc13ced43c0a7b5a0e36b869"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -181,6 +181,31 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==3.1.4"
+        },
+        "latex2pydata": {
+            "hashes": [
+                "sha256:1206b570748fd7cee78f27a56f4ca209da64d3c419c8e6de9516b64bbf401351",
+                "sha256:304012522f2243dcc384ce36015e62416918209a3198e2edccc3005ec3543379"
+            ],
+            "markers": "python_version >= '3.8'",
+            "version": "==0.4.0"
+        },
+        "latexminted": {
+            "hashes": [
+                "sha256:0906874b0356c983abc54fd627b12379b9c133d92f9b9f4f8d200106d6a47e89",
+                "sha256:bc9ce236055872725f9809e893639e61910ec06b467e1672ba9dc3dfe06e66c5"
+            ],
+            "index": "pypi",
+            "markers": "python_version >= '3.8'",
+            "version": "==0.2.0"
+        },
+        "latexrestricted": {
+            "hashes": [
+                "sha256:00a27fd544f3a8711685b2336d222aa91261a3e3d04e51aab5897766501fb25f",
+                "sha256:00c7c34ebb8929e8c37575bdf1591e784c042ea979e7ae9bb0bd52bad2c3a6ca"
+            ],
+            "markers": "python_version >= '3.8'",
+            "version": "==0.4.0"
         },
         "markdown": {
             "hashes": [
