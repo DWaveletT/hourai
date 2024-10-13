@@ -66,13 +66,7 @@ markdown_extensions:
   - pymdownx.highlight:
       linenums: true
   - pymdownx.inlinehilite
-  # - pymdownx.keys
-  # - pymdownx.magiclink
-  # - pymdownx.mark
-  # - pymdownx.snippets:
-  #     check_paths: true
   - pymdownx.progressbar
-  # - pymdownx.smartsymbols
   - pymdownx.superfences:
       custom_fences:
         - name: math
@@ -81,8 +75,6 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.tilde
-  # - pymdownx.tabbed:
-  #     alternate_style: true
 
 nav:
   - 介绍: index.md

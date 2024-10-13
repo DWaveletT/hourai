@@ -15,7 +15,10 @@ Hourai's Template 是哈尔滨工业大学蓬莱人形队伍在 2022~2024 赛季
 
 ## 可携带版本
 
-咕咕咕。
+通过自动化脚本构建出的完整模板可以在以下链接处查看：
+
+- 页面版本：<https://hourai.nanani-fan.club/print/full-version>；
+- 打印版本：<https://hourai.nanani-fan.club/print/full-version.pdf>。
 
 ## 关于贡献
 

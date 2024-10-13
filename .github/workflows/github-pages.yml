@@ -37,7 +37,7 @@ jobs:
         uses: docker://pandoc/extra:3.5.0.0
         with:
           args: >-
-            docs/print/all.md -o site/print/all.pdf
+            docs/print/full-version.md -o site/print/full-version.pdf
             --template=utils/hourai.tex
             --pdf-engine=xelatex
             --listings
