@@ -39,12 +39,8 @@ jobs:
           args: <-
             docs/print/all.md -o site/print/all.pdf
             --template=utils/hourai.tex
-            --filter=pandoc-minted
-            --pdf-engine=latexmk
-            --pdf-engine-opt=-xelatex
-            --pdf-engine-opt=--shell-escape
-            --pdf-engine-opt=-aux-directory=temp
-            # https://github.com/jgm/pandoc/issues/4721
+            --pdf-engine=xelatex
+            --listings
  
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4

@@ -27,14 +27,22 @@
 \author{哈尔滨工业大学\ 蓬莱人形}
 
 \usepackage{xcolor}
-\usepackage[outputdir=temp]{minted}
+\usepackage{listings, lstfiracode} % https://ctan.org/pkg/lstfiracode
 
-\usemintedstyle{stata-light}
-\setminted{
-    autogobble = true,
-    breaklines = true,
-    frame = single,
-    linenos = true
+% Color Palletes from Gihub
+\lstset{
+  language=[11]C++,
+  basicstyle    = \ttfamily\color[HTML]{24292E},
+  style=FiraCodeStyle,   % Use predefined FiraCodeStyle
+  keywordstyle    =\color[HTML]{D73A49}\bfseries,
+  commentstyle    =\color[HTML]{6A737D}\itshape,
+  numberstyle     =\color[HTML]{005CC5}\bfseries\sffamily,
+  stringstyle     =\color[HTML]{032F62}\bfseries\itshape,
+  tabsize = 4,
+  breaklines,
+  columns = fixed,
+  numbers = left,
+  frame = shadowbox
 }
 
 \begin{document}
