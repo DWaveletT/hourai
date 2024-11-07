@@ -39,65 +39,6 @@ void dfs0(int u, int e){
     }
 }
 
-namespace Problem1{
-// ===== 求直径 =====
-    int H[MAXN], A[MAXN], B[MAXN];
-    
-    i64 L[MAXN];
-    i64 dis = 0;
-    void dfs1(int u, int e){
-        for(auto &[i, v, w] : E[u]) if(i != e){
-            if(!V[v]){
-                dfs1(v, i);
-                dis = max(dis, L[u] + w + L[v]);
-                L[u] = max(L[u], L[v] + w);
-            }
-        }
-    }
-    int main(){
-        int n;
-        cin >> n;
-        for(int i = 1;i <= n;++ i){
-            int u, v, w;
-            cin >> u >> v >> w;
-            E[u].push_back({i, v, w});
-            E[v].push_back({i, u, w});
-        }
-        dfs0(1, 0);
-        memset(V, 0, sizeof(V));
-        for(auto &u : C)
-            V[u] = true;
-        for(auto &u : C){
-            dfs1(u, 0);
-        }
-        for(int i = 0;i < C.size();++ i){
-            int x = C[i];
-            if(i > 0)
-                H[i] = H[i - 1] + get<2>(W[i - 1]);
-            A[i] = L[x] + H[i];
-            B[i] = L[x] - H[i];
-        }
-        int h = H[C.size() - 1] + get<2>(W.back());
-        int j = 0;
-        multiset <int, greater<int> > X, Y;
-        for(int i = 0;i < C.size();++ i){
-            int x = C[i];
-            while(j < i && (H[i] - H[j]) * 2 >= h){
-                X.insert(A[j]);
-                Y.erase (Y.find(B[j]));
-                ++ j;
-            }
-            if(!X.empty())
-                dis = max(dis, L[x] - H[i] + *X.begin() + h);
-            if(!Y.empty())
-                dis = max(dis, L[x] + H[i] + *Y.begin() + 0);
-            Y.insert(B[i]);
-        }
-        cout << dis << endl;
-        return 0;
-    }
-}
-
 namespace Problem2{
 // ===== 删除环上第 i 条边，求直径 =====
     i64 H[MAXN], A1[MAXN], B1[MAXN], A2[MAXN], B2[MAXN], A3[MAXN], B3[MAXN];

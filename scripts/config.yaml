@@ -9,8 +9,7 @@ title:
   balanced-tree: 平衡树
   ds-fhq-treap: 无旋 Treap
   ds-rbtree: 红黑树
-  ds-splay1: Splay 1
-  ds-splay2: Splay 2
+  ds-splay: Splay
   ds-treap: Treap
   per-fhq-treap1: 可持久化无旋 Treap 1
   per-fhq-treap2: 可持久化无旋 Treap 2
