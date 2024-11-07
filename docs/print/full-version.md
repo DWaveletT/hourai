@@ -5441,6 +5441,62 @@ int main(){
     return 0;
 }
 ```
+## 中国剩余定理
+
+### 定理
+
+对于线性方程：
+
+$$
+\begin{cases}
+x \equiv a_1 \pmod {m_1} \\
+x \equiv a_2 \pmod {m_2} \\
+\cdots \\
+x \equiv a_n \pmod {m_n} \\
+\end{cases}
+$$
+
+如果 $a_i$ 两两互质，可以得到 $x$ 的解 $x\equiv L\pmod M$，其中 $M=\prod m_i$，而 $L$ 由下式给出：
+
+$$L = \left(\sum a_i m_i\times (\left(M/m_i\right)^{-1}\bmod m_i)\right)\bmod M$$
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+const int MAXN = 100 + 3;
+long long A[MAXN], B[MAXN], M = 1;
+
+long long exgcd(long long a, long long b, long long &x, long long &y){
+    if(a == 0){
+        x = 0, y = 1; return b;
+    } else {
+        long long x0 = 0, y0 = 0;
+        long long d = exgcd(b % a, a, x0, y0);
+        x = y0 - (b / a) * x0;
+        y = x0;
+        return d;
+    }
+}
+
+int main(){
+    int n;
+    cin >> n;
+    for(int i = 1;i <= n;++ i){
+        cin >> B[i] >> A[i];
+        M = M * B[i];
+    }
+    long long L = 0;
+    for(int i = 1;i <= n;++ i){
+        long long m = M / B[i], b, k;
+        exgcd(m, B[i], b, k);
+        L = (L + (__int128)A[i] * m * b) % M;
+    }
+    L = (L % M + M) % M;
+    cout << L << endl;
+    return 0;
+}
+```
 ## 狄利克雷前缀和
 
 ### 用法
@@ -5935,6 +5991,106 @@ int main(){
     return 0;
 }
 ```
+## 拉格朗日插值
+
+### 定理
+
+给定 $n$ 个横坐标不同的点 $(x_i, y_i)$，可以唯一确定一个 $n - 1$ 阶多项式如下：
+
+$$
+f(x) = \sum_{i=1}^n \frac{\prod_{j\neq i} (x-x_j)}{\prod_{j\neq i}(x_i-x_j)} \cdot y_i
+$$
+
+下面代码先求出了多项式再计算 $f(k)$，也可以直接带入计算。
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+const int MAXN = 2e3 + 3;
+const int MOD  = 998244353;
+int X[MAXN], Y[MAXN], F[MAXN], G[MAXN], H[MAXN], A[MAXN];
+int power(int a, int b){
+    int r = 1;
+    while(b){
+        if(b & 1) r = 1ll * r * a % MOD;
+        b >>= 1,  a = 1ll * a * a % MOD;
+    }
+    return r;
+}
+
+int main(){
+    int n, k;
+    cin >> n >> k;
+    for(int i = 1;i <= n;++ i){
+        cin >> X[i] >> Y[i];
+    }
+    F[0] = 1;
+    for(int i = 1;i <= n;++ i){     // 计算 prod(x - x_i)
+        for(int j = 0;j <= n;++ j){
+            G[j] = ((j == 0 ? 0 : F[j - 1]) - 1ll * F[j] * X[i] % MOD + MOD) % MOD;
+        }
+        for(int j = 0;j <= n;++ j){
+            F[j] = G[j];
+        }
+    }
+    for(int i = 1;i <= n;++ i){
+        for(int j = 0;j <= n;++ j){
+            G[j] = F[j];
+        }
+        for(int j = n;j >= 0;-- j){ // 计算 prod(x - x_j) / (x - x_i)
+            H[j] = G[j + 1];
+            G[j] = (G[j] + 1ll * H[j] * X[i]) % MOD;
+        }
+        int w = 1;                  // 计算 inv(prod(x_i - x_j))
+        for(int j = 1;j <= n;++ j) if(j != i)
+            w = 1ll * w * (X[i] - X[j] + MOD) % MOD;
+        w = 1ll * power(w, MOD - 2) * Y[i] % MOD;
+        for(int j = 0;j <= n;++ j)
+            A[j] = (A[j] + 1ll * w * H[j]) % MOD;
+    }
+    int t = 1, ans = 0;
+    for(int i = 0;i <= n - 1;++ i){
+        ans = (ans + 1ll * A[i] * t) % MOD;
+        t = 1ll * t * k % MOD;
+    }
+    cout << ans << endl;
+}
+```
+## min-max 容斥
+
+### 定理
+
+$$\begin{aligned}
+\max_{i\in S} \{x_i\} &= \sum_{T\subseteq S}(-1)^{|T| - 1}\min_{j\in T}\{x_j\} \\
+\min_{i\in S} \{x_i\} &= \sum_{T\subseteq S}(-1)^{|T| - 1}\max_{j\in T}\{x_j\} \\
+\end{aligned}$$
+
+期望意义下上式依然成立。
+
+另外设 $\max^k$ 表示第 $k$ 大的元素，可以推广为如下式子：
+
+$$
+\max_{i\in S}^k \{x_i\} = \sum_{T\subseteq S}(-1)^{|T| - k}\binom{|T - 1|}{k - 1} \min_{j\in T}\{x_j\}
+$$
+
+此外在数论上可以得到：
+
+$$
+\operatorname*{lcm}_{i\in S} \{x_i\} = \prod_{T\subseteq S} \left(\gcd_{j\in T}\{x_j\}\right)^{(-1)^{|T| - 1}}
+$$
+
+### 应用
+
+对于计算“$n$ 个属性都出现的期望时间”问题，设第 $i$ 个属性第一次出现的时间是 $t_i$，所求即为 $\max(t_i)$，使用 min-max 容斥转为计算 $\min(t_i)$。
+
+比如 $n$ 个独立物品，每次抽中物品 $i$ 的概率是 $p_i$，问期望抽多少次抽中所有物品。那么就可以计算 $\min_S$ 表示第一次抽中物品集合 $S$ 内物品的时间，可以得到：
+
+$$\max_{U}=\sum_{S\subseteq U}(-1)^{|S| - 1}\min_S = \sum_{S\subseteq U}(-1)^{|S| - 1}\cdot \frac{1}{\sum _{x\in S}p_x}$$
+
+```cpp
+
+```
 ## Barrett 取模
 
 ### 用法
@@ -6077,6 +6233,104 @@ int main(){
             cout << "Prime" << endl;
         else 
             cout << p << endl;
+    }
+    return 0;
+}
+```
+## polya 定理
+
+### Burnside 引理
+
+记所有染色方案的集合为 $X$，其中单个染色方案为 $x$。一种**对称操作** $g\in X$ 作用于染色方案 $x\in X$ 上可以得到另外一种染色 $x'$。
+
+将所有对称操作作为集合 $G$，那么 $Gx = \{gx \mid g\in G\}$ 是**与 $x$ 本质相同的染色方案的集合**，形式化地称为 $x$ 的轨道。统计本质不同染色方案数，就是**统计不同轨道个数**。
+
+Burnside 引理说明如下：
+
+$$
+|X / G| = \frac{1}{|G|} \sum_{g\in G}|X^g|
+$$
+
+其中 $X^g$ 表示在 $g\in G$ 的作用下，**不动点**的集合。不动点被定义为 $x = gx$ 的 $x$。
+
+### Polya 定理
+
+对于通常的染色问题，$X$ 可以看作一个长度为 $n$ 的序列，每个元素是 $1$ 到 $m$ 的整数。可以将 $n$ 看作面数、$m$ 看作颜色数。Polya 定理叙述如下：
+
+$$
+|X / G| = \frac{1}{|G|} \sum_{g\in G}\sum_{g\in G} m^{c(g)}
+$$
+
+其中 $c(g)$ 表示对一个序列做轮换操作 $g$ 可以**分解成多少个置换环**。
+
+然而，增加了限制（比如要求某种颜色必须要多少个），就无法直接应用 Polya 定理，需要利用 Burnside 引理进行具体问题具体分析。
+
+### 应用
+
+给定 $n$ 个点 $n$ 条边的环，现在有 $n$ 种颜色，给每个顶点染色，询问有多少种本质不同的染色方案。
+
+显然 $X$ 是全体元素在 $1$ 到 $n$ 之间长度为 $n$ 的序列，$G$ 是所有可能的单次旋转方案，共有 $n$ 种，第 $i$ 种方案会把 $1$ 置换到 $i$。于是：
+
+$$
+\begin{aligned}
+\mathrm{ans} &= \frac{1}{|G|} \sum_{i=1}^n m^{c(g_i)} \\
+&= \frac{1}{n} \sum_{i=1}^{n} n^{\gcd(i,n)} \\
+&= \frac{1}{n} \sum_{d\mid n}^n n^{d} \sum_{i=1}^n [\gcd(i,n) = d] \\
+&= \frac{1}{n} \sum_{d\mid n}^n n^{d} \varphi(n/d) \\
+\end{aligned}
+$$
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+const int MOD = 1e9 + 7;
+int power(int a, int b){
+    int r = 1;
+    while(b){
+        if(b & 1) r = 1ll * r * a % MOD;
+        b >>= 1,  a = 1ll * a * a % MOD;
+    }
+    return r;
+}
+
+vector <tuple<int, int> > P;
+void solve(int step, int n, int d, int f, int &ans){
+    if(step == P.size()){
+        ans = (ans + 1ll * power(n, n / d) * f) % MOD;
+    } else {
+        auto [w, c] = P[step];
+        int dd = 1, ff = 1;
+        for(int i = 0;i <= c;++ i){
+            solve(step + 1, n, d * dd, f * ff, ans);
+            ff = ff * (w - (i == 0));
+            dd = dd * w;
+        }
+    }
+}
+
+int main(){
+    int T;
+    cin >> T;
+    while(T --){
+        int n, t;
+        cin >> n;
+        t = n;
+        for(int i = 2;i * i <= n;++ i) if(n % i == 0){
+            int w = i, c = 0;
+            while(t % i == 0){
+                t /= i, c ++;
+            }
+            P.push_back({ w, c });
+        }
+        if(t != 1){
+            P.push_back({ t, 1 });
+        }
+        int ans = 0;
+        solve(0, n, 1, 1, ans);
+        ans = 1ll * ans * power(n, MOD - 2) % MOD;
+        cout << ans << endl;
+        P.clear();
     }
     return 0;
 }
@@ -6391,6 +6645,21 @@ int main(){
     }
     return 0;
 }
+```
+## 单位根反演
+
+### 定理
+
+给出单位根反演如下：
+
+$$
+[d\mid n] = \frac{1}{d}\sum_{i=0}^{d-1}\omega_{d}^{ni}
+$$
+
+因为题太难了不会做，所以没有例题，咕着。
+
+```cpp
+
 ```
 # 多项式
 

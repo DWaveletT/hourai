@@ -60,6 +60,7 @@ nav:
       - 矩阵求逆: code/mat-inv.md
       - 矩阵树: code/mat-tree.md
     - 大步小步: code/math-bsgs.md
+    - 中国剩余定理: code/math-crt.md
     - 狄利克雷前缀和: code/math-dirichlet.md
     - 扩展欧几里得: code/math-exgcd.md
     - 快速离散对数: code/math-fast-dlog.md
@@ -67,12 +68,16 @@ nav:
     - 原根: code/math-genshin.md
     - 快速乘法逆元（离线）: code/math-inv-offline.md
     - 快速乘法逆元（在线）: code/math-inv-online.md
+    - 拉格朗日插值: code/math-lagrange.md
+    - min-max 容斥: code/math-min-max.md
     - Barrett 取模: code/math-mod.md
     - Pollard's Rho: code/math-pollards-rho.md
+    - polya 定理: code/math-polya.md
     - min25 筛: code/math-seive-min25.md
     - 杜教筛: code/math-sieve-du.md
     - PN 筛: code/math-sieve-pn.md
     - 二次剩余: code/math-twice.md
+    - 单位根反演: code/math-unit-root.md
   - 多项式:
     - NTT 全家桶: code/poly-family.md
     - FWT 全家桶: code/poly-fwt.md

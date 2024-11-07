@@ -70,6 +70,11 @@ title:
   math-sieve-du: 杜教筛
   math-sieve-pn: PN 筛
   math-twice: 二次剩余
+  math-lagrange: 拉格朗日插值
+  math-min-max: min-max 容斥
+  math-polya: polya 定理
+  math-unit-root: 单位根反演
+  math-crt: 中国剩余定理
   10-other: 其他
   cartesian-tree: 笛卡尔树
   cdq: CDQ 分治

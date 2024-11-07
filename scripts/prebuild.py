@@ -88,5 +88,5 @@ for file in os.scandir(MARKDOWN_DIR):
 with open('nav.txt', 'w', encoding='utf-8') as f:
     f.writelines(nav)
 
-with open('{}/all.md'.format(PRINT_DIR), 'w', encoding='utf-8') as f:
+with open('{}/full-version.md'.format(PRINT_DIR), 'w', encoding='utf-8') as f:
     f.writelines(all)
