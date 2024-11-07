@@ -4,6 +4,7 @@ title:
   bag-tree: 树形背包
   dp-ddp1: 动态动态规划 1
   dp-plug: 插头 dp
+  dp-slope: 斜率优化
   02-ds: 数据结构
   balanced-tree: 平衡树
   ds-fhq-treap: 无旋 Treap
@@ -58,6 +59,7 @@ title:
   mat-tree: 矩阵树
   math-bsgs: 大步小步
   math-exgcd: 扩展欧几里得
+  math-exexgcd: 万能欧几里得
   math-dirichlet: 狄利克雷前缀和
   math-fast-dlog: 快速离散对数
   math-fast-gcd: 快速最大公约数
@@ -75,6 +77,7 @@ title:
   math-polya: polya 定理
   math-unit-root: 单位根反演
   math-crt: 中国剩余定理
+  math-table: 常用数表
   10-other: 其他
   cartesian-tree: 笛卡尔树
   cdq: CDQ 分治

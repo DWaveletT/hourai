@@ -82,6 +82,7 @@ nav:
     - 树形背包: code/bag-tree.md
     - 动态动态规划 1: code/dp-ddp1.md
     - 插头 dp: code/dp-plug.md
+    - 斜率优化: code/dp-slope.md
   - 数据结构:
     - 平衡树:
       - 无旋 Treap: code/ds-fhq-treap.md
@@ -140,6 +141,7 @@ nav:
     - 大步小步: code/math-bsgs.md
     - 中国剩余定理: code/math-crt.md
     - 狄利克雷前缀和: code/math-dirichlet.md
+    - 万能欧几里得: code/math-exexgcd.md
     - 扩展欧几里得: code/math-exgcd.md
     - 快速离散对数: code/math-fast-dlog.md
     - 快速最大公约数: code/math-fast-gcd.md
@@ -154,6 +156,7 @@ nav:
     - min25 筛: code/math-seive-min25.md
     - 杜教筛: code/math-sieve-du.md
     - PN 筛: code/math-sieve-pn.md
+    - 常用数表: code/math-table.md
     - 二次剩余: code/math-twice.md
     - 单位根反演: code/math-unit-root.md
   - 多项式:

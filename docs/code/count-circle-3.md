@@ -1,44 +1,48 @@
+## 三元环计数
+
+**无向图**：考虑将所有点按度数从小往大排序，然后将每条边定向，由排在前面的指向排在后面的，得到一个有向图。然后考虑枚举一个点，再枚举一个点，暴力数，具体见代码。结论是，这样定向后，每个点的出度是 $O(\sqrt{m})$ 的。复杂度 $O(m\sqrt{m})$。
+**有向图**：不难发现，上述方法枚举了三个点，计算有向图三元环也就只需要处理下方向的事，这个由于算法够暴力，随便改改就能做了。
+
 ```cpp
-#include<bits/stdc++.h>
-using namespace std;
 
-const int MAXN = 2e5 + 3;
-vector <int> E[MAXN];
-int D[MAXN], U[MAXN], V[MAXN];
-bool F[MAXN];
-
-int main(){
-    int n, m;
-    cin >> n >> m;
-    for(int i = 1;i <= m;++ i){
-        int u, v;
-        cin >> u >> v;
-        D[u] ++;
-        D[v] ++;
-        U[i] = u, V[i] = v;
-    }
-    for(int i = 1;i <= m;++ i){
-        int u = U[i];
-        int v = V[i];
-        if(D[u] > D[v] || (D[u] == D[v] && u > v))
-            swap(u, v);
-        E[u].push_back(v);
-    }
-
-    int ans = 0;
-    for(int u = 1;u <= n;++ u){
-        for(auto &v: E[u])
-            F[v] = 1;
-        for(auto &v: E[u]){
-            for(auto &w: E[v]){
-                ans += F[w];
-            }
-        }
-        for(auto &v: E[u])
-            F[v] = 0;
-    }
-    cout << ans << "\n";
-
-    return 0;
+// 无向图
+ll n, m; cin >> n >> m;
+vector<pair<ll, ll>> Edges(m);
+vector<vector<ll>> G(n + 2);
+vector<ll> deg(n + 2);
+for (auto &[i, j] : Edges) cin >> i >> j, ++deg[i], ++deg[j];
+for (auto [i, j] : Edges) {
+	if (deg[i] > deg[j] || (deg[i] == deg[j] && i > j)) swap(i, j);
+	G[i].emplace_back(j);
 }
+vector<ll> val(n + 2);
+ll ans = 0;
+for (ll i = 1; i <= n; ++i) {
+	for (auto j : G[i]) ++val[j];
+	for (auto j : G[i]) for (auto k : G[j]) ans += val[k];
+	for (auto j : G[i]) val[j] = 0;
+}
+
+// 有向图
+ll n, m; cin >> n >> m;
+vector<pair<ll, ll>> Edges(m);
+vector<vector<pll>> G(n + 2);
+vector<ll> deg(n + 2);
+for (auto &[i, j] : Edges) cin >> i >> j, ++deg[i], ++deg[j];
+for (auto [i, j] : Edges) {
+	ll flg = 0;
+	if (deg[i] > deg[j] || (deg[i] == deg[j] && i > j)) swap(i, j), flg = 1;
+	G[i].emplace_back(j, flg);
+}
+vector<ll> in(n + 2), out(n + 2);
+ll ans = 0;
+for (ll i = 1; i <= n; ++i) {
+	for (auto [j, w] : G[i]) w ? (++in[j]) : (++out[j]);
+	for (auto [j, w1] : G[i]) for (auto [k, w2] : G[j]) {
+		if (w1 == w2) ans += w1 ? in[k] : out[k];
+	}
+	for (auto [j, w] : G[i]) in[j] = out[j] = 0;
+}
+cout << ans << '\n';
+
 ```

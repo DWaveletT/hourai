@@ -412,6 +412,73 @@ int main(){
     return 0;
 }
 ```
+## 斜率优化
+
+### 形式
+
+考虑一个经典的 dp 转移方程如下：
+
+$$f_i = \max_{j < i}\{f(j) + w(j, i)\}$$
+
+我们将式子拆成三个部分：只跟 $i$ 有关或者与 $i,j$ 均不相关的部分 $a(i)$，只跟 $j$ 有关的部分 $b(j)$，跟 $i,j$ 均有关的部分 $c(i,j)$：
+
+$$f_{i} = a(i) + \max_{j<i} \{b(j)+c(i,j)\}$$
+
+斜率优化可被用来解决这样一个情形：$c(i,j)=ic_j$。此时 $b(j)+c(i,j)$ 可视作关于 $j$ 的一次函数。如果 $c_j$ 随着 $j$ 的增大而单调，那么可用单调栈维护；否则可以考虑 CDQ 分治或者在凸包上二分。在凸包上可以使用二分查询最高/最低点。
+
+### 例题
+
+玩具装箱。原始转移方程为：
+
+$$f_i = \max_{j< i}\{f_j + (s_i-s_j-L')^2\}$$
+
+其中 $s_i = i+\sum_{j\le i}c_i, L'=L+1$。将其分类得到：
+
+$$
+\begin{aligned}
+f_i &= \max_{j<i}\{f_j+s_i^2+s_j^2+L'^2-2s_is_j+2s_jL'-2s_iL' \} \\
+&= (s_i^2 -2s_iL'+ L'^2) + \max_{j<i}\{(f_j+s_j^2+2s_jL') -2s_is_j \}
+\end{aligned}
+$$
+
+在原始的玩具装箱中，$s_j$ 单调增加，也就是斜率单调增加。因此可以直接使用单调栈维护凸包。同时 $s_i$ 也单调增加，因此可以用指针维护。
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long   i64;
+typedef long double f80;
+const int INF = 2147483647;
+const int MAXN= 5e4 + 3;
+int n, L, p, e, C[MAXN], Q[MAXN];
+f80 S[MAXN], F[MAXN];
+f80 gtx(int x){ return S[x]; }
+f80 gty(int x){ return F[x] + S[x] * S[x]; }
+f80 gtw(int x){ return -2.0 * (L - S[x]); }
+f80 gtk(int x,int y){ return (gty(y) - gty(x)) / (gtx(y) - gtx(x)); }
+int main(){ 
+    cin >> n >> L;
+    for(int i = 1;i <= n;++ i){
+        cin >> C[i];
+        S[i] = S[i - 1] + C[i];
+    }
+    for(int i = 1;i <= n;++ i){
+        S[i] += i;
+    }
+    e = p = 1, L ++, Q[p] = 0;
+    for(int i = 1;i <= n;++ i){
+        while(e < p && gtk(Q[e], Q[e + 1]) < gtw(i))
+            ++ e;
+        int j = Q[e];
+        F[i] = F[j] + pow(S[i] - S[j] - L, 2);
+        while(1 < p && gtk(Q[p - 1], Q[p]) > gtk(Q[p], i))
+            e -= (e == p), -- p;
+        Q[++ p] = i;
+    }
+    printf("%.0Lf\n", F[n]);
+    return 0;
+}
+```
 # 数据结构
 
 ## 平衡树
@@ -3618,53 +3685,86 @@ int main(){
 ```
 ## 三元环计数
 
+### 三元环计数
+
+**无向图**：考虑将所有点按度数从小往大排序，然后将每条边定向，由排在前面的指向排在后面的，得到一个有向图。然后考虑枚举一个点，再枚举一个点，暴力数，具体见代码。结论是，这样定向后，每个点的出度是 $O(\sqrt{m})$ 的。复杂度 $O(m\sqrt{m})$。
+**有向图**：不难发现，上述方法枚举了三个点，计算有向图三元环也就只需要处理下方向的事，这个由于算法够暴力，随便改改就能做了。
+
 ```cpp
-#include<bits/stdc++.h>
-using namespace std;
 
-const int MAXN = 2e5 + 3;
-vector <int> E[MAXN];
-int D[MAXN], U[MAXN], V[MAXN];
-bool F[MAXN];
-
-int main(){
-    int n, m;
-    cin >> n >> m;
-    for(int i = 1;i <= m;++ i){
-        int u, v;
-        cin >> u >> v;
-        D[u] ++;
-        D[v] ++;
-        U[i] = u, V[i] = v;
-    }
-    for(int i = 1;i <= m;++ i){
-        int u = U[i];
-        int v = V[i];
-        if(D[u] > D[v] || (D[u] == D[v] && u > v))
-            swap(u, v);
-        E[u].push_back(v);
-    }
-
-    int ans = 0;
-    for(int u = 1;u <= n;++ u){
-        for(auto &v: E[u])
-            F[v] = 1;
-        for(auto &v: E[u]){
-            for(auto &w: E[v]){
-                ans += F[w];
-            }
-        }
-        for(auto &v: E[u])
-            F[v] = 0;
-    }
-    cout << ans << "\n";
-
-    return 0;
+// 无向图
+ll n, m; cin >> n >> m;
+vector<pair<ll, ll>> Edges(m);
+vector<vector<ll>> G(n + 2);
+vector<ll> deg(n + 2);
+for (auto &[i, j] : Edges) cin >> i >> j, ++deg[i], ++deg[j];
+for (auto [i, j] : Edges) {
+	if (deg[i] > deg[j] || (deg[i] == deg[j] && i > j)) swap(i, j);
+	G[i].emplace_back(j);
 }
+vector<ll> val(n + 2);
+ll ans = 0;
+for (ll i = 1; i <= n; ++i) {
+	for (auto j : G[i]) ++val[j];
+	for (auto j : G[i]) for (auto k : G[j]) ans += val[k];
+	for (auto j : G[i]) val[j] = 0;
+}
+
+// 有向图
+ll n, m; cin >> n >> m;
+vector<pair<ll, ll>> Edges(m);
+vector<vector<pll>> G(n + 2);
+vector<ll> deg(n + 2);
+for (auto &[i, j] : Edges) cin >> i >> j, ++deg[i], ++deg[j];
+for (auto [i, j] : Edges) {
+	ll flg = 0;
+	if (deg[i] > deg[j] || (deg[i] == deg[j] && i > j)) swap(i, j), flg = 1;
+	G[i].emplace_back(j, flg);
+}
+vector<ll> in(n + 2), out(n + 2);
+ll ans = 0;
+for (ll i = 1; i <= n; ++i) {
+	for (auto [j, w] : G[i]) w ? (++in[j]) : (++out[j]);
+	for (auto [j, w1] : G[i]) for (auto [k, w2] : G[j]) {
+		if (w1 == w2) ans += w1 ? in[k] : out[k];
+	}
+	for (auto [j, w] : G[i]) in[j] = out[j] = 0;
+}
+cout << ans << '\n';
+
 ```
 ## 四元环计数
 
+### 四元环计数
+
+_From zpk_
+
+- **无向图**：类似，由于定向后出度结论过于强大，可以暴力。讨论了三种情况。
+- **有向图**：缺少题目，但应当类似三元环计数有向形式记录定向边和原边的正反关系。因为此法最强的结论是定向后出度 $O(\sqrt{m})$，实际上方法很暴力，应当不难数有向形式的。
+
 ```cpp
+
+ll n, m; cin >> n >> m;
+vector<pair<ll, ll>> Edges(m);
+vector<vector<ll>> G(n + 2), iG(n + 2);
+vector<ll> deg(n + 2);
+for (auto &[i, j] : Edges) cin >> i >> j, ++deg[i], ++deg[j];
+for (auto [i, j] : Edges) {
+	if (deg[i] > deg[j] || (deg[i] == deg[j] && i > j)) swap(i, j);
+	G[i].emplace_back(j), iG[j].emplace_back(i);
+}
+ll ans = 0;
+vector<ll> v1(n + 2), v2(n + 2);
+for (ll i = 1; i <= n; ++i) {
+	for (auto j : G[i]) for (auto k : G[j]) ++v1[k];
+	for (auto j : iG[i]) for (auto k : G[j]) ans += v1[k], ++v2[k];
+	for (auto j : G[i]) for (auto k : G[j]) ans += v1[k] * (v1[k] - 1) / 2, v1[k] = 0;
+	for (auto j : iG[i]) for (auto k : G[j]) {
+		if (deg[k] > deg[i] || (deg[k] == deg[i] && k > i)) ans += v2[k] * (v2[k] - 1) / 2;
+		v2[k] = 0;
+	}
+}
+cout << ans << '\n';
 
 ```
 ## 基环树
@@ -5295,6 +5395,63 @@ int main(){
 ```
 ### 矩阵树
 
+#### LGV 定理叙述
+
+设 $G$ 是一张有向无环图，边带权，每个点的度数有限。给定起点集合 $A=\{a_1,a_2, \cdots,a_n\}$，终点集合 $B = \{b_1, b_2, \cdots,b_n\}$。
+
+- 一段路径 $p:v_0\to^{w_1} v_1\to^{w_2} v_2\to \cdots \to^{w_k} v_k$ 的边权被定义为 $\omega (p) = \prod w_i$。
+- 一对顶点 $(a, b)$ 的权值被定义为 $e(a, b) = \sum_{p:a\to b}\omega (p)$。
+
+设矩阵 $M$ 如下：
+
+$$
+M = \begin{pmatrix}
+e(a_1, b_1) & e(a_1, b_2) & \cdots & e(a_1, b_n) \\
+e(a_2, b_1) & e(a_2, b_2) & \cdots & e(a_2, b_n) \\
+\vdots & \vdots & \ddots & \vdots \\
+e(a_n, b_1) & e(a_n, b_2) & \cdots & e(a_n, b_n) \\
+\end{pmatrix}
+$$
+
+从 $A$ 到 $B$ 得到一个**不相交**的路径组 $p=(p_1,p_2,\cdots,p_n)$，其中从 $a_i$ 到达 $b_{\pi_i}$，$\pi$ 是一个排列。定义 $\sigma(\pi)$ 是 $\pi$ 逆序对的数量。
+
+给出 LGV 的叙述如下：
+
+$$
+\det(M) = \sum_{p:A\to B} (-1)^{\sigma (\pi)} \prod_{i=1}^n \omega(p_i)
+$$
+
+可以将边权视作边的重数，那么 $e(a, b)$ 就可以视为从 $a$ 到 $b$ 的不同路径方案数。
+
+#### 矩阵树定理
+
+对于无向图，
+
+- 定义度数矩阵 $D_{i, j} = [i=j]\deg(i)$；
+- 定义邻接矩阵 $E_{i, j} = E_{j, i}$ 是从 $i$ 到 $j$ 的边数个数；
+- 定义拉普拉斯矩阵 $L = D - E$。
+
+对于无向图的矩阵树定理叙述如下：
+
+$$t(G) = \det(L_i) = \frac{1}{n}\lambda_1\lambda_2\cdots \lambda_{n-1}$$
+
+其中 $L_i$ 是将 $L$ 删去第 $i$ 行和第 $i$ 列得到的子式。
+
+对于有向图，类似于无向图定义入度矩阵、出度矩阵、邻接矩阵 $D^{\mathrm{in}}, D^{\mathrm{out}}, E$，同时定义拉普拉斯矩阵 $L^{\mathrm{in}} = D^{\mathrm{in}} - E,L^{\mathrm{out}} - E$。
+
+$$\begin{aligned}
+t^{\mathrm{leaf}}(G, k) &= \det(L^{\mathrm{in}}_k) \\
+t^{\mathrm{root}}(G, k) &= \det(L^{\mathrm{out}}_k) \\
+\end{aligned}$$
+
+其中 $t^{\mathrm{leaf}}(G, k)$ 表示以 $k$ 为根的叶向树，$t^{\mathrm{root}}(G, k)$ 表示以 $k$ 为根的根向树。
+
+#### BEST 定理
+
+对于一个有向欧拉图 $G$，记点 $i$ 的出度为 $\mathrm{out}_ i$，同时 $G$ 的根向生成树个数为 $T$。$T$ 可以任意选取根。则 $G$ 的本质不同的欧拉回路个数为：
+
+$$T \prod_{i}(\mathrm{out}_i - 1)!$$
+
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
@@ -5553,6 +5710,25 @@ int main(){
     cout << ans << endl;
 
     return 0;
+}
+```
+## 万能欧几里得
+
+### 类欧几里得（万能欧几里得）
+
+_From zpk_
+
+一种神奇递归，对 $\displaystyle y=\left\lfloor \frac{Ax+B}{C}\right\rfloor$ 向右和向上走的每步进行压缩，做到 $O(\log V)$ 复杂度。其中 $A\ge C$ 就是直接压缩，向右之后必有至少 $\lfloor A/C\rfloor$ 步向上。$A<C$ 实际上切换 $x,y$ 轴后，相当于压缩了一个上取整折线，而上取整下取整可以互化，便又可以递归。
+
+代码中从 $(0,0)$ 走到 $(n,\lfloor (An+B)/C\rfloor)$，假设了 $A,B,C\ge 0,C\neq 0$（类欧基本都作此假设），$U,R$ 矩阵是从右往左乘的，对列向量进行优化，和实际操作顺序恰好相反。快速幂的 log 据说可以被递归过程均摊掉，实际上并不会导致变成两个 log。
+
+```cpp
+Matrix solve(ll n, ll A, ll B, ll C, Matrix R, Matrix U) {	// (0, 0) 走到 (n, (An+B)/C)
+	if (A >= C) return solve(n, A % C, B, C, U.qpow(A / C) * R, U);
+	ll l = B / C, r = (A * n + B) / C;
+	if (l == r) return R.qpow(n) * U.qpow(l);	// l = r -> l = r or A = 0 or n = 0.
+	ll p = (C * r - B - 1) / A + 1;
+	return R.qpow(n - p) * U * solve(r - l - 1, C, C - B % C + A - 1, A, U, R) * U.qpow(l);
 }
 ```
 ## 扩展欧几里得
@@ -6337,7 +6513,88 @@ int main(){
 ```
 ## min25 筛
 
+设有一个积性函数 $f(n)$，满足 $f(p^k)$ 可以快速求，考虑搞一个在质数位置和 $f(n)$ 相等的 $g(n)$，满足它有完全积性，并且单点和前缀和都可以快速求，然后通过第一部分筛出 $g$ 在质数位置的前缀和，从而相当于得到 $f$ 在质数位置的前缀和，然后利用它，做第二部分，求出 $f$ 的前缀和。
+
+第一部分：$G_k(n)=\sum_{i=1}^{n}[\text{mindiv}(i)>p_k{~\text{or}~}\text{isprime}(i)]g(i)$（$p_0=1$），则有 $G_k(n)=G_{k-1}(n)-g(p_k)(G_{k-1}(n/p_k)-G_{k-1}(p_{k-1}))$，复杂度 $O({n^{3/4}}/{\log n})$。
+
+第二部分：$F_k(n)=\sum_{i=1}^{n}[\text{mindiv}(i)\ge p_k]f(i)$，$F_k(n)=\sum_{\substack{h\ge k\\ p_h^2\le n}}\sum_{\substack{c\ge 1\\ p_h^{c+1}\le n}}(f(p_h^c)F_{h+1}(n/p_h^c)+f(p_h^{c+1}))+F_{\text{prime}}(n)-F_{\text{prime}}(p_{k-1})$，在 $n\le 10^{13}$ 可以证明复杂度 $O(n^{3/4}/\log n)$。
+
+常见细节问题：
+
+- 由于 $n$ 通常是 $10^{10}$ 到 $10^{11}$ 的数，导致 $n$ 会爆 int，$n^2$ 会爆 long long，而且往往会用自然数幂和，更容易爆，所以要小心。
+- 记 $s=\lfloor \sqrt{n}\rfloor$，由于 $F$ 递归时会去找 $F_{h+1}$，会访问到 $s$ 以内最大的质数往后的一个质数，而已经证明对于所有 $n\in\mathbb{N}^+$，$[n+1,2n]$ 中有至少一个质数，所以只需要筛到 $2s$ 即可。
+- 注意补回 $f(1)$。
+
 ```cpp
+
+// 预处理，$1$ 所在的块也算进去了
+namespace init {
+	ll init_n, sqrt_n;
+	vector<ll> np, p, id1, id2, val;
+	ll cnt;
+
+	void main(ll n) {
+		init_n = n, sqrt_n = sqrt(n);
+		ll M = sqrt_n * 2; // 筛出一个 > floor(sqrt(n)) 的质数, 避免后续讨论边界
+		
+		np.resize(M + 1), p.resize(M + 1);
+		for (ll i = 2; i <= M; ++i) {
+			if (!np[i]) p[++p[0]] = i;
+			for (ll j = 1; j <= p[0]; ++j) {
+				if (i * p[j] > M) break;
+				np[i * p[j]] = 1;
+				if (i % p[j] == 0) break;
+			}
+		}
+		p[0] = 1;
+
+		id1.resize(sqrt_n + 1), id2.resize(sqrt_n + 1);
+		val.resize(1);
+		for (ll l = 1, r, v; l <= n; l = r + 1) {
+			v = n / l, r = n / v;
+			if (v <= sqrt_n) id1[v] = ++cnt;
+			else id2[init_n / v] = ++cnt;
+			val.emplace_back(v);
+		}
+	}
+
+	ll id(ll n) {
+		if (n <= sqrt_n) return id1[n];
+		else return id2[init_n / n];
+	}
+}
+using namespace init;
+
+// 计算 $G_k$，两个参数分别是 $g$ 从 $2$ 开始的前缀和和 $g$
+auto calcG = [&] (auto&& sum, auto&& g) -> vector<ll> {
+	vector<ll> G(cnt + 1);
+	for (int i = 1; i <= cnt; ++i) G[i] = sum(val[i]);
+	ll pre = 0;
+	for (int i = 1; p[i] * p[i] <= n; ++i) {
+		for (int j = 1; j <= cnt; ++j) {
+			if (p[i] * p[i] > val[j]) break;
+			ll tmp = id(val[j] / p[i]);
+			G[j] = (G[j] - g(p[i]) * (G[tmp] - pre)) % MD;
+		}
+		pre = (pre + g(p[i])) % MD;
+	}
+	for (int i = 1; i <= cnt; ++i) G[i] = (G[i] % MD + MD) % MD;
+	return G;
+};
+
+// 计算 $F_k$，直接搜，不用记忆化。`fp` 是 $F_{\text{prime}}$，`pc` 是 $p^c$，其中 `f(p[h] ^ c)` 要替换掉。
+function<ll(ll, int)> calcF = [&] (ll m, int k) {
+	if (p[k] > m) return 0;
+	ll ans = (fp[id(m)] - fp[id(p[k - 1])]) % MD;
+	for (int h = k; p[h] * p[h] <= m; ++h) {
+		ll pc = p[h], c = 1;
+		while (pc * p[h] <= m) {
+			ans = (ans + calcF(m / pc, h + 1) * f(p[h] ^ c)) % MD;
+			++c, pc = pc * p[h], ans = (ans + f(p[h] ^ c)) % MD;
+		}
+	}
+	return ans;
+};
 
 ```
 ## 杜教筛
@@ -6559,6 +6816,37 @@ int main(){
 
     return 0;
 }
+```
+## 常用数表
+
+### 分拆数表
+
+\begin{matrix}
+n&10&20&30&40&50&60&70&80&90&100\\
+p(n)&42&627&5604&37338&204226&966467&4087968&15796476&56634173&190569292\\
+\end{matrix}
+
+### 因数个数表
+
+\begin{matrix}
+N&10^1&10^2&10^3&10^4&10^5&10^6&10^7&10^8&10^9\\
+\max d(n)&4&12&32&64&128&240&448&768&1344\\
+\max \omega(n)&2&3&4&5&6&7&8&8&9\\
+\\
+N&10^{10}&10^{11}&10^{12}&10^{13}&10^{14}&10^{15}&10^{16}&10^{17}&10^{18}\\
+\max d(n)&2304&4032&6720&10752&17280&26880&41472&64512&103680\\
+\max \omega(n)&10&10&11&12&12&13&13&14&15\\
+\end{matrix}
+
+### 大质数
+
+$10^{18}$ 级别：
+
+- $P=10^{18}+3$，好记。
+- $P=2924438830427668481$，可以进行 NTT，$P = 174310137655 \times 2 ^ 24 + 1$，原根为 $3$。
+
+```cpp
+
 ```
 ## 二次剩余
 
@@ -7715,44 +8003,215 @@ namespace Trie{
 
 ## 二维凸包
 
-```cpp
-#include "2d.cpp"
+### 例题
 
-poly convex(vector <point> V){
-    double t = PI * rand() / RAND_MAX;
-    for(auto &p : V)
-        p = rotate(p, t);
-    poly res;
-    sort(V.begin(), V.end(), cmpx);
-    vector <point> L;
-    vector <point> R;
-    L.push_back(V.front());
-    R.push_back(V.front());
-    for(auto &p0 : V){
-        while(L.size() >= 2){
-            const point &p1 = L[L.size() - 1];
-            const point &p2 = L[L.size() - 2];
-            if(side(segm(p2, p1), p0) != -1)
-                L.pop_back();
-            else break;
+给定 $n$ 个点，保证每三点不共线。要求找到一个简单多边形满足它不是凸包，使得该多边形面积最大。
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+using i64 = long long;
+
+const int MAXN = 2e5 + 3;
+int X[MAXN], Y[MAXN];
+
+struct Frac {
+    int a, b;
+    Frac (int _a, int _b){
+        if(_b < 0){
+            a = -_a, b = -_b;
+        } else {
+            a =  _a, b =  _b;
         }
-        L.push_back(p0);
-        while(R.size() >= 2){
-            const point &p1 = R[R.size() - 1];
-            const point &p2 = R[R.size() - 2];
-            if(side(segm(p2, p1), p0) !=  1)
-                R.pop_back();
-            else break;
-        }
-        R.push_back(p0);
     }
-    for(int i = L.size() - 1;i >= 0;-- i)
-        res.P.push_back(L[i]);
-    for(int i = 1;i + 2 <= R.size();++ i)
-        res.P.push_back(R[i]);
-    for(auto &p : res.P)
-        p = rotate(p, -t);
-    return res;
+};
+
+struct Node {
+    int x, y;
+}P[MAXN];
+
+bool operator < (const Frac A, const Frac B){
+    return 1ll * A.a * B.b - 1ll * A.b * B.a < 0;
+}
+bool operator < (const Node A, const Node B){
+    return A.x == B.x ? A.y > B.y : A.x < B.x;
+}
+
+const Frac intersect(Node A, Node B){
+    int a = B.y - A.y;
+    int b = A.x - B.x;
+    assert(b != 0);
+    if(b < 0){
+        a = -a, b = -b;
+    }
+    return Frac(a, b);
+}
+bool F[MAXN];
+int main(){
+    int TT;
+    cin >> TT;
+    while(TT -- ){
+        int n;
+        cin >> n;
+        int maxx = -1e9, minx = 1e9;
+        for(int i = 1;i <= n;++ i){
+            auto &[x, y] = P[i];
+            cin >> x >> y;
+            F[i] = false;
+        }
+        sort(P + 1, P + 1 + n);
+        vector <int> Q1, Q2, Q;
+        // Q1 计算上凸壳，Q2 计算下凸壳
+        for(int i = 1;i <= n;++ i){
+            auto &[x, y] = P[i];
+            if(Q1.size() <= 1){
+                Q1.push_back(i);
+            } else {
+                while(Q1.size() >= 2){
+                    auto &[x1, y1] = P[Q1[Q1.size() - 1]];
+                    auto &[x2, y2] = P[Q1[Q1.size() - 2]];
+                    long long cmp = 1ll * (y - y1) * (x1 - x2) - 1ll * (x - x1) * (y1 - y2);
+                    if(cmp > 0){
+                        Q1.pop_back();
+                    } else break;
+                }
+                Q1.push_back(i);
+            }
+            if(Q2.size() <= 1){
+                Q2.push_back(i);
+            } else {
+                while(Q2.size() >= 2){
+                    auto &[x1, y1] = P[Q2[Q2.size() - 1]];
+                    auto &[x2, y2] = P[Q2[Q2.size() - 2]];
+                    long long cmp = 1ll * (y - y1) * (x1 - x2) - 1ll * (x - x1) * (y1 - y2);
+                    if(cmp < 0){
+                        Q2.pop_back();
+                    } else break;
+                }
+                Q2.push_back(i);
+            }
+        }
+
+        Q = Q1;
+        for(int i = Q2.size();i != 0;i --){
+            if(i != Q2.size())
+                Q.push_back(Q2[i - 1]);
+        }
+        long long area = 0;
+        int x0 = P[Q[0]].x;
+        int y0 = P[Q[0]].y;
+        for(int i = 1;i + 1 < Q.size();++ i){
+            auto &[x1, y1] = P[Q[    i]];
+            auto &[x2, y2] = P[Q[i + 1]];
+            area += 1ll * (x1 - x0) * (y2 - y0) - 1ll * (x2 - x0) * (y1 - y0);
+        }
+        area = -area;
+        for(auto &i: Q1) F[i] = true;
+        for(auto &i: Q2) F[i] = true;
+        bool ok = false;
+        for(int i = 1;i <= n;++ i) if(!F[i]){
+            ok = true;
+            maxx = max(maxx, P[i].x);
+            minx = min(minx, P[i].x);
+        }
+        if(!ok){
+            cout << -1 << "\n";
+            continue;
+        }
+        vector <int>  L1;
+        vector <int>  L2;
+        // L1 插入 kx + b 维护下凸壳
+        for(int i = 1;i <= n;++ i) if(!F[i]){
+            auto &[k, b] = P[i];
+            if(!L1.empty() && k == P[L1.back()].x)
+                continue;
+            while(L1.size() >= 2){
+                auto &P1 = P[L1[L1.size() - 1]];
+                auto &P2 = P[L1[L1.size() - 2]];
+                Frac i1 = intersect(P1, P[i]);
+                Frac i2 = intersect(P2, P[i]);
+                if(i1 < i2){
+                    L1.pop_back();
+                } else break;
+            }
+            L1.push_back(i);
+        }
+        // L2 插入 kx + b 维护上凸壳
+        for(int i = n;i >= 1;-- i) if(!F[i]){
+            auto &[k, b] = P[i];
+            if(!L2.empty() && k == P[L2.back()].x)
+                continue;
+            while(L2.size() >= 2){
+                auto &P1 = P[L2[L2.size() - 1]];
+                auto &P2 = P[L2[L2.size() - 2]];
+
+                Frac i1 = intersect(P1, P[i]);
+                Frac i2 = intersect(P2, P[i]);
+                if(i1 < i2){
+                    L2.pop_back();
+                } else break;
+            }
+            L2.push_back(i);
+        }
+        vector <Frac> E1;
+        E1.push_back(Frac( -2e9, 1 ));
+        for(int i = 0;i + 1 < L1.size();++ i){
+            auto &P1 = P[L1[i    ]];
+            auto &P2 = P[L1[i + 1]];
+            E1.push_back(intersect(P1, P2));
+        }
+        vector <Frac> E2;
+        E2.push_back(Frac( -2e9, 1 ));
+        for(int i = 0;i + 1 < L2.size();++ i){
+            auto &P1 = P[L2[i    ]];
+            auto &P2 = P[L2[i + 1]];
+            E2.push_back(intersect(P1, P2));
+        }
+        long long ans = 0;
+        for(int i = 0;i + 1 < Q.size();++ i){
+            auto &[x1, y1] = P[Q[i    ]];
+            auto &[x2, y2] = P[Q[i + 1]];
+            long long w = 1ll * x2 * y1 - 1ll * x1 * y2;
+            int A = y2 - y1;
+            int B = x1 - x2;
+            int x = 0, y = 0;
+            if(B == 0){
+                if(A > 0){
+                    x = minx, y = 0;
+                } else {
+                    x = maxx, y = 0;
+                }
+            } else 
+            if(B <  0){
+                Frac K = Frac(-A, -B);
+                int p = 0;
+                for(int k = 20;k >= 0;-- k){
+                    int pp = p | 1 << k;
+                    if(pp < E1.size() && E1[pp] < K){
+                        p = pp;
+                    }
+                }
+                x = P[L1[p]].x;
+                y = P[L1[p]].y;
+            } else {
+                Frac K = Frac( A,  B);
+                int p = 0;
+                for(int k = 20;k >= 0;-- k){
+                    int pp = p | 1 << k;
+                    if(pp < E2.size() && E2[pp] < K){
+                        p = pp;
+                    }
+                }
+                x = P[L2[p]].x;
+                y = P[L2[p]].y;
+            }
+            ans = max(ans, area - (w + 1ll * A * x + 1ll * B * y));
+        }
+        // cerr << "ans = " << ans << endl;
+        cout << ans << "\n";
+    }
+    return 0;
 }
 ```
 ## 最小圆覆盖
