@@ -79,6 +79,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#lgv-定理叙述" class="md-skip">
+          跳转至
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -571,6 +576,27 @@
   
   <span class="md-ellipsis">
     插头 dp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dp-slope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    斜率优化
   </span>
   
 
@@ -1947,6 +1973,17 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    矩阵树
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1956,6 +1993,50 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lgv-定理叙述" class="md-nav__link">
+    <span class="md-ellipsis">
+      LGV 定理叙述
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#矩阵树定理" class="md-nav__link">
+    <span class="md-ellipsis">
+      矩阵树定理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-定理" class="md-nav__link">
+    <span class="md-ellipsis">
+      BEST 定理
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -2024,6 +2105,27 @@
   
   <span class="md-ellipsis">
     狄利克雷前缀和
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../math-exexgcd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    万能欧几里得
   </span>
   
 
@@ -2318,6 +2420,27 @@
   
   <span class="md-ellipsis">
     PN 筛
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../math-table/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    常用数表
   </span>
   
 
@@ -3057,6 +3180,41 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#lgv-定理叙述" class="md-nav__link">
+    <span class="md-ellipsis">
+      LGV 定理叙述
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#矩阵树定理" class="md-nav__link">
+    <span class="md-ellipsis">
+      矩阵树定理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-定理" class="md-nav__link">
+    <span class="md-ellipsis">
+      BEST 定理
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -3075,6 +3233,46 @@
 
   <h1>矩阵树</h1>
 
+<h2 id="lgv-定理叙述">LGV 定理叙述<a class="headerlink" href="#lgv-定理叙述" title="Permanent link"></a></h2>
+<p>设 <span class="arithmatex">\(G\)</span> 是一张有向无环图，边带权，每个点的度数有限。给定起点集合 <span class="arithmatex">\(A=\{a_1,a_2, \cdots,a_n\}\)</span>，终点集合 <span class="arithmatex">\(B = \{b_1, b_2, \cdots,b_n\}\)</span>。</p>
+<ul>
+<li>一段路径 <span class="arithmatex">\(p:v_0\to^{w_1} v_1\to^{w_2} v_2\to \cdots \to^{w_k} v_k\)</span> 的边权被定义为 <span class="arithmatex">\(\omega (p) = \prod w_i\)</span>。</li>
+<li>一对顶点 <span class="arithmatex">\((a, b)\)</span> 的权值被定义为 <span class="arithmatex">\(e(a, b) = \sum_{p:a\to b}\omega (p)\)</span>。</li>
+</ul>
+<p>设矩阵 <span class="arithmatex">\(M\)</span> 如下：</p>
+<div class="arithmatex">\[
+M = \begin{pmatrix}
+e(a_1, b_1) &amp; e(a_1, b_2) &amp; \cdots &amp; e(a_1, b_n) \\
+e(a_2, b_1) &amp; e(a_2, b_2) &amp; \cdots &amp; e(a_2, b_n) \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+e(a_n, b_1) &amp; e(a_n, b_2) &amp; \cdots &amp; e(a_n, b_n) \\
+\end{pmatrix}
+\]</div>
+<p>从 <span class="arithmatex">\(A\)</span> 到 <span class="arithmatex">\(B\)</span> 得到一个<strong>不相交</strong>的路径组 <span class="arithmatex">\(p=(p_1,p_2,\cdots,p_n)\)</span>，其中从 <span class="arithmatex">\(a_i\)</span> 到达 <span class="arithmatex">\(b_{\pi_i}\)</span>，<span class="arithmatex">\(\pi\)</span> 是一个排列。定义 <span class="arithmatex">\(\sigma(\pi)\)</span> 是 <span class="arithmatex">\(\pi\)</span> 逆序对的数量。</p>
+<p>给出 LGV 的叙述如下：</p>
+<div class="arithmatex">\[
+\det(M) = \sum_{p:A\to B} (-1)^{\sigma (\pi)} \prod_{i=1}^n \omega(p_i)
+\]</div>
+<p>可以将边权视作边的重数，那么 <span class="arithmatex">\(e(a, b)\)</span> 就可以视为从 <span class="arithmatex">\(a\)</span> 到 <span class="arithmatex">\(b\)</span> 的不同路径方案数。</p>
+<h2 id="矩阵树定理">矩阵树定理<a class="headerlink" href="#矩阵树定理" title="Permanent link"></a></h2>
+<p>对于无向图，</p>
+<ul>
+<li>定义度数矩阵 <span class="arithmatex">\(D_{i, j} = [i=j]\deg(i)\)</span>；</li>
+<li>定义邻接矩阵 <span class="arithmatex">\(E_{i, j} = E_{j, i}\)</span> 是从 <span class="arithmatex">\(i\)</span> 到 <span class="arithmatex">\(j\)</span> 的边数个数；</li>
+<li>定义拉普拉斯矩阵 <span class="arithmatex">\(L = D - E\)</span>。</li>
+</ul>
+<p>对于无向图的矩阵树定理叙述如下：</p>
+<div class="arithmatex">\[t(G) = \det(L_i) = \frac{1}{n}\lambda_1\lambda_2\cdots \lambda_{n-1}\]</div>
+<p>其中 <span class="arithmatex">\(L_i\)</span> 是将 <span class="arithmatex">\(L\)</span> 删去第 <span class="arithmatex">\(i\)</span> 行和第 <span class="arithmatex">\(i\)</span> 列得到的子式。</p>
+<p>对于有向图，类似于无向图定义入度矩阵、出度矩阵、邻接矩阵 <span class="arithmatex">\(D^{\mathrm{in}}, D^{\mathrm{out}}, E\)</span>，同时定义拉普拉斯矩阵 <span class="arithmatex">\(L^{\mathrm{in}} = D^{\mathrm{in}} - E,L^{\mathrm{out}} - E\)</span>。</p>
+<div class="arithmatex">\[\begin{aligned}
+t^{\mathrm{leaf}}(G, k) &amp;= \det(L^{\mathrm{in}}_k) \\
+t^{\mathrm{root}}(G, k) &amp;= \det(L^{\mathrm{out}}_k) \\
+\end{aligned}\]</div>
+<p>其中 <span class="arithmatex">\(t^{\mathrm{leaf}}(G, k)\)</span> 表示以 <span class="arithmatex">\(k\)</span> 为根的叶向树，<span class="arithmatex">\(t^{\mathrm{root}}(G, k)\)</span> 表示以 <span class="arithmatex">\(k\)</span> 为根的根向树。</p>
+<h2 id="best-定理">BEST 定理<a class="headerlink" href="#best-定理" title="Permanent link"></a></h2>
+<p>对于一个有向欧拉图 <span class="arithmatex">\(G\)</span>，记点 <span class="arithmatex">\(i\)</span> 的出度为 <span class="arithmatex">\(\mathrm{out}_ i\)</span>，同时 <span class="arithmatex">\(G\)</span> 的根向生成树个数为 <span class="arithmatex">\(T\)</span>。<span class="arithmatex">\(T\)</span> 可以任意选取根。则 <span class="arithmatex">\(G\)</span> 的本质不同的欧拉回路个数为：</p>
+<div class="arithmatex">\[T \prod_{i}(\mathrm{out}_i - 1)!\]</div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
