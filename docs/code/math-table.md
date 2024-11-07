@@ -12,7 +12,7 @@ $$
 
 $$
 \def\arraystretch{1.5}
-\begin{array}{c||c|c|c|c|c|c|c|c} \hline\hline
+\begin{array}{c||c|c|c|c|c|c|c|c|c} \hline\hline
 N             & 10^1 & 10^2 & 10^3 & 10^4 & 10^5 & 10^6 & 10^7 & 10^8 & 10^9\\\hline
 \max d(n)     &    4 &   12 &   32 &   64 &  128 &  240 &  448 &  768 & 1344\\
 \max \omega(n)&    2 &    3 &    4 &    5 &    6 &    7 &    8 &    8 &    9\\
