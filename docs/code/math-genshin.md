@@ -37,7 +37,6 @@ $$
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 int power(int a, int b, int p){
     int r = 1;
     while(b){
@@ -46,7 +45,6 @@ int power(int a, int b, int p){
     }
     return r;
 }
-
 int getphi(int x){
     int t = x, r = x;
     for(int i = 2;i <= x / i;++ i){
@@ -75,7 +73,6 @@ vector <int> getprime(int x){
         p.push_back(x);
     return p;
 }
-
 bool test(int g, int m, int mm, vector<int> &P){
     for(auto &p: P){
         if(power(g, mm / p, m) == 1)
@@ -83,7 +80,6 @@ bool test(int g, int m, int mm, vector<int> &P){
     }
     return true;
 }
-
 int get_genshin(int m){
     int mm = getphi(m);
     vector <int> P = getprime(mm);
@@ -92,7 +88,6 @@ int get_genshin(int m){
             return i;
     }
 }
-
 int main(){
     cout << get_genshin(998244353) << endl;
     return 0;

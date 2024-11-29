@@ -10,9 +10,7 @@ using namespace std;
 typedef long long i64;
 const int INF = 1e9;
 const int MAXN = 1e5 + 3;
-
 int W[MAXN];
-
 struct Mat{ int M[2][2]; };
 struct Vec{ int V[2];    };
 Mat operator *(const Mat &a, const Mat &b){
@@ -29,7 +27,6 @@ Vec operator *(const Mat &a, const Vec &v){
     r.V[1] = max(a.M[1][0] + v.V[0], a.M[1][1] + v.V[1]);
     return r;
 }
-
 namespace Gra{
     vector<int> E[MAXN];
     int G[MAXN], S[MAXN], D[MAXN], T[MAXN], F[MAXN];
@@ -37,7 +34,6 @@ namespace Gra{
     int H[MAXN][2];
     int K[MAXN][2];
     struct Mat M[MAXN];
-
     void dfs1(int u, int f){
         S[u] = 1;
         F[u] = f;
@@ -79,7 +75,6 @@ namespace Gra{
         K[u][1] += H[u][1] + W[u];
     }
 }
-
 namespace Seg{
     const int SIZ = 4e5 + 3;
     struct Mat M[SIZ];
@@ -139,7 +134,6 @@ int main(){
         using namespace Gra;
         int x = qread(), y = qread();
         W[x] = y;
-
         int u = x;
         while(u != 0){
             const int &v = X[u];

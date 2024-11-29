@@ -7,10 +7,8 @@ $$s(i) = \sum_{d\mid i} f_{d}$$
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MAXN = 2e7 + 3;
 unsigned A[MAXN];
-
 int p, P[MAXN]; bool V[MAXN];
 void solve(int n){
     for(int i = 2;i <= n;++ i){
@@ -26,9 +24,7 @@ void solve(int n){
                 break;
         }
     }
-    
 }
-
 unsigned seed;
 inline unsigned read(){
 	seed ^= seed << 13;
@@ -36,8 +32,6 @@ inline unsigned read(){
 	seed ^= seed << 5;
 	return seed;
 }
-
-
 int main(){
     int n;
     cin >> n >> seed;
@@ -50,7 +44,6 @@ int main(){
         ans ^= A[i];
     }
     cout << ans << endl;
-
     return 0;
 }
 ```

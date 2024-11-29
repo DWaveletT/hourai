@@ -9,10 +9,8 @@
 #include<bits/stdc++.h>
 #define endl "\n"
 using namespace std;
-
 const int MAXN = 1e5 + 3;
 vector<int> E[MAXN];
-
 namespace LCA{
     const int SIZ = 1e5 + 3;
     int D[SIZ], F[SIZ];
@@ -61,7 +59,6 @@ namespace LCA{
         return D[a] + D[b] - 2 * D[lca(a, b)];
     }
 }
-
 namespace BIT{
     void modify(int D[], int n, int p, int w){
         ++ p;
@@ -77,7 +74,6 @@ namespace BIT{
         return r;
     }
 }
-
 namespace PTree{
     const int SIZ = 1e5 + 3;
     bool V[SIZ];
@@ -85,7 +81,6 @@ namespace PTree{
     vector<int> EE[MAXN];
     int *D1[MAXN];
     int *D2[MAXN];
-
     void dfs1(int s, int &g, int u, int f){
         S[u] = 1;
         int maxsize = 0;
@@ -99,7 +94,6 @@ namespace PTree{
         if(maxsize <= s / 2)
             g = u;
     }
-
     int n;
     void build(int s, int &g, int u, int f){
         dfs1(s, g, u, f);
@@ -166,9 +160,7 @@ namespace PTree{
         return ans;
     }
 }
-
 int W[MAXN];
-
 int main(){
     ios :: sync_with_stdio(false);
     int n, m;
@@ -183,12 +175,9 @@ int main(){
         E[v].push_back(u);
     }
     LCA :: init(n);
-
     PTree :: build(n);
-
     for(int i = 1;i <= n;++ i)
         PTree :: modify(i, W[i]);
-
     int lastans = 0;
     for(int i = 1;i <= m;++ i){
         int op; cin >> op;

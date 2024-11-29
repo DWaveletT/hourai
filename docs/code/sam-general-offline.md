@@ -1,11 +1,9 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXM= 26 + 3;
 namespace SAM{
     const int SIZ = 2e6 + 3;
@@ -48,11 +46,9 @@ namespace SAM{
         cout << ans << endl;
     }
 }
-
 namespace Trie{
     const int SIZ = 1e6 + 3;
     int M[SIZ][MAXM], s, h = 25;
-
     void insert(char *S){
         int p = 0;
         for(int i = 0;S[i];++ i){
@@ -64,7 +60,6 @@ namespace Trie{
         }
     }
     int O[SIZ];
-
     void build_sam(){
         queue <int> Q;
         Q.push(0);

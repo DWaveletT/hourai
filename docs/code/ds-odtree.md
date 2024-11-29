@@ -1,10 +1,8 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using u64 = unsigned long long;
 const int MAXN = 1e6 + 3;
-
 int power(int a, int b, int p){
     int r = 1;
     while(b){
@@ -13,11 +11,9 @@ int power(int a, int b, int p){
     }
     return r;
 }
-
 namespace ODT {
     // <pos_type, value_type>
     map <int, long long> M;
-
     // 分裂为 [1, p) 和 [p, +inf)，返回后者迭代器
     auto split(int p) {
         auto it = prev(M.upper_bound(p));
@@ -26,7 +22,6 @@ namespace ODT {
             make_pair(p, it -> second)
         );
     }
-
     // 区间赋值
     void assign(int l, int r, int v) {
         auto it = split(l);
@@ -36,7 +31,6 @@ namespace ODT {
         }
         M[l] = v;
     }
-
     // // 执行操作
     // void perform(int l, int r) {
     //     auto it = split(l);
@@ -46,7 +40,6 @@ namespace ODT {
     //         it = next(it);
     //     }
     // }
-
     void modify1(int l, int r, int w) {
         auto it = split(l);
         split(r + 1);
@@ -61,7 +54,6 @@ namespace ODT {
     long long query1(int l, int r, int k) {
         auto it = split(l);
         split(r + 1);
-
         map <long long, int> T;
         while(it -> first != r + 1) {
             T[it -> second] += next(it) -> first - it -> first;
@@ -77,7 +69,6 @@ namespace ODT {
     long long query2(int l, int r, int x, int y) {
         auto it = split(l);
         split(r + 1);
-
         int ans = 0;
         while(it -> first != r + 1) {
             int c = next(it) -> first - it -> first;
@@ -87,24 +78,18 @@ namespace ODT {
         }
         return ans;
     }
-
 };
-
 const int MOD = 1e9 + 7;
-
 int read(int &seed){
     int ret = seed;
     seed = (seed * 7ll + 13) % MOD;
     return ret;
 }
-
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-
     int n, m, seed, vmax;
     cin >> n >> m >> seed >> vmax;
-
     ODT :: M[n + 1] = 0;
     for(int i = 1;i <= n;++ i){
         int a = read(seed) % vmax + 1;
@@ -117,16 +102,12 @@ int main(){
         int x, y;
         if(l > r)
             swap(l, r);
-
         if(op == 3){
             x = (read(seed) % (r - l + 1)) + 1;
         } else 
             x = read(seed) % vmax + 1;
-        
         if(op == 4)
             y = read(seed) % vmax + 1;
-        
-
         if(op == 1){
             ODT :: modify1(l, r, x);
         } else 

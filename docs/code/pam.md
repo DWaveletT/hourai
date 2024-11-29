@@ -1,7 +1,6 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MAXM = 26 + 3;
 namespace PAM{
     const int SIZ = 5e5 + 3;
@@ -37,7 +36,6 @@ namespace PAM{
         }
     }
 }
-
 const int MAXN = 5e5 + 3;
 char T[MAXN];
 int main(){

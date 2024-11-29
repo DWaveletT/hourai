@@ -1,11 +1,9 @@
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 namespace Dinic{
     const i64 INF = 1e18;
     const int SIZ = 5e5 + 3;
@@ -70,11 +68,8 @@ namespace Dinic{
         return ans;
     }
 }
-
 // ===== TEST =====
-
 int qread();
-
 int main(){
     int n = qread(), m = qread(), s = qread(), t = qread();
     for(int i = 1;i <= m;++ i){

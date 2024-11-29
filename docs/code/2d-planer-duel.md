@@ -1,6 +1,5 @@
 ```cpp
 #include "2d.cpp"
-
 namespace DSU{
     const int MAXN = 1e5 + 3;
     int F[MAXN];
@@ -8,7 +7,6 @@ namespace DSU{
         return u == F[u] ? u : F[u] = getfa(F[u]);
     }
 }
-
 namespace Dual{
     const int MAXN = 1e5 + 3;
     const int MAXM = 1e5 + 3;
@@ -17,7 +15,6 @@ namespace Dual{
     bool cmp(int a, int b){
         return W[a] < W[b];
     }
-
     vector <pair<int, int> > E[MAXN];
     const int MAXT = 20 + 3;
     int F[MAXN][MAXT], G[MAXN][MAXT], D[MAXN], h = 20;
@@ -75,20 +72,16 @@ namespace Dual{
         return ans;
     }
 }
-
 namespace Planer{
     const int MAXN = 1e5 + 3 + 3;
     const int MAXE = 2e5 + 3;
     const int MAXG = 1e5 + 3;
     const int MAXQ = 2e5 + 3;
     point P[MAXN];
-
     using edge = tuple<int, int>;
-
     double gety(int a, int b, double x){
         return P[a].y + (x - P[a].x) / (P[b].x - P[a].x) * (P[b].y - P[a].y);
     }
-
     double scanx;
     struct Cmp1{
         bool operator ()(const pair<edge, int> l1, const pair<edge, int> l2) const{
@@ -114,20 +107,15 @@ namespace Planer{
             }
         };
     };
-
     vector <pair<edge, int> > E[MAXN];
-    
     vector <int> G[MAXG];
     int L[MAXE], R[MAXE], W[MAXE], n, m, q, o;
     double theta;
-
     int outer;
-
     void rotate(){
         srand(time(0));
         theta = PI * rand() / RAND_MAX;
     }
-
     int add(double x, double y){
         srand(time(0));
         P[++ n] = rotate(vec(x, y), theta);
@@ -141,7 +129,6 @@ namespace Planer{
         L[o] = v, R[o] = u, W[o] = w;
         return m;
     }
-
     int I[MAXE];
     int polys;
     pair<edge, int> findleft(int l, int r){
@@ -183,7 +170,6 @@ namespace Planer{
                 outer = i;
         }
     }
-
     void dual(){
         Dual :: n = polys;
         Dual :: m = 0;
@@ -199,15 +185,11 @@ namespace Planer{
         Dual :: build();
         Dual :: outer = outer;
     }
-
     set <pair<edge, int>, Cmp1> S;
-    
     vector <pair<double, int> > T;
     vector <pair<double, int> > Q;
-
     double X[MAXQ], Y[MAXQ];
     int    Z[MAXQ];
-
     int ask(double x, double y){
         ++ q;
         point p = rotate(vec(x, y), theta);
@@ -215,7 +197,6 @@ namespace Planer{
         Y[q] = p.y;
         return q;
     }
-
     void locate(){
         T.clear(), Q.clear(), S.clear();
         for(int i = 1;i <= q;++ i){
@@ -233,7 +214,6 @@ namespace Planer{
         }
         sort(T.begin(), T.end());
         sort(Q.begin(), Q.end());
-
         int p1 = 0, p2 = 0;
         scanx = -1e9;
         Cmp1 CMP;
@@ -271,10 +251,8 @@ namespace Planer{
         }
     }
 }
-
 const int MAXN = 1e5 + 3;
 int A[MAXN], B[MAXN];
-
 int main(){
 #ifndef ONLINE_JUDGE
     freopen("test.in", "r", stdin);
@@ -282,7 +260,6 @@ int main(){
 #endif
     int n, m, q;
     Planer :: rotate();
-
     cin >> n >> m;
     for(int i = 1;i <= n;++ i){
         double x, y;

@@ -2,7 +2,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long i64;
-
 struct Line{ int id; double k, b; Line() = default;};
 namespace LCSeg{
     const int SIZ = 2e5 + 3;

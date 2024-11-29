@@ -1,6 +1,5 @@
 ```cpp
 #include "2d.cpp"
-
 point geto(point a, point b, point c) {
     double a1, a2, b1, b2, c1, c2;
     point ans(0, 0);
@@ -20,11 +19,9 @@ point geto(point a, point b, point c) {
     }
     return ans;
 }
-
 mt19937 MT;
 circ minimal(vector <point> V){
     shuffle(V.begin(), V.end(), MT);
-
     point  o = V[0];
     double r = 0;
     for(int i = 0;i < V.size();++ i) {

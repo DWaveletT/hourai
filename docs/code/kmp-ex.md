@@ -11,12 +11,10 @@ $$
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long i64;
-
 const int MAXN = 2e7 + 3;
 char A[MAXN], B[MAXN * 2];
 int n, m, l, r, Z[MAXN * 2];
 i64 ans1, ans2;
-
 int main(){
     scanf("%s%s", A + 1, B + 1);
     n = strlen(A + 1);

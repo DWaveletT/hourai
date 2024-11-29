@@ -4,7 +4,6 @@
 **有向图**：不难发现，上述方法枚举了三个点，计算有向图三元环也就只需要处理下方向的事，这个由于算法够暴力，随便改改就能做了。
 
 ```cpp
-
 // 无向图
 ll n, m; cin >> n >> m;
 vector<pair<ll, ll>> Edges(m);
@@ -22,7 +21,6 @@ for (ll i = 1; i <= n; ++i) {
 	for (auto j : G[i]) for (auto k : G[j]) ans += val[k];
 	for (auto j : G[i]) val[j] = 0;
 }
-
 // 有向图
 ll n, m; cin >> n >> m;
 vector<pair<ll, ll>> Edges(m);

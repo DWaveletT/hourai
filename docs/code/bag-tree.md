@@ -2,13 +2,10 @@
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long i64;
-
 const int MAXN = 2e3 + 3;
-
 vector<int> E[MAXN];
 int W[MAXN];
 int F[MAXN][MAXN], S[MAXN];
-
 void dfs(int u, int f){
     F[u][1] = W[u];
     S[u]    = 1;
@@ -20,7 +17,6 @@ void dfs(int u, int f){
         S[u] += S[v];
     }
 }
-
 int main(){
     int n, m;
     cin >> n >> m;

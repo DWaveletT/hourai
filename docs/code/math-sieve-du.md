@@ -14,16 +14,12 @@ $$
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MAXN = 1e7 + 3;
 const int H = 1e7;
-
 int P[MAXN], p; bool V[MAXN];
-
 long long ph[MAXN], sph[MAXN];
 long long mu[MAXN], smu[MAXN];
 long long tp[MAXN];
-
 long long solve_ph(long long N){
     for(int d = N / H;d >= 1;-- d){
         long long n = N / d;
@@ -52,11 +48,9 @@ long long solve_mu(long long N){
     }
     return N <= H ? smu[N] : tp[1];
 }
-
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-
     ph[1] = 1;
     mu[1] = 1;
     for(int i = 2;i <= H;++ i){
@@ -87,7 +81,6 @@ int main(){
     while(T --> 0){
         int n;
         cin >> n;
-        
         cout << solve_ph(n) << " " << solve_mu(n) << "\n";
     }
     return 0;

@@ -18,10 +18,8 @@ $$L = \left(\sum a_i m_i\times (\left(M/m_i\right)^{-1}\bmod m_i)\right)\bmod M$
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MAXN = 100 + 3;
 long long A[MAXN], B[MAXN], M = 1;
-
 long long exgcd(long long a, long long b, long long &x, long long &y){
     if(a == 0){
         x = 0, y = 1; return b;
@@ -33,7 +31,6 @@ long long exgcd(long long a, long long b, long long &x, long long &y){
         return d;
     }
 }
-
 int main(){
     int n;
     cin >> n;

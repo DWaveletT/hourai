@@ -1,17 +1,13 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN = 1e6 + 3;
 const int MAXM = 256 + 3;
-
 #define LTYPE 0
 #define STYPE 1
-
 void induce_sort(int n, int S[], int T[], int m, int LM[], int SA[], int C[]){
     vector <int> BL(n);
     vector <int> BS(n);
@@ -30,7 +26,6 @@ void induce_sort(int n, int S[], int T[], int m, int LM[], int SA[], int C[]){
         if(SA[i] > 0 && T[p = SA[i] - 1] == STYPE)
             SA[BS[S[p]] --] = p;
 }
-
 // 长度 n，字符集 [0, n)，要求最后一个元素为 0
 // 例如输入 ababa 传入 n = 6, S = [1 2 1 2 1 0]
 void sais(int n, int S[], int SA[]){
@@ -78,7 +73,6 @@ void sais(int n, int S[], int SA[]){
         S0[i] = P[SA0[i]];
     induce_sort(n, S, T.data(), m, S0.data(), SA, C.data());
 }
-
 int S[MAXN], SA[MAXN], H[MAXM], G[MAXM];
 int main(){
     int n = 0, t = 0, m = 256;

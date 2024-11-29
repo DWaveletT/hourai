@@ -35,7 +35,6 @@ const int MOD = 998244353;
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-    
     up(1, h, i) G[0][i] = G[i][0] = i;
     up(1, h, i) up(1, h, j){
         if(i >= j) G[i][j] = G[i - j][j];

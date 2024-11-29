@@ -6,7 +6,6 @@ _From zpk_
 - **有向图**：缺少题目，但应当类似三元环计数有向形式记录定向边和原边的正反关系。因为此法最强的结论是定向后出度 $O(\sqrt{m})$，实际上方法很暴力，应当不难数有向形式的。
 
 ```cpp
-
 ll n, m; cin >> n >> m;
 vector<pair<ll, ll>> Edges(m);
 vector<vector<ll>> G(n + 2), iG(n + 2);

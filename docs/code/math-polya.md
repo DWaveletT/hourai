@@ -42,7 +42,6 @@ $$
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MOD = 1e9 + 7;
 int power(int a, int b){
     int r = 1;
@@ -52,7 +51,6 @@ int power(int a, int b){
     }
     return r;
 }
-
 vector <tuple<int, int> > P;
 void solve(int step, int n, int d, int f, int &ans){
     if(step == P.size()){
@@ -67,7 +65,6 @@ void solve(int step, int n, int d, int f, int &ans){
         }
     }
 }
-
 int main(){
     int T;
     cin >> T;

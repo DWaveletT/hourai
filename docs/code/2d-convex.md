@@ -5,12 +5,9 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
-
 const int MAXN = 2e5 + 3;
 int X[MAXN], Y[MAXN];
-
 struct Frac {
     int a, b;
     Frac (int _a, int _b){
@@ -21,18 +18,15 @@ struct Frac {
         }
     }
 };
-
 struct Node {
     int x, y;
 }P[MAXN];
-
 bool operator < (const Frac A, const Frac B){
     return 1ll * A.a * B.b - 1ll * A.b * B.a < 0;
 }
 bool operator < (const Node A, const Node B){
     return A.x == B.x ? A.y > B.y : A.x < B.x;
 }
-
 const Frac intersect(Node A, Node B){
     int a = B.y - A.y;
     int b = A.x - B.x;
@@ -87,7 +81,6 @@ int main(){
                 Q2.push_back(i);
             }
         }
-
         Q = Q1;
         for(int i = Q2.size();i != 0;i --){
             if(i != Q2.size())
@@ -140,7 +133,6 @@ int main(){
             while(L2.size() >= 2){
                 auto &P1 = P[L2[L2.size() - 1]];
                 auto &P2 = P[L2[L2.size() - 2]];
-
                 Frac i1 = intersect(P1, P[i]);
                 Frac i2 = intersect(P2, P[i]);
                 if(i1 < i2){

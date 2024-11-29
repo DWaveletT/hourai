@@ -1,11 +1,9 @@
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 namespace LB{
     const int SIZ = 60 + 3;
     i64 W[SIZ], h = 60;
@@ -30,7 +28,6 @@ namespace LB{
         return x;
     }
 }
-
 namespace realLB{
     const int SIZ = 500 + 3;
     long double W[SIZ][SIZ];
@@ -58,11 +55,8 @@ namespace realLB{
         return false;
     }
 }
-
 // ===== TEST =====
-
 int qread();
-
 const int MAXN = 500 + 3;
 long double X[MAXN][MAXN], C[MAXN];
 int I[MAXN];

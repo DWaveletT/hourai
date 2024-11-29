@@ -3,13 +3,10 @@
 #define up(l, r, i) for(int i = l, END##i = r;i <= END##i;++ i)
 #define dn(r, l, i) for(int i = r, END##i = l;i >= END##i;-- i)
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAX_ = (1 << 19) + 3;
-
 template <typename T>
 struct cplx0{
     T a, b; cplx0(T _a = 0, T _b = 0) :a(_a), b(_b){}
@@ -19,7 +16,6 @@ struct cplx0{
     cplx0 operator *(int t) { return cplx0(a * t, b * t); }
 };
 using cplx = cplx0<double>;
-
 const long double pi = acos(-1);
 namespace Poly{
     void FFT(int n, cplx Z[]){
@@ -50,14 +46,11 @@ namespace Poly{
             Z[i].a /= 1.0 * n, Z[i].b /= 1.0 * n;
     }
 }
-
 const int MAXN  = (1 << 19) + 3;
 const int BLOCK = 32768;
 cplx A1[MAXN], A2[MAXN], B1[MAXN], B2[MAXN];
 int n, m, L, mod;
-
 cplx P[MAXN], Q[MAXN];
-
 void FFTFFT(int L, cplx X[], cplx Y[]){
     for(int i = 0;i < L;++ i){
         P[i].a = X[i].a;
@@ -75,11 +68,9 @@ void FFTFFT(int L, cplx X[], cplx Y[]){
         Y[i].a /= 2.0, Y[i].b /= 2.0;
     }
 }
-
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-
     cin >> n >> m >> mod;
     for(int i = 0;i <= n;++ i){
         int a; cin >> a;
@@ -107,13 +98,10 @@ int main(){
         long long a2b1 = P[i].b + 0.5;
         long long a1b2 = Q[i].a + 0.5;
         long long a2b2 = Q[i].b + 0.5;
-
         long long w = ((a1b1 % mod * (BLOCK * BLOCK % mod)) + ((a2b1 + a1b2) % mod) * BLOCK + a2b2) % mod;
-
         if(i <= n + m)
             cout << w << " ";
     }
-
     return 0;
 }
 ```

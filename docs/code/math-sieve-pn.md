@@ -18,17 +18,13 @@ $$
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MAXN = 1e7 + 3;
 const int MAXM = 1e5 + 3;
 const int H = 1e7;
-
 const int MOD = 1e9 + 7;
 const int DIV2 = 500000004;
 const int DIV6 = 166666668;
-
 int P[MAXN], p; bool V[MAXN];
-
 int g[MAXN], le[MAXN], ge[MAXN];
 int s1(long long n){    // 1^1 + 2^1 + ... + n^1
     n %= MOD;
@@ -56,7 +52,6 @@ int sieve_du(long long N){
     return N <= H ? le[N] : ge[1];
 }
 vector <int> hc[MAXM], gc[MAXM];
-
 int ANS;
 void sieve_pn(int last, long long x, int h, long long N){
     ANS = (ANS + 1ll * h * sg(N / x, N)) % MOD;
@@ -71,7 +66,6 @@ void sieve_pn(int last, long long x, int h, long long N){
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-
     g[1] = 1;
     for(int i = 2;i <= H;++ i){
         if(!V[i]){
@@ -113,9 +107,7 @@ int main(){
     }
     sieve_du(N);
     sieve_pn(0, 1, 1, N);
-
     cout << ANS << "\n";
-
     return 0;
 }
 ```

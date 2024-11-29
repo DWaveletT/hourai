@@ -1,11 +1,9 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN = 1e6 + 3;
 int n, m;
 int A[MAXN], B[MAXN];

@@ -7,19 +7,14 @@
 $n$ 个物品，$m$ 容量背包，第 $i$ 个物品重量为 $w_i$ 价值为 $v_i$ 共有 $c_i$ 个，计算不超过容量的情况下最多拿多少价值的物品。
 
 ```cpp
-
 #include <bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 int qread();
 const int MAXN = 4e4 + 3;
-
 int F[MAXN];
-
 int main(){
     int n, m;
     cin >> n >> m;
@@ -51,13 +46,10 @@ int main(){
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long i64;
-
 const int MAXN = 2e3 + 3;
-
 vector<int> E[MAXN];
 int W[MAXN];
 int F[MAXN][MAXN], S[MAXN];
-
 void dfs(int u, int f){
     F[u][1] = W[u];
     S[u]    = 1;
@@ -69,7 +61,6 @@ void dfs(int u, int f){
         S[u] += S[v];
     }
 }
-
 int main(){
     int n, m;
     cin >> n >> m;
@@ -97,9 +88,7 @@ using namespace std;
 typedef long long i64;
 const int INF = 1e9;
 const int MAXN = 1e5 + 3;
-
 int W[MAXN];
-
 struct Mat{ int M[2][2]; };
 struct Vec{ int V[2];    };
 Mat operator *(const Mat &a, const Mat &b){
@@ -116,7 +105,6 @@ Vec operator *(const Mat &a, const Vec &v){
     r.V[1] = max(a.M[1][0] + v.V[0], a.M[1][1] + v.V[1]);
     return r;
 }
-
 namespace Gra{
     vector<int> E[MAXN];
     int G[MAXN], S[MAXN], D[MAXN], T[MAXN], F[MAXN];
@@ -124,7 +112,6 @@ namespace Gra{
     int H[MAXN][2];
     int K[MAXN][2];
     struct Mat M[MAXN];
-
     void dfs1(int u, int f){
         S[u] = 1;
         F[u] = f;
@@ -166,7 +153,6 @@ namespace Gra{
         K[u][1] += H[u][1] + W[u];
     }
 }
-
 namespace Seg{
     const int SIZ = 4e5 + 3;
     struct Mat M[SIZ];
@@ -226,7 +212,6 @@ int main(){
         using namespace Gra;
         int x = qread(), y = qread();
         W[x] = y;
-
         int u = x;
         while(u != 0){
             const int &v = X[u];
@@ -261,14 +246,11 @@ int main(){
 #define up(l, r, i) for(int i = l, END##i = r;i <= END##i;++ i)
 #define dn(r, l, i) for(int i = r, END##i = l;i >= END##i;-- i)
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN = 20 + 3;
 const int MAXM = 67108864 + 3;
-
 namespace HashT{
     const int SIZ = 19999997;
     int H[SIZ], V[SIZ], N[SIZ], t;
@@ -488,11 +470,9 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 typedef unsigned int       u32;
 typedef unsigned long long u64;
 mt19937_64 MT(114514);
@@ -586,9 +566,7 @@ namespace Treap{
         return find_kth(root, find_rank(root, w + 1));
     }
 }
-
 // ===== TEST =====
-
 int qread();
 int main(){
     using namespace Treap;
@@ -617,11 +595,9 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 namespace Splay{
     const int SIZ = 1e6 + 1e5 + 3;
     int F[SIZ], C[SIZ], S[SIZ], X[SIZ][2], size;
@@ -837,10 +813,8 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using u64 = unsigned long long;
 const int MAXN = 1e6 + 3;
-
 int power(int a, int b, int p){
     int r = 1;
     while(b){
@@ -849,11 +823,9 @@ int power(int a, int b, int p){
     }
     return r;
 }
-
 namespace ODT {
     // <pos_type, value_type>
     map <int, long long> M;
-
     // 分裂为 [1, p) 和 [p, +inf)，返回后者迭代器
     auto split(int p) {
         auto it = prev(M.upper_bound(p));
@@ -862,7 +834,6 @@ namespace ODT {
             make_pair(p, it -> second)
         );
     }
-
     // 区间赋值
     void assign(int l, int r, int v) {
         auto it = split(l);
@@ -872,7 +843,6 @@ namespace ODT {
         }
         M[l] = v;
     }
-
     // // 执行操作
     // void perform(int l, int r) {
     //     auto it = split(l);
@@ -882,7 +852,6 @@ namespace ODT {
     //         it = next(it);
     //     }
     // }
-
     void modify1(int l, int r, int w) {
         auto it = split(l);
         split(r + 1);
@@ -897,7 +866,6 @@ namespace ODT {
     long long query1(int l, int r, int k) {
         auto it = split(l);
         split(r + 1);
-
         map <long long, int> T;
         while(it -> first != r + 1) {
             T[it -> second] += next(it) -> first - it -> first;
@@ -913,7 +881,6 @@ namespace ODT {
     long long query2(int l, int r, int x, int y) {
         auto it = split(l);
         split(r + 1);
-
         int ans = 0;
         while(it -> first != r + 1) {
             int c = next(it) -> first - it -> first;
@@ -923,24 +890,18 @@ namespace ODT {
         }
         return ans;
     }
-
 };
-
 const int MOD = 1e9 + 7;
-
 int read(int &seed){
     int ret = seed;
     seed = (seed * 7ll + 13) % MOD;
     return ret;
 }
-
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-
     int n, m, seed, vmax;
     cin >> n >> m >> seed >> vmax;
-
     ODT :: M[n + 1] = 0;
     for(int i = 1;i <= n;++ i){
         int a = read(seed) % vmax + 1;
@@ -953,16 +914,12 @@ int main(){
         int x, y;
         if(l > r)
             swap(l, r);
-
         if(op == 3){
             x = (read(seed) % (r - l + 1)) + 1;
         } else 
             x = read(seed) % vmax + 1;
-        
         if(op == 4)
             y = read(seed) % vmax + 1;
-        
-
         if(op == 1){
             ODT :: modify1(l, r, x);
         } else 
@@ -984,19 +941,15 @@ int main(){
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 namespace LeftHeap{
     const int SIZ = 1e5 + 3;
     int W[SIZ], D[SIZ];
     int L[SIZ], R[SIZ];
     int F[SIZ], s;
-
     bool E[SIZ];
-
     int merge(int u, int v){
         if(u == 0 || v == 0)
             return u | v;
@@ -1033,14 +986,10 @@ namespace LeftHeap{
         return s;
     }
 }
-
 // ===== TEST =====
-
 int qread();
-
 const int MAXN = 1e5 + 3;
 int A[MAXN], O[MAXN];
-
 int main(){
     int n, m;
     cin >> n >> m;
@@ -1083,11 +1032,9 @@ int main(){
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 namespace LB{
     const int SIZ = 60 + 3;
     i64 W[SIZ], h = 60;
@@ -1112,7 +1059,6 @@ namespace LB{
         return x;
     }
 }
-
 namespace realLB{
     const int SIZ = 500 + 3;
     long double W[SIZ][SIZ];
@@ -1140,11 +1086,8 @@ namespace realLB{
         return false;
     }
 }
-
 // ===== TEST =====
-
 int qread();
-
 const int MAXN = 500 + 3;
 long double X[MAXN][MAXN], C[MAXN];
 int I[MAXN];
@@ -1182,7 +1125,6 @@ int main(){
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long i64;
-
 namespace LinkCutTree{
     const int SIZ = 1e5 + 3;
     int F[SIZ], C[SIZ], S[SIZ], W[SIZ], A[SIZ], X[SIZ][2], size;
@@ -1306,7 +1248,6 @@ int main(){
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long i64;
-
 struct Line{ int id; double k, b; Line() = default;};
 namespace LCSeg{
     const int SIZ = 2e5 + 3;
@@ -1378,7 +1319,6 @@ int main(){
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long i64;
-
 const int INF = 2e9;
 const int MAXN= 5e5 + 3;
 int A[MAXN];
@@ -1538,11 +1478,9 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 int qread(){
     int w = 1, c, ret;
     while((c = getchar()) >  '9' || c <  '0') w = (c == '-' ? -1 : 1); ret = c - '0';
@@ -1615,12 +1553,10 @@ int main(){
         int x = INF;
         if(p <= n) x = min(x, get<0>(P[p]));
         if(q <= n) x = min(x, get<0>(Q[q]));
-
         if(last != -1){
             ans += 1ll * Seg :: query(1) * (x - last);
         }
         last = x;
-
         while(q <= n && get<0>(Q[q]) == x){
             auto [x, l, r] = Q[q]; ++ q;
             l = lower_bound(H + 1, H + 1 + o, l) - H + 1;
@@ -1645,23 +1581,18 @@ int main(){
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 namespace BLOCK{
     const int SIZ = 1e6 + 1e5 + 3;
     const int BSZ = 2000;
-
     list <vector<int> > block;
-
     void build(int n, const int A[]){
         for(int l = 0, r = 0;r != n;){
             l = r;
             r = min(l + BSZ / 2, n);
             vector <int> V0(A + l, A + r);
-
             block.emplace_back(V0);
         }
     }
@@ -1695,7 +1626,6 @@ namespace BLOCK{
                 if(it -> size() > BSZ){
                     vector <int> V1(it -> begin(), it -> begin() + BSZ / 2);
                     vector <int> V2(it -> begin() + BSZ / 2, it -> end());
-
                     *it = V2;
                     block.insert(it, V1);
                 }
@@ -1717,31 +1647,22 @@ namespace BLOCK{
         }
     }
 }
-
 int qread();
-
 const int MAXN = 1e5 + 3;
 int A[MAXN];
-
 // ===== TEST =====
-
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-
     int n, m;
-    
     cin >> n >> m;
     for(int i = 1;i <= n;++ i)
         cin >> A[i];
     sort(A + 1, A + 1 + n);
     A[n + 1] = INT_MAX;
-
     BLOCK :: build(n + 1, A + 1);
-
     int last = 0;
     int ans = 0;
-
     for(int i = 1;i <= m;++ i){
         int op;
         cin >> op;
@@ -1874,10 +1795,8 @@ int main(){
 #include<bits/stdc++.h>
 #define endl "\n"
 using namespace std;
-
 const int MAXN = 1e5 + 3;
 vector<int> E[MAXN];
-
 namespace LCA{
     const int SIZ = 1e5 + 3;
     int D[SIZ], F[SIZ];
@@ -1926,7 +1845,6 @@ namespace LCA{
         return D[a] + D[b] - 2 * D[lca(a, b)];
     }
 }
-
 namespace BIT{
     void modify(int D[], int n, int p, int w){
         ++ p;
@@ -1942,7 +1860,6 @@ namespace BIT{
         return r;
     }
 }
-
 namespace PTree{
     const int SIZ = 1e5 + 3;
     bool V[SIZ];
@@ -1950,7 +1867,6 @@ namespace PTree{
     vector<int> EE[MAXN];
     int *D1[MAXN];
     int *D2[MAXN];
-
     void dfs1(int s, int &g, int u, int f){
         S[u] = 1;
         int maxsize = 0;
@@ -1964,7 +1880,6 @@ namespace PTree{
         if(maxsize <= s / 2)
             g = u;
     }
-
     int n;
     void build(int s, int &g, int u, int f){
         dfs1(s, g, u, f);
@@ -2031,9 +1946,7 @@ namespace PTree{
         return ans;
     }
 }
-
 int W[MAXN];
-
 int main(){
     ios :: sync_with_stdio(false);
     int n, m;
@@ -2048,12 +1961,9 @@ int main(){
         E[v].push_back(u);
     }
     LCA :: init(n);
-
     PTree :: build(n);
-
     for(int i = 1;i <= n;++ i)
         PTree :: modify(i, W[i]);
-
     int lastans = 0;
     for(int i = 1;i <= m;++ i){
         int op; cin >> op;
@@ -2080,11 +1990,9 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN= 5e5 + 3;
 const int MAXM=  19 + 3;
 vector <int> P[MAXN];
@@ -2150,7 +2058,6 @@ int main(){
     for(int i = 1;i <= q;++ i){
         int x = (get(s) ^ lastans) % n + 1;
         int k = (get(s) ^ lastans) % D[x];
-        
         if(k == 0){
             lastans = x;
         } else {
@@ -2167,7 +2074,6 @@ int main(){
             lastans = x;
         }
         realans ^= 1ll * i * lastans;
-        
     }
     printf("%lld\n", realans);
     return 0;
@@ -2178,15 +2084,11 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN= 1e5 + 3;
-
 int MOD;
-
 int n, m, root;
 int A[MAXN];
 int qread();
@@ -2214,7 +2116,6 @@ void dfs2(int u, int f){
     }
     R[u] = cnt;
 }
-
 namespace Seg{
     #define lc(t) (t << 1)
     #define rc(t) (t << 1 | 1)
@@ -2322,10 +2223,8 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using u64 = unsigned long long;
 const int MAXN = 1e6 + 3;
-
 u64 xor_shift(u64 x){
     x ^= x << 13;
     x ^= x >> 7;
@@ -2333,7 +2232,6 @@ u64 xor_shift(u64 x){
     return x;
 }
 u64 H[MAXN];
-
 vector <int> E[MAXN];
 void dfs(int u, int f){
     H[u] = 1;
@@ -2343,7 +2241,6 @@ void dfs(int u, int f){
     }
     H[u] = xor_shift(H[u]); // !important
 }
-
 int main(){
     int n;
     cin >> n;
@@ -2354,7 +2251,6 @@ int main(){
         E[v].push_back(u);
     }
     dfs(1, 0);
-
     sort(H + 1, H + 1 + n);
     cout << (unique(H + 1, H + 1 + n) - H - 1) << endl;
     return 0;
@@ -2369,7 +2265,6 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MAXN = 5e6 + 3;
 int D[MAXN], F[MAXN], P[MAXN];
 vector<int> tree2prufer(int n){
@@ -2392,14 +2287,11 @@ vector<int> prufer2tree(int n){
     }
     return F;
 }
-
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-
     int n, m;
     cin >> n >> m;
-
     vector <int> ANS;
     if(m == 1){     // tree -> prufer
         for(int i = 1;i <= n - 1;++ i){
@@ -2425,10 +2317,8 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MAXN = 5e5 + 3;
 vector<pair<int, int> > E[MAXN];
-
 namespace LCA{
     const int SIZ = 5e5 + 3;
     int D[SIZ], H[SIZ], F[SIZ];
@@ -2477,16 +2367,12 @@ namespace LCA{
         return H[a] + H[b] - 2 * H[lca(a, b)];
     }
 }
-
 bool cmp(int a, int b){
     return LCA :: P[a] < LCA :: P[b];
 }
-
 bool I[MAXN];
-
 vector <int> E1[MAXN];
 vector <int> V1;
-
 void solve(vector <int> &V){
     using LCA :: lca;
     using LCA :: D;
@@ -2516,9 +2402,7 @@ void solve(vector <int> &V){
             E1[v].push_back(l);
         V1.push_back(l = v), S.pop();
     }
-
     // dfs(1, 0); // SOLVE HERE !!!
-
     for(auto &u : V1)
         E1[u].clear(), I[u] = false;
     V1.clear();
@@ -2635,7 +2519,6 @@ int main(){
 **有向图**：不难发现，上述方法枚举了三个点，计算有向图三元环也就只需要处理下方向的事，这个由于算法够暴力，随便改改就能做了。
 
 ```cpp
-
 // 无向图
 ll n, m; cin >> n >> m;
 vector<pair<ll, ll>> Edges(m);
@@ -2653,7 +2536,6 @@ for (ll i = 1; i <= n; ++i) {
 	for (auto j : G[i]) for (auto k : G[j]) ans += val[k];
 	for (auto j : G[i]) val[j] = 0;
 }
-
 // 有向图
 ll n, m; cin >> n >> m;
 vector<pair<ll, ll>> Edges(m);
@@ -2687,7 +2569,6 @@ _From zpk_
 - **有向图**：缺少题目，但应当类似三元环计数有向形式记录定向边和原边的正反关系。因为此法最强的结论是定向后出度 $O(\sqrt{m})$，实际上方法很暴力，应当不难数有向形式的。
 
 ```cpp
-
 ll n, m; cin >> n >> m;
 vector<pair<ll, ll>> Edges(m);
 vector<vector<ll>> G(n + 2), iG(n + 2);
@@ -2716,23 +2597,17 @@ cout << ans << '\n';
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 typedef long long i64;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN = 1e5 + 3;
-
 using edge = tuple<int, int, int>;
-
 vector <edge> E[MAXN];
 vector <edge> W;
 vector <int>  C;
-
 edge F[MAXN];
 bool V[MAXN];
 int  I[MAXN], o;
-
 void dfs0(int u, int e){
     V[u] = true;
     I[u] = ++ o;
@@ -2754,11 +2629,9 @@ void dfs0(int u, int e){
         }
     }
 }
-
 namespace Problem2{
 // ===== 删除环上第 i 条边，求直径 =====
     i64 H[MAXN], A1[MAXN], B1[MAXN], A2[MAXN], B2[MAXN], A3[MAXN], B3[MAXN];
-    
     i64 L[MAXN];
     i64 dis = 0;
     void dfs1(int u, int e){
@@ -2822,7 +2695,6 @@ namespace Problem2{
             t = min(t, d);
         }
         t = min(t, max(A3[r], dis));
-
         if(t % 2 == 0)
             cout << t / 2 << ".0" << endl;
         if(t % 2 == 1)
@@ -2830,10 +2702,8 @@ namespace Problem2{
         return 0;
     }
 }
-
 namespace Problem3{
 // ===== 求最大点权独立集 =====
-
     int A[MAXN];
     i64 X[MAXN], Y[MAXN];
     i64 P[MAXN][2], Q[MAXN][2];
@@ -2847,7 +2717,6 @@ namespace Problem3{
         }
         X[u] += A[u];
     }
-
     int main(){
         int n;
         cin >> n;
@@ -2887,7 +2756,6 @@ namespace Problem3{
         return 0;
     }
 }
-
 int main(){
     return Problem3 :: main();
 }
@@ -2901,13 +2769,11 @@ $n$ 个变量 $m$ 个条件，形如若 $x_i = a$ 则 $y_j = b$，找到任意�
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
 namespace SCC{
     const int MAXN= 2e6 + 3;
-
     vector <int> V[MAXN];
     stack  <int> S;
     int D[MAXN], L[MAXN], C[MAXN], o, s;
@@ -2939,7 +2805,6 @@ int main(){
     ios :: sync_with_stdio(false);
     int n, m;
     cin >> n >> m;
-    
     for(int i = 1;i <= n;++ i)
         X[i][0] = ++ o;
     for(int i = 1;i <= n;++ i)
@@ -2980,11 +2845,9 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MAXN= 2e4 + 3;
 const int MAXM= 1e5 + 3;
 vector<int> V[MAXN];
-
 int n, m, o, D[MAXN], L[MAXN];
 bool F[MAXN], C[MAXN];
 void dfs(int u, int g){
@@ -3024,11 +2887,9 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN= 5e5 + 3;
 vector <vector<int>> A;
 vector <pair<int, int>> V[MAXN];
@@ -3064,11 +2925,9 @@ void dfs(int u, int l){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN= 5e5 + 3;
 vector <vector<int>> A;
 vector <int> V[MAXN];
@@ -3104,13 +2963,10 @@ void dfs(int u, int f){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN= 5e5 + 3;
-
 vector <int> V[MAXN];
 stack  <int> S;
 int D[MAXN], L[MAXN], C[MAXN], o, s;
@@ -3135,10 +2991,8 @@ void dfs(int u){
         S.pop(), I[u] = false, C[u] = c;
     }
 }
-
 vector <int> ANS[MAXN];
 int main(){
-
     int n, m;
     cin >> n >> m;
     for(int i = 1;i <= m;++ i){
@@ -3272,7 +3126,6 @@ int main(){
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
-
 int qread();
 namespace Dinic{
     const long long INF = 1e18;
@@ -3339,7 +3192,6 @@ namespace Dinic{
         return ans;
     }
 }
-
 namespace GHTree{
     const int MAXN =  500 + 5;
     const int MAXM = 1500 + 5;
@@ -3367,7 +3219,6 @@ namespace GHTree{
         int w = Dinic :: dinic(s, t);
         E[s].push_back(make_pair(t, w));
         E[t].push_back(make_pair(s, w));
-        
         vector <int> P;
         vector <int> Q;
         for(auto &u : N){
@@ -3405,11 +3256,9 @@ namespace GHTree{
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 namespace Dinic{
     const i64 INF = 1e18;
     const int SIZ = 5e5 + 3;
@@ -3474,11 +3323,8 @@ namespace Dinic{
         return ans;
     }
 }
-
 // ===== TEST =====
-
 int qread();
-
 int main(){
     int n = qread(), m = qread(), s = qread(), t = qread();
     for(int i = 1;i <= m;++ i){
@@ -3500,11 +3346,9 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  = 1e9;
 const i64 INFL = 1e18;
-
 namespace MCMF{
     const int MAXN = 1e5 + 3;
     const int MAXM = 2e5 + 3;
@@ -3618,12 +3462,9 @@ namespace MCMF{
         return res.second + cost0;
     }
 }
-
 // ===== TEST =====
-
 int qread();
 int main(){
-    
     return 0;
 }
 ```
@@ -3638,12 +3479,10 @@ int main(){
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
-
 int qread();
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 namespace MCMF{
     const int MAXN = 1e5 + 3;
     const int MAXM = 2e5 + 3;
@@ -3749,22 +3588,16 @@ namespace MCMF{
         return mcmf(s0, t0);
     }
 }
-
 const int MAXN = 1e3 + 3;
 const int MAXM = 365 + 3;
-
 int G[MAXN], A[MAXN], B[MAXM];
-
 int main(){
 	ios :: sync_with_stdio(false);
 	cin.tie(nullptr);
-
 	int n, m, o = 0;
 	while(cin >> n >> m){
-
 		int s = ++ o;
 		int t = ++ o;
-
 		for(int i = 1;i <= m;++ i){
 			cin >> G[i];
 			A[i] = ++ o;
@@ -3772,12 +3605,9 @@ int main(){
 		}
 		for(int i = 1;i <= n;++ i){
 			B[i] = ++ o;
-
 			int c, d;
 			cin >> c >> d;
-
 			MCMF :: add(s, B[i], 0, d);
-
 			for(int j = 1;j <= c;++ j){
 				int t, l, r;
 				cin >> t >> l >> r;
@@ -3786,10 +3616,8 @@ int main(){
 			}
 		}
 		cout << MCMF :: solve(s, t) << "\n\n";
-
 		MCMF :: clear();
 	}
-	
 	return 0;
 }
 
@@ -3803,14 +3631,11 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN = 600 + 3;
 int MOD;
-
 struct Mat{
     int n, m;
     int W[MAXN][MAXN];
@@ -3822,10 +3647,8 @@ struct Mat{
                 W[i][j] = 0;
     }
 };
-
 int mat_det(Mat a){
     int ans = 1;
-
     const int &n = a.n;
     for(int i = 1;i <= n;++ i){
         int f = -1;
@@ -3862,7 +3685,6 @@ int mat_det(Mat a){
         ans = 1ll * ans * a.W[i][i] % MOD;
     return ans;
 }
-
 int main(){
     int n;
     cin >> n >> MOD;
@@ -3879,15 +3701,11 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN = 100 + 3;
-
 const double EPS = 1e-9;
-
 struct Mat{
     int n, m;
     double W[MAXN][MAXN];
@@ -3899,11 +3717,9 @@ struct Mat{
                 W[i][j] = 0;
     }
 };
-
 bool zero(double f){
     return fabs(f) < EPS;
 }
-
 int mat_rank(Mat &a){
     const int &n = a.n;
     const int &m = a.m;
@@ -3933,9 +3749,7 @@ int mat_rank(Mat &a){
     }
     return cnt;
 }
-
 double X[MAXN];
-
 int main(){
     int n;
     cin >> n;
@@ -3967,7 +3781,6 @@ int main(){
         for(int i = 1;i <= n;++ i)
             cout << "x" << i << "=" << fixed << setprecision(2) << X[i] << endl;
     }
-
     return 0;
 }
 ```
@@ -3976,15 +3789,11 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN = 100 + 3;
-
 const int MOD  = 998244353;
-
 struct Mat{
     int n, m;
     int W[MAXN][MAXN];
@@ -3996,7 +3805,6 @@ struct Mat{
                 W[i][j] = 0;
     }
 };
-
 int power(int a, int b){
     int r = 1;
     while(b){
@@ -4005,11 +3813,9 @@ int power(int a, int b){
     }
     return r;
 }
-
 int inv(int x){
     return power(x, MOD - 2);
 }
-
 int mat_rank(Mat &a){
     const int &n = a.n;
     const int &m = a.m;
@@ -4040,9 +3846,7 @@ int mat_rank(Mat &a){
     }
     return cnt;
 }
-
 int X[MAXN];
-
 int main(){
     int n;
     cin >> n;
@@ -4075,7 +3879,6 @@ int main(){
         for(int i = 1;i <= n;++ i)
             cout << "x" << i << "=" << X[i] << endl;
     }
-
     return 0;
 }
 ```
@@ -4084,14 +3887,11 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN = 400 + 3;
 const int MOD  = 1e9 + 7;
-
 struct Mat{
     int n, m;
     int W[MAXN][MAXN];
@@ -4103,7 +3903,6 @@ struct Mat{
                 W[i][j] = 0;
     }
 };
-
 int power(int a, int b){
     int r = 1;
     while(b){
@@ -4112,11 +3911,9 @@ int power(int a, int b){
     }
     return r;
 }
-
 int inv(int x){
     return power(x, MOD - 2);
 }
-
 bool mat_inv(Mat &a){
     const int &n = a.n;
     Mat b(n, n);
@@ -4164,9 +3961,7 @@ bool mat_inv(Mat &a){
             a.W[i][j] = b.W[i][j];
     return true;
 }
-
 int X[MAXN];
-
 int main(){
     int n;
     cin >> n;
@@ -4247,14 +4042,11 @@ $$T \prod_{i}(\mathrm{out}_i - 1)!$$
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN = 300 + 3;
 const int MOD  = 1e9 + 7;
-
 struct Mat{
     int n, m;
     int W[MAXN][MAXN];
@@ -4266,10 +4058,8 @@ struct Mat{
                 W[i][j] = 0;
     }
 };
-
 int mat_det(Mat a){
     int ans = 1;
-
     const int &n = a.n;
     for(int i = 1;i <= n;++ i){
         int f = -1;
@@ -4306,10 +4096,8 @@ int mat_det(Mat a){
         ans = 1ll * ans * a.W[i][i] % MOD;
     return ans;
 }
-
 int D[MAXN];
 int W[MAXN][MAXN];
-
 int main(){
     int n, m, t;
     cin >> n >> m >> t;
@@ -4347,7 +4135,6 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 int power(int a, int b, int  p){
     int r = 1;
     while(b){
@@ -4376,11 +4163,9 @@ namespace BSGS {
         return -1;
     }
 }
-
 int main(){
     int p, b, n;
     cin >> p >> b >> n;
-
     int ans = BSGS :: solve(b, n, p);
     if(ans == -1){
         cout << "no solution\n";
@@ -4412,10 +4197,8 @@ $$L = \left(\sum a_i m_i\times (\left(M/m_i\right)^{-1}\bmod m_i)\right)\bmod M$
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MAXN = 100 + 3;
 long long A[MAXN], B[MAXN], M = 1;
-
 long long exgcd(long long a, long long b, long long &x, long long &y){
     if(a == 0){
         x = 0, y = 1; return b;
@@ -4427,7 +4210,6 @@ long long exgcd(long long a, long long b, long long &x, long long &y){
         return d;
     }
 }
-
 int main(){
     int n;
     cin >> n;
@@ -4457,10 +4239,8 @@ $$s(i) = \sum_{d\mid i} f_{d}$$
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MAXN = 2e7 + 3;
 unsigned A[MAXN];
-
 int p, P[MAXN]; bool V[MAXN];
 void solve(int n){
     for(int i = 2;i <= n;++ i){
@@ -4476,9 +4256,7 @@ void solve(int n){
                 break;
         }
     }
-    
 }
-
 unsigned seed;
 inline unsigned read(){
 	seed ^= seed << 13;
@@ -4486,8 +4264,6 @@ inline unsigned read(){
 	seed ^= seed << 5;
 	return seed;
 }
-
-
 int main(){
     int n;
     cin >> n >> seed;
@@ -4500,7 +4276,6 @@ int main(){
         ans ^= A[i];
     }
     cout << ans << endl;
-
     return 0;
 }
 ```
@@ -4554,7 +4329,6 @@ int exgcd(int a, int b, int &x, int &y){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 int power(int a, int b, int  p){
     int r = 1;
     while(b){
@@ -4588,11 +4362,9 @@ namespace BSGS {
         return -1;
     }
 }
-
 const int MAXN = 1e5 + 3;
 int H[MAXN], P[MAXN], H0, p, h, g, mod;
 bool V[MAXN];
-
 int solve(int x){
     if(x <= h){
         return H[x];
@@ -4604,18 +4376,14 @@ int solve(int x){
         return (solve(x - r) - H[v + 1] + mod - 1) % (mod - 1);
     }
 }
-
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-    
     int T;
     cin >> g >> mod;
     h = sqrt(mod) + 1;
-
     BSGS :: init(g, mod, sqrt(1ll * mod * sqrt(mod) / log10(mod)));
     H0 = BSGS :: solve(mod - 1);
-
     H[1] = 0;
     for(int i = 2;i <= h;++ i){
         if(!V[i]){
@@ -4630,7 +4398,6 @@ int main(){
                 break;
         }
     }
-
     cin >> T;
     while(T --){
         int x, tmp = 0;
@@ -4679,7 +4446,6 @@ const int MOD = 998244353;
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-    
     up(1, h, i) G[0][i] = G[i][0] = i;
     up(1, h, i) up(1, h, j){
         if(i >= j) G[i][j] = G[i - j][j];
@@ -4779,7 +4545,6 @@ $$
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 int power(int a, int b, int p){
     int r = 1;
     while(b){
@@ -4788,7 +4553,6 @@ int power(int a, int b, int p){
     }
     return r;
 }
-
 int getphi(int x){
     int t = x, r = x;
     for(int i = 2;i <= x / i;++ i){
@@ -4817,7 +4581,6 @@ vector <int> getprime(int x){
         p.push_back(x);
     return p;
 }
-
 bool test(int g, int m, int mm, vector<int> &P){
     for(auto &p: P){
         if(power(g, mm / p, m) == 1)
@@ -4825,7 +4588,6 @@ bool test(int g, int m, int mm, vector<int> &P){
     }
     return true;
 }
-
 int get_genshin(int m){
     int mm = getphi(m);
     vector <int> P = getprime(mm);
@@ -4834,7 +4596,6 @@ int get_genshin(int m){
             return i;
     }
 }
-
 int main(){
     cout << get_genshin(998244353) << endl;
     return 0;
@@ -4849,7 +4610,6 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 int power(int a, int b, int p){
     int r = 1;
     while(b){
@@ -4858,15 +4618,12 @@ int power(int a, int b, int p){
     }
     return r;
 }
-
 const int MAXN = 5e6 + 3;
 int A[MAXN], B[MAXN];
 int P[MAXN], Q[MAXN];
-
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-
     int n, p, K, S = 1;
     cin >> n >> p >> K;
     P[0] = 1;
@@ -4885,7 +4642,6 @@ int main(){
         ans = (ans + 1ll * S * B[i]) % p;
     }
     cout << ans << "\n";
-    
     return 0;
 }
 ```
@@ -4898,30 +4654,24 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MAXN = 1e7 + 3;
 pair<int, int> F[MAXN], G[MAXN];
 int I[MAXN];
-
 using u32 = uint32_t;
-
 u32 read(u32 &seed){
     seed ^= seed << 13;
     seed ^= seed >> 17;
     seed ^= seed << 5;
     return seed;
 }
-
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-
     u32 seed;
     int n, p;
     cin >> n >> p >> seed;
     int m = pow(p, 1.0 / 3.0);
     I[1] = 1;
-
     for(int i = 2;i <= p / m;++ i){
         I[i] = 1ll * (p / i) * (p - I[p % i]) % p;
     }
@@ -4935,12 +4685,10 @@ int main(){
     }
     F[    0] = G[    0] = { 0, 1 };
     F[m * m] = G[m * m] = { 1, 1 };
-
     for(int i = 1;i <      m * m;++ i) if(!F[i].second)
         F[i] = F[i - 1];
     for(int i = m * m - 1;i >= 1;-- i) if(!G[i].second)
         G[i] = G[i + 1];
-    
     int lastans = 0;
     for(int i = 1;i <= n;++ i){
         int a, inv;
@@ -4974,7 +4722,6 @@ $$
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MAXN = 2e3 + 3;
 const int MOD  = 998244353;
 int X[MAXN], Y[MAXN], F[MAXN], G[MAXN], H[MAXN], A[MAXN];
@@ -4986,7 +4733,6 @@ int power(int a, int b){
     }
     return r;
 }
-
 int main(){
     int n, k;
     cin >> n >> k;
@@ -5068,17 +4814,13 @@ $$\max_{U}=\sum_{S\subseteq U}(-1)^{|S| - 1}\min_S = \sum_{S\subseteq U}(-1)^{|S
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 long long S = 0, X = 0;
-
 void init(int MOD){
     while((1 << (S + 1)) < MOD)
         S ++;
     X = ((__int128)1 << 60 + S) / MOD + !!(((__int128)1 << 60 + S) % MOD);
-
     cerr << S << " " << X << endl;
 }
-
 int power(long long x, int y, int MOD){
     long long r = 1;
     while(y){
@@ -5092,15 +4834,12 @@ int power(long long x, int y, int MOD){
     }
     return r;
 }
-
 int main(){
     init(998244353);
-
     cout << power(2, 10, 998244353) << endl;
     cout << power(2, 20, 998244353) << endl;
     cout << power(2, 30, 998244353) << endl;
     cout << power(2, 40, 998244353) << endl;
-
     return 0;
 }
 ```
@@ -5114,11 +4853,9 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 i64 step(i64 a, i64 c, i64 m){
     return ((__int128)a * a + c) % m;
 }
@@ -5185,9 +4922,7 @@ basic_string<i64> rho(i64 n){
         x1 = x2;
     }
 }
-
 // ===== TEST =====
-
 int main(){
     int T;
     cin >> T;
@@ -5251,7 +4986,6 @@ $$
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MOD = 1e9 + 7;
 int power(int a, int b){
     int r = 1;
@@ -5261,7 +4995,6 @@ int power(int a, int b){
     }
     return r;
 }
-
 vector <tuple<int, int> > P;
 void solve(int step, int n, int d, int f, int &ans){
     if(step == P.size()){
@@ -5276,7 +5009,6 @@ void solve(int step, int n, int d, int f, int &ans){
         }
     }
 }
-
 int main(){
     int T;
     cin >> T;
@@ -5318,17 +5050,14 @@ int main(){
 - 注意补回 $f(1)$。
 
 ```cpp
-
 // 预处理，$1$ 所在的块也算进去了
 namespace init {
 	ll init_n, sqrt_n;
 	vector<ll> np, p, id1, id2, val;
 	ll cnt;
-
 	void main(ll n) {
 		init_n = n, sqrt_n = sqrt(n);
 		ll M = sqrt_n * 2; // 筛出一个 > floor(sqrt(n)) 的质数, 避免后续讨论边界
-		
 		np.resize(M + 1), p.resize(M + 1);
 		for (ll i = 2; i <= M; ++i) {
 			if (!np[i]) p[++p[0]] = i;
@@ -5339,7 +5068,6 @@ namespace init {
 			}
 		}
 		p[0] = 1;
-
 		id1.resize(sqrt_n + 1), id2.resize(sqrt_n + 1);
 		val.resize(1);
 		for (ll l = 1, r, v; l <= n; l = r + 1) {
@@ -5349,14 +5077,12 @@ namespace init {
 			val.emplace_back(v);
 		}
 	}
-
 	ll id(ll n) {
 		if (n <= sqrt_n) return id1[n];
 		else return id2[init_n / n];
 	}
 }
 using namespace init;
-
 // 计算 $G_k$，两个参数分别是 $g$ 从 $2$ 开始的前缀和和 $g$
 auto calcG = [&] (auto&& sum, auto&& g) -> vector<ll> {
 	vector<ll> G(cnt + 1);
@@ -5373,7 +5099,6 @@ auto calcG = [&] (auto&& sum, auto&& g) -> vector<ll> {
 	for (int i = 1; i <= cnt; ++i) G[i] = (G[i] % MD + MD) % MD;
 	return G;
 };
-
 // 计算 $F_k$，直接搜，不用记忆化。`fp` 是 $F_{\text{prime}}$，`pc` 是 $p^c$，其中 `f(p[h] ^ c)` 要替换掉。
 function<ll(ll, int)> calcF = [&] (ll m, int k) {
 	if (p[k] > m) return 0;
@@ -5407,16 +5132,12 @@ $$
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MAXN = 1e7 + 3;
 const int H = 1e7;
-
 int P[MAXN], p; bool V[MAXN];
-
 long long ph[MAXN], sph[MAXN];
 long long mu[MAXN], smu[MAXN];
 long long tp[MAXN];
-
 long long solve_ph(long long N){
     for(int d = N / H;d >= 1;-- d){
         long long n = N / d;
@@ -5445,11 +5166,9 @@ long long solve_mu(long long N){
     }
     return N <= H ? smu[N] : tp[1];
 }
-
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-
     ph[1] = 1;
     mu[1] = 1;
     for(int i = 2;i <= H;++ i){
@@ -5480,7 +5199,6 @@ int main(){
     while(T --> 0){
         int n;
         cin >> n;
-        
         cout << solve_ph(n) << " " << solve_mu(n) << "\n";
     }
     return 0;
@@ -5508,17 +5226,13 @@ $$
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MAXN = 1e7 + 3;
 const int MAXM = 1e5 + 3;
 const int H = 1e7;
-
 const int MOD = 1e9 + 7;
 const int DIV2 = 500000004;
 const int DIV6 = 166666668;
-
 int P[MAXN], p; bool V[MAXN];
-
 int g[MAXN], le[MAXN], ge[MAXN];
 int s1(long long n){    // 1^1 + 2^1 + ... + n^1
     n %= MOD;
@@ -5546,7 +5260,6 @@ int sieve_du(long long N){
     return N <= H ? le[N] : ge[1];
 }
 vector <int> hc[MAXM], gc[MAXM];
-
 int ANS;
 void sieve_pn(int last, long long x, int h, long long N){
     ANS = (ANS + 1ll * h * sg(N / x, N)) % MOD;
@@ -5561,7 +5274,6 @@ void sieve_pn(int last, long long x, int h, long long N){
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-
     g[1] = 1;
     for(int i = 2;i <= H;++ i){
         if(!V[i]){
@@ -5603,9 +5315,7 @@ int main(){
     }
     sieve_du(N);
     sieve_pn(0, 1, 1, N);
-
     cout << ANS << "\n";
-
     return 0;
 }
 ```
@@ -5653,10 +5363,8 @@ $10^{18}$ 级别：
 多次询问，每次询问给定奇素数 $p$ 以及 $y$，在 $\mathcal O(\log p)$ 复杂度计算 $x$ 使得 $x^2 \equiv 0 \pmod p$ 或者无解。
 
 ```cpp
-
 #include<bits/stdc++.h>
 using namespace std;
-
 int power(int a, int b, int p){
     int r = 1;
     while(b){
@@ -5665,11 +5373,9 @@ int power(int a, int b, int p){
     }
     return r;
 }
-
 bool check(int x, int p){
     return power(x, (p - 1) / 2, p) == 1;
 }
-
 struct Node {
     int real, imag;
 };
@@ -5686,7 +5392,6 @@ Node power(Node a, int b, int p, int v){
     }
     return r;
 }
-
 mt19937 MT;
 void solve(int n, int p, int &x1, int &x2){
     if(n == 0){
@@ -5704,15 +5409,12 @@ void solve(int n, int p, int &x1, int &x2){
     Node u = { a, 1 };
     x1 = power(u, (p + 1) / 2, p, t).real;
     x2 = (p - x1) % p;
-
     if(x1 > x2)
         swap(x1, x2);
 }
-
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-    
     int T;
     cin >> T;
     while(T --){
@@ -5763,13 +5465,10 @@ $$
 #define up(l, r, i) for(int i = l, END##i = r;i <= END##i;++ i)
 #define dn(r, l, i) for(int i = r, END##i = l;i >= END##i;-- i)
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MOD = 998244353;
-
 int power(int a, int b){
     int r = 1;
     while(b){
@@ -5778,11 +5477,9 @@ int power(int a, int b){
     }
     return r;
 }
-
 int inv(int x){
     return power(x, MOD - 2);
 }
-
 const int MAX_ = (1 << 19) + 3;
 struct cplx{
     double a, b; cplx(double _a = 0, double _b = 0) :a(_a), b(_b){}
@@ -5791,7 +5488,6 @@ struct cplx{
     cplx operator *(cplx t){ return cplx(a * t.a - b * t.b, a * t.b + b * t.a); }
     cplx operator *(int t) { return cplx(a * t, b * t); }
 };
-
 const long double pi = acos(-1);
 namespace Poly{
     void FFT(int n, cplx Z[]){
@@ -5962,14 +5658,11 @@ $$b_k = \sum_{i \otimes j = k} a_i \times b_j$$
 #define up(l, r, i) for(int i = l, END##i = r;i <= END##i;++ i)
 #define dn(r, l, i) for(int i = r, END##i = l;i >= END##i;-- i)
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MOD = 998244353;
-
-namespace Solve1{   // and 卷积
+namespace Solve1{   // or 卷积
     void FWT(int n, int *A){
         for(int l = 1 << n, u = 2, v = 1;u <= l;u <<= 1, v <<= 1)
             for(int j = 0;j < l;j += u)
@@ -5983,7 +5676,7 @@ namespace Solve1{   // and 卷积
                     A[j + v + k] = (A[j + v + k] - A[j + k] + MOD) % MOD;
     }
 }
-namespace Solve2{   // or  卷积
+namespace Solve2{   // and 卷积
     void FWT(int n, int *A){
         for(int l = 1 << n, u = 2, v = 1;u <= l;u <<= 1, v <<= 1)
             for(int j = 0;j < l;j += u)
@@ -6028,13 +5721,10 @@ namespace Solve3{   // xor 卷积
 #define up(l, r, i) for(int i = l, END##i = r;i <= END##i;++ i)
 #define dn(r, l, i) for(int i = r, END##i = l;i >= END##i;-- i)
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAX_ = (1 << 19) + 3;
-
 template <typename T>
 struct cplx0{
     T a, b; cplx0(T _a = 0, T _b = 0) :a(_a), b(_b){}
@@ -6044,7 +5734,6 @@ struct cplx0{
     cplx0 operator *(int t) { return cplx0(a * t, b * t); }
 };
 using cplx = cplx0<double>;
-
 const long double pi = acos(-1);
 namespace Poly{
     void FFT(int n, cplx Z[]){
@@ -6075,14 +5764,11 @@ namespace Poly{
             Z[i].a /= 1.0 * n, Z[i].b /= 1.0 * n;
     }
 }
-
 const int MAXN  = (1 << 19) + 3;
 const int BLOCK = 32768;
 cplx A1[MAXN], A2[MAXN], B1[MAXN], B2[MAXN];
 int n, m, L, mod;
-
 cplx P[MAXN], Q[MAXN];
-
 void FFTFFT(int L, cplx X[], cplx Y[]){
     for(int i = 0;i < L;++ i){
         P[i].a = X[i].a;
@@ -6100,11 +5786,9 @@ void FFTFFT(int L, cplx X[], cplx Y[]){
         Y[i].a /= 2.0, Y[i].b /= 2.0;
     }
 }
-
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-
     cin >> n >> m >> mod;
     for(int i = 0;i <= n;++ i){
         int a; cin >> a;
@@ -6132,13 +5816,10 @@ int main(){
         long long a2b1 = P[i].b + 0.5;
         long long a1b2 = Q[i].a + 0.5;
         long long a2b2 = Q[i].b + 0.5;
-
         long long w = ((a1b1 % mod * (BLOCK * BLOCK % mod)) + ((a2b1 + a1b2) % mod) * BLOCK + a2b2) % mod;
-
         if(i <= n + m)
             cout << w << " ";
     }
-
     return 0;
 }
 ```
@@ -6149,16 +5830,12 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
-
 const int MOD = 1e9 + 7;
-
 namespace ACAM{
     const int MAXN =1e6 + 3;
     const int MAXM = 26 + 3;
     int C[MAXN][MAXM], o;
-    
     void insert(char *S){
         int p = 0, len = 0;
         for(int i = 0;S[i];++ i){
@@ -6206,12 +5883,10 @@ $$
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long i64;
-
 const int MAXN = 2e7 + 3;
 char A[MAXN], B[MAXN * 2];
 int n, m, l, r, Z[MAXN * 2];
 i64 ans1, ans2;
-
 int main(){
     scanf("%s%s", A + 1, B + 1);
     n = strlen(A + 1);
@@ -6248,11 +5923,9 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN= 2.2e7 + 11;
 char S[MAXN], T[MAXN]; int n, R[MAXN];
 int main(){
@@ -6284,7 +5957,6 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MAXM = 26 + 3;
 namespace PAM{
     const int SIZ = 5e5 + 3;
@@ -6320,7 +5992,6 @@ namespace PAM{
         }
     }
 }
-
 const int MAXN = 5e5 + 3;
 char T[MAXN];
 int main(){
@@ -6350,11 +6021,9 @@ azzzyyzyyx
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN = 1e6 + 3;
 int n, m;
 int A[MAXN], B[MAXN];
@@ -6395,17 +6064,13 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN = 1e6 + 3;
 const int MAXM = 256 + 3;
-
 #define LTYPE 0
 #define STYPE 1
-
 void induce_sort(int n, int S[], int T[], int m, int LM[], int SA[], int C[]){
     vector <int> BL(n);
     vector <int> BS(n);
@@ -6424,7 +6089,6 @@ void induce_sort(int n, int S[], int T[], int m, int LM[], int SA[], int C[]){
         if(SA[i] > 0 && T[p = SA[i] - 1] == STYPE)
             SA[BS[S[p]] --] = p;
 }
-
 // 长度 n，字符集 [0, n)，要求最后一个元素为 0
 // 例如输入 ababa 传入 n = 6, S = [1 2 1 2 1 0]
 void sais(int n, int S[], int SA[]){
@@ -6472,7 +6136,6 @@ void sais(int n, int S[], int SA[]){
         S0[i] = P[SA0[i]];
     induce_sort(n, S, T.data(), m, S0.data(), SA, C.data());
 }
-
 int S[MAXN], SA[MAXN], H[MAXM], G[MAXM];
 int main(){
     int n = 0, t = 0, m = 256;
@@ -6498,11 +6161,9 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXM= 26 + 3;
 namespace SAM{
     const int SIZ = 2e6 + 3;
@@ -6545,11 +6206,9 @@ namespace SAM{
         cout << ans << endl;
     }
 }
-
 namespace Trie{
     const int SIZ = 1e6 + 3;
     int M[SIZ][MAXM], s, h = 25;
-
     void insert(char *S){
         int p = 0;
         for(int i = 0;S[i];++ i){
@@ -6561,7 +6220,6 @@ namespace Trie{
         }
     }
     int O[SIZ];
-
     void build_sam(){
         queue <int> Q;
         Q.push(0);
@@ -6601,11 +6259,9 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXM= 26 + 3;
 namespace SAM{
     const int SIZ = 2e6 + 3;
@@ -6691,11 +6347,9 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXM= 26 + 3;
 namespace SAM{
     const int SIZ = 2e6 + 3;
@@ -6766,17 +6420,13 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXM= 10 + 3;
-
 namespace Trie{
     const int SIZ = 1e6 + 3;
     int M[SIZ][MAXM], s, h = 10;
-
     void extend(int &last, char c){
         int e = c - 'a';
         if(M[last][e]){
@@ -6808,12 +6458,9 @@ namespace Trie{
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
-
 const int MAXN = 2e5 + 3;
 int X[MAXN], Y[MAXN];
-
 struct Frac {
     int a, b;
     Frac (int _a, int _b){
@@ -6824,18 +6471,15 @@ struct Frac {
         }
     }
 };
-
 struct Node {
     int x, y;
 }P[MAXN];
-
 bool operator < (const Frac A, const Frac B){
     return 1ll * A.a * B.b - 1ll * A.b * B.a < 0;
 }
 bool operator < (const Node A, const Node B){
     return A.x == B.x ? A.y > B.y : A.x < B.x;
 }
-
 const Frac intersect(Node A, Node B){
     int a = B.y - A.y;
     int b = A.x - B.x;
@@ -6890,7 +6534,6 @@ int main(){
                 Q2.push_back(i);
             }
         }
-
         Q = Q1;
         for(int i = Q2.size();i != 0;i --){
             if(i != Q2.size())
@@ -6943,7 +6586,6 @@ int main(){
             while(L2.size() >= 2){
                 auto &P1 = P[L2[L2.size() - 1]];
                 auto &P2 = P[L2[L2.size() - 2]];
-
                 Frac i1 = intersect(P1, P[i]);
                 Frac i2 = intersect(P2, P[i]);
                 if(i1 < i2){
@@ -7016,7 +6658,6 @@ int main(){
 
 ```cpp
 #include "2d.cpp"
-
 point geto(point a, point b, point c) {
     double a1, a2, b1, b2, c1, c2;
     point ans(0, 0);
@@ -7036,11 +6677,9 @@ point geto(point a, point b, point c) {
     }
     return ans;
 }
-
 mt19937 MT;
 circ minimal(vector <point> V){
     shuffle(V.begin(), V.end(), MT);
-
     point  o = V[0];
     double r = 0;
     for(int i = 0;i < V.size();++ i) {
@@ -7070,7 +6709,6 @@ circ minimal(vector <point> V){
 
 ```cpp
 #include "2d.cpp"
-
 namespace DSU{
     const int MAXN = 1e5 + 3;
     int F[MAXN];
@@ -7078,7 +6716,6 @@ namespace DSU{
         return u == F[u] ? u : F[u] = getfa(F[u]);
     }
 }
-
 namespace Dual{
     const int MAXN = 1e5 + 3;
     const int MAXM = 1e5 + 3;
@@ -7087,7 +6724,6 @@ namespace Dual{
     bool cmp(int a, int b){
         return W[a] < W[b];
     }
-
     vector <pair<int, int> > E[MAXN];
     const int MAXT = 20 + 3;
     int F[MAXN][MAXT], G[MAXN][MAXT], D[MAXN], h = 20;
@@ -7145,20 +6781,16 @@ namespace Dual{
         return ans;
     }
 }
-
 namespace Planer{
     const int MAXN = 1e5 + 3 + 3;
     const int MAXE = 2e5 + 3;
     const int MAXG = 1e5 + 3;
     const int MAXQ = 2e5 + 3;
     point P[MAXN];
-
     using edge = tuple<int, int>;
-
     double gety(int a, int b, double x){
         return P[a].y + (x - P[a].x) / (P[b].x - P[a].x) * (P[b].y - P[a].y);
     }
-
     double scanx;
     struct Cmp1{
         bool operator ()(const pair<edge, int> l1, const pair<edge, int> l2) const{
@@ -7184,20 +6816,15 @@ namespace Planer{
             }
         };
     };
-
     vector <pair<edge, int> > E[MAXN];
-    
     vector <int> G[MAXG];
     int L[MAXE], R[MAXE], W[MAXE], n, m, q, o;
     double theta;
-
     int outer;
-
     void rotate(){
         srand(time(0));
         theta = PI * rand() / RAND_MAX;
     }
-
     int add(double x, double y){
         srand(time(0));
         P[++ n] = rotate(vec(x, y), theta);
@@ -7211,7 +6838,6 @@ namespace Planer{
         L[o] = v, R[o] = u, W[o] = w;
         return m;
     }
-
     int I[MAXE];
     int polys;
     pair<edge, int> findleft(int l, int r){
@@ -7253,7 +6879,6 @@ namespace Planer{
                 outer = i;
         }
     }
-
     void dual(){
         Dual :: n = polys;
         Dual :: m = 0;
@@ -7269,15 +6894,11 @@ namespace Planer{
         Dual :: build();
         Dual :: outer = outer;
     }
-
     set <pair<edge, int>, Cmp1> S;
-    
     vector <pair<double, int> > T;
     vector <pair<double, int> > Q;
-
     double X[MAXQ], Y[MAXQ];
     int    Z[MAXQ];
-
     int ask(double x, double y){
         ++ q;
         point p = rotate(vec(x, y), theta);
@@ -7285,7 +6906,6 @@ namespace Planer{
         Y[q] = p.y;
         return q;
     }
-
     void locate(){
         T.clear(), Q.clear(), S.clear();
         for(int i = 1;i <= q;++ i){
@@ -7303,7 +6923,6 @@ namespace Planer{
         }
         sort(T.begin(), T.end());
         sort(Q.begin(), Q.end());
-
         int p1 = 0, p2 = 0;
         scanx = -1e9;
         Cmp1 CMP;
@@ -7341,10 +6960,8 @@ namespace Planer{
         }
     }
 }
-
 const int MAXN = 1e5 + 3;
 int A[MAXN], B[MAXN];
-
 int main(){
 #ifndef ONLINE_JUDGE
     freopen("test.in", "r", stdin);
@@ -7352,7 +6969,6 @@ int main(){
 #endif
     int n, m, q;
     Planer :: rotate();
-
     cin >> n >> m;
     for(int i = 1;i <= n;++ i){
         double x, y;
@@ -7390,37 +7006,29 @@ int main(){
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 int qread();
-
 const double EPS = 1e-9;
 const double PI  = acos(-1);
-
 bool equal(double a, double b){
     return fabs(a - b) < EPS;
 }
-
 int sign(double a){
     if(equal(a, 0))
         return 0;
     return a > 0 ? 1 : -1;
 }
-
 double sqr(double x){
     return x * x;
 }
-
 struct vec{   // 二维向量
     double x;
     double y;
     vec(){}
     vec(double _x, double _y) : x(_x), y(_y){}
 };
-
 vec operator +(const vec &a, const vec &b){
     return vec(a.x + b.x, a.y + b.y);
 }
@@ -7439,22 +7047,18 @@ vec mul(const double &r, const vec &a){
 bool equal(vec a, vec b){
     return equal(a.x, b.x) && equal(a.y, b.y);
 }
-
 using point = vec;
-
 point rotate(point a, double t){
     double c = cos(t);
     double s = sin(t);
     return point(a.x * c - a.y * s, a.y * c + a.x * s);
 }
-
 bool cmpx(point a, point b){
     return sign(a.x - b.x) == -1;
 }
 bool cmpy(point a, point b){
     return sign(a.y - b.y) == -1;
 }
-
 struct line{    // 有向直线
     point o;
     vec p;
@@ -7464,18 +7068,15 @@ struct segm{    // 有向线段
     point a, b;
     segm(point _a, point _b) : a(_a), b(_b){}
 };
-
 int side(line l, point p){
     return sign(mulx(l.p, p - l.o));
 }
 int side(segm s, point p){
     return sign(mulx(s.b - s.a, p - s.a));
 }
-
 bool parallel(line a, line b){
     return equal(0, mulx(a.p, b.p));
 }
-
 double abs(vec a){
     return sqrt(a.x * a.x + a.y * a.y);
 }
@@ -7488,11 +7089,9 @@ double abs(segm s){
 double dis(line a, point p){
     return abs(mulx(p - a.o, a.p)) / abs(a.p);
 }
-
 point intersection(line a, line b){
     return b.o + mul(mulx(b.o - a.o, a.p) / mulx(a.p, b.p), b.p);
 }
-
 bool intersect(double l1, double r1, double l2, double r2){
     if(l1 > r1) swap(l1, r1);
     if(l2 > r2) swap(l2, r2);
@@ -7500,7 +7099,6 @@ bool intersect(double l1, double r1, double l2, double r2){
         return true;
     return !equal(max(r1, r2) - min(l1, l2), r1 - l1 + r2 - l2);
 }
-
 bool intersect(segm s1, segm s2){
     bool fx = intersect(s1.a.x, s1.b.x, s2.a.x, s2.b.x);
     if(!fx) return false;
@@ -7512,20 +7110,16 @@ bool intersect(segm s1, segm s2){
     if(g2) return false;
     return true;
 }
-
 struct circ{  // 二维圆形
     point o;
     double r;
 };
-
 struct poly{  // 二维多边形
     vector <point> P;
 };
-
 double area(point a, point b, point c){
     return abs(mulx(b - a, c - a)) / 2;
 }
-
 double area(const poly &P){
     double ans = 0;
     for(int i = 0;i < P.P.size();++ i){
@@ -7536,7 +7130,6 @@ double area(const poly &P){
     return ans / 2;
 }
 
-
 ```
 # 其他
 
@@ -7545,16 +7138,12 @@ double area(const poly &P){
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 int qread();
-
 const int MAXN = 1e7 + 3;
 int n, L[MAXN], R[MAXN], A[MAXN];
-
 void build(){
     stack <int> S;
     A[n + 1] = -1e9;
@@ -7570,7 +7159,6 @@ void build(){
         S.push(i);
     }
 }
-
 int main(){
     n = qread();
     for(int i = 1;i <= n;++ i)
@@ -7664,16 +7252,13 @@ $$\int_{0}^{+\infty} x^{(a/x) - x}$$
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 double simpson(double (*f)(double), double l, double r){
     double mid = (l + r) / 2;
     return (r - l) * (f(l) + 4 * f(mid) + f(r)) / 6.0;
 }
-
 double adapt_simpson(double (*f)(double), double l, double r, double EPS, int step){
     double mid = (l + r) / 2;
     double w0 = simpson(f, l, r);
@@ -7685,12 +7270,10 @@ double adapt_simpson(double (*f)(double), double l, double r, double EPS, int st
         return adapt_simpson(f, l, mid, EPS, step - 1) + 
                adapt_simpson(f, mid, r, EPS, step - 1);
 }
-
 double a, l, r;
 double fun(double x){
     return pow(x, a / x - x);
 }
-
 int main(){
     cin >> a;
     if(a < 0)
@@ -7711,7 +7294,6 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const double T0 = 2e3, Tk = 1e-14, delta = 0.993, R = 1e-3;
 mt19937 MT(114514);
 double distance(double x, double y, double a, double b){
@@ -7767,10 +7349,8 @@ int main(){
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using u32 = uint32_t;
 using u64 = uint64_t;
-
 u32 xorshift32(u32 &x){
     x ^= x << 13;
     x ^= x >> 17;

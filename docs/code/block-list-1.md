@@ -1,23 +1,18 @@
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 namespace BLOCK{
     const int SIZ = 1e6 + 1e5 + 3;
     const int BSZ = 2000;
-
     list <vector<int> > block;
-
     void build(int n, const int A[]){
         for(int l = 0, r = 0;r != n;){
             l = r;
             r = min(l + BSZ / 2, n);
             vector <int> V0(A + l, A + r);
-
             block.emplace_back(V0);
         }
     }
@@ -51,7 +46,6 @@ namespace BLOCK{
                 if(it -> size() > BSZ){
                     vector <int> V1(it -> begin(), it -> begin() + BSZ / 2);
                     vector <int> V2(it -> begin() + BSZ / 2, it -> end());
-
                     *it = V2;
                     block.insert(it, V1);
                 }
@@ -73,31 +67,22 @@ namespace BLOCK{
         }
     }
 }
-
 int qread();
-
 const int MAXN = 1e5 + 3;
 int A[MAXN];
-
 // ===== TEST =====
-
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-
     int n, m;
-    
     cin >> n >> m;
     for(int i = 1;i <= n;++ i)
         cin >> A[i];
     sort(A + 1, A + 1 + n);
     A[n + 1] = INT_MAX;
-
     BLOCK :: build(n + 1, A + 1);
-
     int last = 0;
     int ans = 0;
-
     for(int i = 1;i <= m;++ i){
         int op;
         cin >> op;

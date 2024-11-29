@@ -3,10 +3,8 @@
 多次询问，每次询问给定奇素数 $p$ 以及 $y$，在 $\mathcal O(\log p)$ 复杂度计算 $x$ 使得 $x^2 \equiv 0 \pmod p$ 或者无解。
 
 ```cpp
-
 #include<bits/stdc++.h>
 using namespace std;
-
 int power(int a, int b, int p){
     int r = 1;
     while(b){
@@ -15,11 +13,9 @@ int power(int a, int b, int p){
     }
     return r;
 }
-
 bool check(int x, int p){
     return power(x, (p - 1) / 2, p) == 1;
 }
-
 struct Node {
     int real, imag;
 };
@@ -36,7 +32,6 @@ Node power(Node a, int b, int p, int v){
     }
     return r;
 }
-
 mt19937 MT;
 void solve(int n, int p, int &x1, int &x2){
     if(n == 0){
@@ -54,15 +49,12 @@ void solve(int n, int p, int &x1, int &x2){
     Node u = { a, 1 };
     x1 = power(u, (p + 1) / 2, p, t).real;
     x2 = (p - x1) % p;
-
     if(x1 > x2)
         swap(x1, x2);
 }
-
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-    
     int T;
     cin >> T;
     while(T --){

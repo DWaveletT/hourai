@@ -1,11 +1,9 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 int qread(){
     int w = 1, c, ret;
     while((c = getchar()) >  '9' || c <  '0') w = (c == '-' ? -1 : 1); ret = c - '0';
@@ -78,12 +76,10 @@ int main(){
         int x = INF;
         if(p <= n) x = min(x, get<0>(P[p]));
         if(q <= n) x = min(x, get<0>(Q[q]));
-
         if(last != -1){
             ans += 1ll * Seg :: query(1) * (x - last);
         }
         last = x;
-
         while(q <= n && get<0>(Q[q]) == x){
             auto [x, l, r] = Q[q]; ++ q;
             l = lower_bound(H + 1, H + 1 + o, l) - H + 1;

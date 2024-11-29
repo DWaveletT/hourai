@@ -1,19 +1,15 @@
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 namespace LeftHeap{
     const int SIZ = 1e5 + 3;
     int W[SIZ], D[SIZ];
     int L[SIZ], R[SIZ];
     int F[SIZ], s;
-
     bool E[SIZ];
-
     int merge(int u, int v){
         if(u == 0 || v == 0)
             return u | v;
@@ -50,14 +46,10 @@ namespace LeftHeap{
         return s;
     }
 }
-
 // ===== TEST =====
-
 int qread();
-
 const int MAXN = 1e5 + 3;
 int A[MAXN], O[MAXN];
-
 int main(){
     int n, m;
     cin >> n >> m;

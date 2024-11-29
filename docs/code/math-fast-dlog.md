@@ -7,7 +7,6 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 int power(int a, int b, int  p){
     int r = 1;
     while(b){
@@ -41,11 +40,9 @@ namespace BSGS {
         return -1;
     }
 }
-
 const int MAXN = 1e5 + 3;
 int H[MAXN], P[MAXN], H0, p, h, g, mod;
 bool V[MAXN];
-
 int solve(int x){
     if(x <= h){
         return H[x];
@@ -57,18 +54,14 @@ int solve(int x){
         return (solve(x - r) - H[v + 1] + mod - 1) % (mod - 1);
     }
 }
-
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-    
     int T;
     cin >> g >> mod;
     h = sqrt(mod) + 1;
-
     BSGS :: init(g, mod, sqrt(1ll * mod * sqrt(mod) / log10(mod)));
     H0 = BSGS :: solve(mod - 1);
-
     H[1] = 0;
     for(int i = 2;i <= h;++ i){
         if(!V[i]){
@@ -83,7 +76,6 @@ int main(){
                 break;
         }
     }
-
     cin >> T;
     while(T --){
         int x, tmp = 0;

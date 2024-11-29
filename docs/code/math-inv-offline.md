@@ -5,7 +5,6 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 int power(int a, int b, int p){
     int r = 1;
     while(b){
@@ -14,15 +13,12 @@ int power(int a, int b, int p){
     }
     return r;
 }
-
 const int MAXN = 5e6 + 3;
 int A[MAXN], B[MAXN];
 int P[MAXN], Q[MAXN];
-
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-
     int n, p, K, S = 1;
     cin >> n >> p >> K;
     P[0] = 1;
@@ -41,7 +37,6 @@ int main(){
         ans = (ans + 1ll * S * B[i]) % p;
     }
     cout << ans << "\n";
-    
     return 0;
 }
 ```

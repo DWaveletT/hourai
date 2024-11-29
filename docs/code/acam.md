@@ -1,16 +1,12 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
-
 const int MOD = 1e9 + 7;
-
 namespace ACAM{
     const int MAXN =1e6 + 3;
     const int MAXM = 26 + 3;
     int C[MAXN][MAXM], o;
-    
     void insert(char *S){
         int p = 0, len = 0;
         for(int i = 0;S[i];++ i){

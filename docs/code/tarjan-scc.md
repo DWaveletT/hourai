@@ -1,13 +1,10 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN= 5e5 + 3;
-
 vector <int> V[MAXN];
 stack  <int> S;
 int D[MAXN], L[MAXN], C[MAXN], o, s;
@@ -32,10 +29,8 @@ void dfs(int u){
         S.pop(), I[u] = false, C[u] = c;
     }
 }
-
 vector <int> ANS[MAXN];
 int main(){
-
     int n, m;
     cin >> n >> m;
     for(int i = 1;i <= m;++ i){

@@ -1,14 +1,11 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN = 600 + 3;
 int MOD;
-
 struct Mat{
     int n, m;
     int W[MAXN][MAXN];
@@ -20,10 +17,8 @@ struct Mat{
                 W[i][j] = 0;
     }
 };
-
 int mat_det(Mat a){
     int ans = 1;
-
     const int &n = a.n;
     for(int i = 1;i <= n;++ i){
         int f = -1;
@@ -60,7 +55,6 @@ int mat_det(Mat a){
         ans = 1ll * ans * a.W[i][i] % MOD;
     return ans;
 }
-
 int main(){
     int n;
     cin >> n >> MOD;

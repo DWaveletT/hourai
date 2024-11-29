@@ -1,11 +1,9 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 namespace Splay{
     const int SIZ = 1e6 + 1e5 + 3;
     int F[SIZ], C[SIZ], S[SIZ], X[SIZ][2], size;

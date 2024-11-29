@@ -1,11 +1,9 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN= 5e5 + 3;
 const int MAXM=  19 + 3;
 vector <int> P[MAXN];
@@ -71,7 +69,6 @@ int main(){
     for(int i = 1;i <= q;++ i){
         int x = (get(s) ^ lastans) % n + 1;
         int k = (get(s) ^ lastans) % D[x];
-        
         if(k == 0){
             lastans = x;
         } else {
@@ -88,7 +85,6 @@ int main(){
             lastans = x;
         }
         realans ^= 1ll * i * lastans;
-        
     }
     printf("%lld\n", realans);
     return 0;

@@ -1,23 +1,17 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 typedef long long i64;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN = 1e5 + 3;
-
 using edge = tuple<int, int, int>;
-
 vector <edge> E[MAXN];
 vector <edge> W;
 vector <int>  C;
-
 edge F[MAXN];
 bool V[MAXN];
 int  I[MAXN], o;
-
 void dfs0(int u, int e){
     V[u] = true;
     I[u] = ++ o;
@@ -39,11 +33,9 @@ void dfs0(int u, int e){
         }
     }
 }
-
 namespace Problem2{
 // ===== 删除环上第 i 条边，求直径 =====
     i64 H[MAXN], A1[MAXN], B1[MAXN], A2[MAXN], B2[MAXN], A3[MAXN], B3[MAXN];
-    
     i64 L[MAXN];
     i64 dis = 0;
     void dfs1(int u, int e){
@@ -107,7 +99,6 @@ namespace Problem2{
             t = min(t, d);
         }
         t = min(t, max(A3[r], dis));
-
         if(t % 2 == 0)
             cout << t / 2 << ".0" << endl;
         if(t % 2 == 1)
@@ -115,10 +106,8 @@ namespace Problem2{
         return 0;
     }
 }
-
 namespace Problem3{
 // ===== 求最大点权独立集 =====
-
     int A[MAXN];
     i64 X[MAXN], Y[MAXN];
     i64 P[MAXN][2], Q[MAXN][2];
@@ -132,7 +121,6 @@ namespace Problem3{
         }
         X[u] += A[u];
     }
-
     int main(){
         int n;
         cin >> n;
@@ -172,7 +160,6 @@ namespace Problem3{
         return 0;
     }
 }
-
 int main(){
     return Problem3 :: main();
 }

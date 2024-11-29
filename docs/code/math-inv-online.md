@@ -5,30 +5,24 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MAXN = 1e7 + 3;
 pair<int, int> F[MAXN], G[MAXN];
 int I[MAXN];
-
 using u32 = uint32_t;
-
 u32 read(u32 &seed){
     seed ^= seed << 13;
     seed ^= seed >> 17;
     seed ^= seed << 5;
     return seed;
 }
-
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-
     u32 seed;
     int n, p;
     cin >> n >> p >> seed;
     int m = pow(p, 1.0 / 3.0);
     I[1] = 1;
-
     for(int i = 2;i <= p / m;++ i){
         I[i] = 1ll * (p / i) * (p - I[p % i]) % p;
     }
@@ -42,12 +36,10 @@ int main(){
     }
     F[    0] = G[    0] = { 0, 1 };
     F[m * m] = G[m * m] = { 1, 1 };
-
     for(int i = 1;i <      m * m;++ i) if(!F[i].second)
         F[i] = F[i - 1];
     for(int i = m * m - 1;i >= 1;-- i) if(!G[i].second)
         G[i] = G[i + 1];
-    
     int lastans = 0;
     for(int i = 1;i <= n;++ i){
         int a, inv;

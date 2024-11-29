@@ -1,15 +1,11 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN= 1e5 + 3;
-
 int MOD;
-
 int n, m, root;
 int A[MAXN];
 int qread();
@@ -37,7 +33,6 @@ void dfs2(int u, int f){
     }
     R[u] = cnt;
 }
-
 namespace Seg{
     #define lc(t) (t << 1)
     #define rc(t) (t << 1 | 1)

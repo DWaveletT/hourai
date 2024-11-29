@@ -11,17 +11,14 @@
 - 注意补回 $f(1)$。
 
 ```cpp
-
 // 预处理，$1$ 所在的块也算进去了
 namespace init {
 	ll init_n, sqrt_n;
 	vector<ll> np, p, id1, id2, val;
 	ll cnt;
-
 	void main(ll n) {
 		init_n = n, sqrt_n = sqrt(n);
 		ll M = sqrt_n * 2; // 筛出一个 > floor(sqrt(n)) 的质数, 避免后续讨论边界
-		
 		np.resize(M + 1), p.resize(M + 1);
 		for (ll i = 2; i <= M; ++i) {
 			if (!np[i]) p[++p[0]] = i;
@@ -32,7 +29,6 @@ namespace init {
 			}
 		}
 		p[0] = 1;
-
 		id1.resize(sqrt_n + 1), id2.resize(sqrt_n + 1);
 		val.resize(1);
 		for (ll l = 1, r, v; l <= n; l = r + 1) {
@@ -42,14 +38,12 @@ namespace init {
 			val.emplace_back(v);
 		}
 	}
-
 	ll id(ll n) {
 		if (n <= sqrt_n) return id1[n];
 		else return id2[init_n / n];
 	}
 }
 using namespace init;
-
 // 计算 $G_k$，两个参数分别是 $g$ 从 $2$ 开始的前缀和和 $g$
 auto calcG = [&] (auto&& sum, auto&& g) -> vector<ll> {
 	vector<ll> G(cnt + 1);
@@ -66,7 +60,6 @@ auto calcG = [&] (auto&& sum, auto&& g) -> vector<ll> {
 	for (int i = 1; i <= cnt; ++i) G[i] = (G[i] % MD + MD) % MD;
 	return G;
 };
-
 // 计算 $F_k$，直接搜，不用记忆化。`fp` 是 $F_{\text{prime}}$，`pc` 是 $p^c$，其中 `f(p[h] ^ c)` 要替换掉。
 function<ll(ll, int)> calcF = [&] (ll m, int k) {
 	if (p[k] > m) return 0;

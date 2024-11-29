@@ -1,15 +1,11 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN = 100 + 3;
-
 const double EPS = 1e-9;
-
 struct Mat{
     int n, m;
     double W[MAXN][MAXN];
@@ -21,11 +17,9 @@ struct Mat{
                 W[i][j] = 0;
     }
 };
-
 bool zero(double f){
     return fabs(f) < EPS;
 }
-
 int mat_rank(Mat &a){
     const int &n = a.n;
     const int &m = a.m;
@@ -55,9 +49,7 @@ int mat_rank(Mat &a){
     }
     return cnt;
 }
-
 double X[MAXN];
-
 int main(){
     int n;
     cin >> n;
@@ -89,7 +81,6 @@ int main(){
         for(int i = 1;i <= n;++ i)
             cout << "x" << i << "=" << fixed << setprecision(2) << X[i] << endl;
     }
-
     return 0;
 }
 ```

@@ -5,13 +5,11 @@ $n$ 个变量 $m$ 个条件，形如若 $x_i = a$ 则 $y_j = b$，找到任意�
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
 namespace SCC{
     const int MAXN= 2e6 + 3;
-
     vector <int> V[MAXN];
     stack  <int> S;
     int D[MAXN], L[MAXN], C[MAXN], o, s;
@@ -43,7 +41,6 @@ int main(){
     ios :: sync_with_stdio(false);
     int n, m;
     cin >> n >> m;
-    
     for(int i = 1;i <= n;++ i)
         X[i][0] = ++ o;
     for(int i = 1;i <= n;++ i)

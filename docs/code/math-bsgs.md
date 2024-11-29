@@ -5,7 +5,6 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 int power(int a, int b, int  p){
     int r = 1;
     while(b){
@@ -34,11 +33,9 @@ namespace BSGS {
         return -1;
     }
 }
-
 int main(){
     int p, b, n;
     cin >> p >> b >> n;
-
     int ans = BSGS :: solve(b, n, p);
     if(ans == -1){
         cout << "no solution\n";

@@ -2,7 +2,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long i64;
-
 const int INF = 2e9;
 const int MAXN= 5e5 + 3;
 int A[MAXN];

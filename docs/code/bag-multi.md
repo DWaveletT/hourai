@@ -3,19 +3,14 @@
 $n$ 个物品，$m$ 容量背包，第 $i$ 个物品重量为 $w_i$ 价值为 $v_i$ 共有 $c_i$ 个，计算不超过容量的情况下最多拿多少价值的物品。
 
 ```cpp
-
 #include <bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 int qread();
 const int MAXN = 4e4 + 3;
-
 int F[MAXN];
-
 int main(){
     int n, m;
     cin >> n >> m;

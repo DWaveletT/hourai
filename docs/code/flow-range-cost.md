@@ -7,11 +7,9 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  = 1e9;
 const i64 INFL = 1e18;
-
 namespace MCMF{
     const int MAXN = 1e5 + 3;
     const int MAXM = 2e5 + 3;
@@ -125,12 +123,9 @@ namespace MCMF{
         return res.second + cost0;
     }
 }
-
 // ===== TEST =====
-
 int qread();
 int main(){
-    
     return 0;
 }
 ```

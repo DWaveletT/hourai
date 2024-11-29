@@ -18,7 +18,7 @@ const i64 INFL = 1e18;
 
 const int MOD = 998244353;
 
-namespace Solve1{   // and 卷积
+namespace Solve1{   // or 卷积
     void FWT(int n, int *A){
         for(int l = 1 << n, u = 2, v = 1;u <= l;u <<= 1, v <<= 1)
             for(int j = 0;j < l;j += u)
@@ -32,7 +32,7 @@ namespace Solve1{   // and 卷积
                     A[j + v + k] = (A[j + v + k] - A[j + k] + MOD) % MOD;
     }
 }
-namespace Solve2{   // or  卷积
+namespace Solve2{   // and 卷积
     void FWT(int n, int *A){
         for(int l = 1 << n, u = 2, v = 1;u <= l;u <<= 1, v <<= 1)
             for(int j = 0;j < l;j += u)

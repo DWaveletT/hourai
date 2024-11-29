@@ -10,13 +10,10 @@
 #define up(l, r, i) for(int i = l, END##i = r;i <= END##i;++ i)
 #define dn(r, l, i) for(int i = r, END##i = l;i >= END##i;-- i)
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MOD = 998244353;
-
 int power(int a, int b){
     int r = 1;
     while(b){
@@ -25,11 +22,9 @@ int power(int a, int b){
     }
     return r;
 }
-
 int inv(int x){
     return power(x, MOD - 2);
 }
-
 const int MAX_ = (1 << 19) + 3;
 struct cplx{
     double a, b; cplx(double _a = 0, double _b = 0) :a(_a), b(_b){}
@@ -38,7 +33,6 @@ struct cplx{
     cplx operator *(cplx t){ return cplx(a * t.a - b * t.b, a * t.b + b * t.a); }
     cplx operator *(int t) { return cplx(a * t, b * t); }
 };
-
 const long double pi = acos(-1);
 namespace Poly{
     void FFT(int n, cplx Z[]){

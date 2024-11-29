@@ -2,7 +2,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long i64;
-
 namespace LinkCutTree{
     const int SIZ = 1e5 + 3;
     int F[SIZ], C[SIZ], S[SIZ], W[SIZ], A[SIZ], X[SIZ][2], size;

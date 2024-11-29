@@ -5,7 +5,6 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const double T0 = 2e3, Tk = 1e-14, delta = 0.993, R = 1e-3;
 mt19937 MT(114514);
 double distance(double x, double y, double a, double b){

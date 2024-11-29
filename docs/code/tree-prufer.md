@@ -5,7 +5,6 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MAXN = 5e6 + 3;
 int D[MAXN], F[MAXN], P[MAXN];
 vector<int> tree2prufer(int n){
@@ -28,14 +27,11 @@ vector<int> prufer2tree(int n){
     }
     return F;
 }
-
 int main(){
     ios :: sync_with_stdio(false);
     cin.tie(nullptr);
-
     int n, m;
     cin >> n >> m;
-
     vector <int> ANS;
     if(m == 1){     // tree -> prufer
         for(int i = 1;i <= n - 1;++ i){

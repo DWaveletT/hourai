@@ -5,7 +5,6 @@
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
-
 int qread();
 namespace Dinic{
     const long long INF = 1e18;
@@ -72,7 +71,6 @@ namespace Dinic{
         return ans;
     }
 }
-
 namespace GHTree{
     const int MAXN =  500 + 5;
     const int MAXM = 1500 + 5;
@@ -100,7 +98,6 @@ namespace GHTree{
         int w = Dinic :: dinic(s, t);
         E[s].push_back(make_pair(t, w));
         E[t].push_back(make_pair(s, w));
-        
         vector <int> P;
         vector <int> Q;
         for(auto &u : N){

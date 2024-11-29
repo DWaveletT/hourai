@@ -7,12 +7,10 @@
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
-
 int qread();
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 namespace MCMF{
     const int MAXN = 1e5 + 3;
     const int MAXM = 2e5 + 3;
@@ -118,22 +116,16 @@ namespace MCMF{
         return mcmf(s0, t0);
     }
 }
-
 const int MAXN = 1e3 + 3;
 const int MAXM = 365 + 3;
-
 int G[MAXN], A[MAXN], B[MAXM];
-
 int main(){
 	ios :: sync_with_stdio(false);
 	cin.tie(nullptr);
-
 	int n, m, o = 0;
 	while(cin >> n >> m){
-
 		int s = ++ o;
 		int t = ++ o;
-
 		for(int i = 1;i <= m;++ i){
 			cin >> G[i];
 			A[i] = ++ o;
@@ -141,12 +133,9 @@ int main(){
 		}
 		for(int i = 1;i <= n;++ i){
 			B[i] = ++ o;
-
 			int c, d;
 			cin >> c >> d;
-
 			MCMF :: add(s, B[i], 0, d);
-
 			for(int j = 1;j <= c;++ j){
 				int t, l, r;
 				cin >> t >> l >> r;
@@ -155,10 +144,8 @@ int main(){
 			}
 		}
 		cout << MCMF :: solve(s, t) << "\n\n";
-
 		MCMF :: clear();
 	}
-	
 	return 0;
 }
 

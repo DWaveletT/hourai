@@ -6,11 +6,9 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 i64 step(i64 a, i64 c, i64 m){
     return ((__int128)a * a + c) % m;
 }
@@ -77,9 +75,7 @@ basic_string<i64> rho(i64 n){
         x1 = x2;
     }
 }
-
 // ===== TEST =====
-
 int main(){
     int T;
     cin >> T;

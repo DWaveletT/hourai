@@ -56,10 +56,14 @@ def make_file(layer: int, raw_path: str, filename: str):
         out.extend(lines[1:p]), out.append('\n')
     
     out.append('```cpp\n')
-    out.extend(lines[p + 1:])
+    for line in lines[p + 1:]:
+        if line.split():
+            out.extend(line)
     out.append('\n```\n')
     all.append('```cpp\n')
-    all.extend(lines[p + 1:])
+    for line in lines[p + 1:]:
+        if line.split():
+            all.extend(line)
     all.append('\n```\n')
 
     with open(out_path, 'w', encoding='utf-8') as f:

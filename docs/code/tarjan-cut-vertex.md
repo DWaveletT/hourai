@@ -1,11 +1,9 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MAXN= 2e4 + 3;
 const int MAXM= 1e5 + 3;
 vector<int> V[MAXN];
-
 int n, m, o, D[MAXN], L[MAXN];
 bool F[MAXN], C[MAXN];
 void dfs(int u, int g){

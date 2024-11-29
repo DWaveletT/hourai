@@ -11,7 +11,6 @@ $$
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MAXN = 2e3 + 3;
 const int MOD  = 998244353;
 int X[MAXN], Y[MAXN], F[MAXN], G[MAXN], H[MAXN], A[MAXN];
@@ -23,7 +22,6 @@ int power(int a, int b){
     }
     return r;
 }
-
 int main(){
     int n, k;
     cin >> n >> k;

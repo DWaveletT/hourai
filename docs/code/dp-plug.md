@@ -7,14 +7,11 @@
 #define up(l, r, i) for(int i = l, END##i = r;i <= END##i;++ i)
 #define dn(r, l, i) for(int i = r, END##i = l;i >= END##i;-- i)
 using namespace std;
-
 using i64 = long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
-
 const int MAXN = 20 + 3;
 const int MAXM = 67108864 + 3;
-
 namespace HashT{
     const int SIZ = 19999997;
     int H[SIZ], V[SIZ], N[SIZ], t;

@@ -1,10 +1,8 @@
 ```cpp
 #include<bits/stdc++.h>
 using namespace std;
-
 const int MAXN = 5e5 + 3;
 vector<pair<int, int> > E[MAXN];
-
 namespace LCA{
     const int SIZ = 5e5 + 3;
     int D[SIZ], H[SIZ], F[SIZ];
@@ -53,16 +51,12 @@ namespace LCA{
         return H[a] + H[b] - 2 * H[lca(a, b)];
     }
 }
-
 bool cmp(int a, int b){
     return LCA :: P[a] < LCA :: P[b];
 }
-
 bool I[MAXN];
-
 vector <int> E1[MAXN];
 vector <int> V1;
-
 void solve(vector <int> &V){
     using LCA :: lca;
     using LCA :: D;
@@ -92,9 +86,7 @@ void solve(vector <int> &V){
             E1[v].push_back(l);
         V1.push_back(l = v), S.pop();
     }
-
     // dfs(1, 0); // SOLVE HERE !!!
-
     for(auto &u : V1)
         E1[u].clear(), I[u] = false;
     V1.clear();
