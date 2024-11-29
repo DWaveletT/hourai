@@ -3425,31 +3425,7 @@
 <span class="normal">289</span>
 <span class="normal">290</span>
 <span class="normal">291</span>
-<span class="normal">292</span>
-<span class="normal">293</span>
-<span class="normal">294</span>
-<span class="normal">295</span>
-<span class="normal">296</span>
-<span class="normal">297</span>
-<span class="normal">298</span>
-<span class="normal">299</span>
-<span class="normal">300</span>
-<span class="normal">301</span>
-<span class="normal">302</span>
-<span class="normal">303</span>
-<span class="normal">304</span>
-<span class="normal">305</span>
-<span class="normal">306</span>
-<span class="normal">307</span>
-<span class="normal">308</span>
-<span class="normal">309</span>
-<span class="normal">310</span>
-<span class="normal">311</span>
-<span class="normal">312</span>
-<span class="normal">313</span>
-<span class="normal">314</span>
-<span class="normal">315</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;2d.cpp&quot;</span>
-
+<span class="normal">292</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;2d.cpp&quot;</span>
 <span class="k">namespace</span><span class="w"> </span><span class="nn">DSU</span><span class="p">{</span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAXN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">F</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
@@ -3457,7 +3433,6 @@
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">F</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">F</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getfa</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="n">u</span><span class="p">]);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
-
 <span class="k">namespace</span><span class="w"> </span><span class="nn">Dual</span><span class="p">{</span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAXN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAXM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
@@ -3466,7 +3441,6 @@
 <span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="nf">cmp</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">){</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">W</span><span class="p">[</span><span class="n">a</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">W</span><span class="p">[</span><span class="n">b</span><span class="p">];</span>
 <span class="w">    </span><span class="p">}</span>
-
 <span class="w">    </span><span class="n">vector</span><span class="w"> </span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">E</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAXT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">F</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="n">MAXT</span><span class="p">],</span><span class="w"> </span><span class="n">G</span><span class="p">[</span><span class="n">MAXN</span><span class="p">][</span><span class="n">MAXT</span><span class="p">],</span><span class="w"> </span><span class="n">D</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
@@ -3524,20 +3498,16 @@
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ans</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
-
 <span class="k">namespace</span><span class="w"> </span><span class="nn">Planer</span><span class="p">{</span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAXN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAXE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2e5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAXG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAXQ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2e5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="w">    </span><span class="n">point</span><span class="w"> </span><span class="n">P</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-
 <span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">edge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tuple</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="p">;</span>
-
 <span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="nf">gety</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">){</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">P</span><span class="p">[</span><span class="n">a</span><span class="p">].</span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">P</span><span class="p">[</span><span class="n">a</span><span class="p">].</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">b</span><span class="p">].</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">P</span><span class="p">[</span><span class="n">a</span><span class="p">].</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">b</span><span class="p">].</span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">P</span><span class="p">[</span><span class="n">a</span><span class="p">].</span><span class="n">y</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
-
 <span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">scanx</span><span class="p">;</span>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Cmp1</span><span class="p">{</span>
 <span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="nf">operator</span><span class="w"> </span><span class="p">()(</span><span class="k">const</span><span class="w"> </span><span class="n">pair</span><span class="o">&lt;</span><span class="n">edge</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">l1</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">pair</span><span class="o">&lt;</span><span class="n">edge</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">l2</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">{</span>
@@ -3563,20 +3533,15 @@
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">};</span>
 <span class="w">    </span><span class="p">};</span>
-
 <span class="w">    </span><span class="n">vector</span><span class="w"> </span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">edge</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">E</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-
 <span class="w">    </span><span class="n">vector</span><span class="w"> </span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">G</span><span class="p">[</span><span class="n">MAXG</span><span class="p">];</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">L</span><span class="p">[</span><span class="n">MAXE</span><span class="p">],</span><span class="w"> </span><span class="n">R</span><span class="p">[</span><span class="n">MAXE</span><span class="p">],</span><span class="w"> </span><span class="n">W</span><span class="p">[</span><span class="n">MAXE</span><span class="p">],</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="n">o</span><span class="p">;</span>
 <span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">theta</span><span class="p">;</span>
-
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">outer</span><span class="p">;</span>
-
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">rotate</span><span class="p">(){</span>
 <span class="w">        </span><span class="n">srand</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
 <span class="w">        </span><span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PI</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">RAND_MAX</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
-
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">){</span>
 <span class="w">        </span><span class="n">srand</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
 <span class="w">        </span><span class="n">P</span><span class="p">[</span><span class="o">++</span><span class="w"> </span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rotate</span><span class="p">(</span><span class="n">vec</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="n">theta</span><span class="p">);</span>
@@ -3590,7 +3555,6 @@
 <span class="w">        </span><span class="n">L</span><span class="p">[</span><span class="n">o</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">[</span><span class="n">o</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">W</span><span class="p">[</span><span class="n">o</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">w</span><span class="p">;</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
-
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">I</span><span class="p">[</span><span class="n">MAXE</span><span class="p">];</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">polys</span><span class="p">;</span>
 <span class="w">    </span><span class="n">pair</span><span class="o">&lt;</span><span class="n">edge</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">findleft</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">r</span><span class="p">){</span>
@@ -3632,7 +3596,6 @@
 <span class="w">                </span><span class="n">outer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
-
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">dual</span><span class="p">(){</span>
 <span class="w">        </span><span class="n">Dual</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">polys</span><span class="p">;</span>
 <span class="w">        </span><span class="n">Dual</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
@@ -3648,15 +3611,11 @@
 <span class="w">        </span><span class="n">Dual</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">build</span><span class="p">();</span>
 <span class="w">        </span><span class="n">Dual</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">outer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">outer</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
-
 <span class="w">    </span><span class="n">set</span><span class="w"> </span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="n">edge</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">Cmp1</span><span class="o">&gt;</span><span class="w"> </span><span class="n">S</span><span class="p">;</span>
-
 <span class="w">    </span><span class="n">vector</span><span class="w"> </span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">T</span><span class="p">;</span>
 <span class="w">    </span><span class="n">vector</span><span class="w"> </span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">Q</span><span class="p">;</span>
-
 <span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">X</span><span class="p">[</span><span class="n">MAXQ</span><span class="p">],</span><span class="w"> </span><span class="n">Y</span><span class="p">[</span><span class="n">MAXQ</span><span class="p">];</span>
 <span class="w">    </span><span class="kt">int</span><span class="w">    </span><span class="n">Z</span><span class="p">[</span><span class="n">MAXQ</span><span class="p">];</span>
-
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="nf">ask</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">y</span><span class="p">){</span>
 <span class="w">        </span><span class="o">++</span><span class="w"> </span><span class="n">q</span><span class="p">;</span>
 <span class="w">        </span><span class="n">point</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rotate</span><span class="p">(</span><span class="n">vec</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="n">theta</span><span class="p">);</span>
@@ -3664,7 +3623,6 @@
 <span class="w">        </span><span class="n">Y</span><span class="p">[</span><span class="n">q</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">q</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
-
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">locate</span><span class="p">(){</span>
 <span class="w">        </span><span class="n">T</span><span class="p">.</span><span class="n">clear</span><span class="p">(),</span><span class="w"> </span><span class="n">Q</span><span class="p">.</span><span class="n">clear</span><span class="p">(),</span><span class="w"> </span><span class="n">S</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
 <span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">q</span><span class="p">;</span><span class="o">++</span><span class="w"> </span><span class="n">i</span><span class="p">){</span>
@@ -3682,7 +3640,6 @@
 <span class="w">        </span><span class="p">}</span>
 <span class="w">        </span><span class="n">sort</span><span class="p">(</span><span class="n">T</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">T</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
 <span class="w">        </span><span class="n">sort</span><span class="p">(</span><span class="n">Q</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">Q</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
-
 <span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">        </span><span class="n">scanx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">-1e9</span><span class="p">;</span>
 <span class="w">        </span><span class="n">Cmp1</span><span class="w"> </span><span class="n">CMP</span><span class="p">;</span>
@@ -3720,10 +3677,8 @@
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
-
 <span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">MAXN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e5</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="kt">int</span><span class="w"> </span><span class="n">A</span><span class="p">[</span><span class="n">MAXN</span><span class="p">],</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
-
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
 <span class="cp">#ifndef ONLINE_JUDGE</span>
 <span class="w">    </span><span class="n">freopen</span><span class="p">(</span><span class="s">&quot;test.in&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;r&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">stdin</span><span class="p">);</span>
@@ -3731,7 +3686,6 @@
 <span class="cp">#endif</span>
 <span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">;</span>
 <span class="w">    </span><span class="n">Planer</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">rotate</span><span class="p">();</span>
-
 <span class="w">    </span><span class="n">cin</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">m</span><span class="p">;</span>
 <span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="o">++</span><span class="w"> </span><span class="n">i</span><span class="p">){</span>
 <span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
