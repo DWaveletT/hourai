@@ -1,7 +1,7 @@
 /**
 ## 用法
 
-调用 init 计算出 $S$ 和 $X$，得到计算 $x \bmod P = (x\times X) / 2^{60} + S$。
+调用 init 计算出 $S$ 和 $X$，得到计算 $\lfloor x / P \rfloor = (x\times X) / 2^{60 + S}$。从而计算 $x \bmod P = x - P \times \lfloor x / P \rfloor$。
 **/
 #include<bits/stdc++.h>
 using namespace std;
