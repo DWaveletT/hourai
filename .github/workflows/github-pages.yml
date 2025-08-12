@@ -11,33 +11,29 @@ permissions:
   id-token: write
 
 jobs:
-  # 构建网页
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 缓存 apt 包
+      - name: Create TeX Live deps file
+        run: |
+          echo "texlive-latex-base texlive-latex-recommended texlive-xetex texlive-lang-chinese texlive-fonts-recommended texlive-science lmodern latexmk pandoc" > scripts/texlive-deps.txt
+
       - name: Cache apt packages
         uses: actions/cache@v4
         with:
           path: |
             /var/cache/apt/archives
-            /var/lib/apt/lists/*
-          key: ${{ runner.os }}-apt-${{ hashFiles('**/scripts/texlive-deps.txt') }}
+            /var/lib/apt/lists
+          key: ${{ runner.os }}-apt-${{ hashFiles('scripts/texlive-deps.txt') }}
           restore-keys: |
             ${{ runner.os }}-apt-
-
-      # 创建 TeX Live 依赖文件
-      - name: Create TeX Live deps file
-        run: |
-          echo "texlive-latex-base texlive-latex-recommended texlive-xetex texlive-lang-chinese texlive-fonts-recommended texlive-science lmodern latexmk pandoc" > scripts/texlive-deps.txt
 
       - name: Update apt
         run: sudo apt-get update
 
-      # 安装最小 TeX Live
       - name: Install TeX Live (minimal)
         run: |
           sudo apt-get install -y \
@@ -51,56 +47,60 @@ jobs:
             latexmk \
             pandoc
 
-      # 缓存 TeX Live 用户配置
+      # 获取当前 TeX Live 版本号
+      - name: Detect TeX Live version
+        id: detect-texlive
+        run: |
+          YEAR=$(tlmgr --version 2>/dev/null | grep -oE '[0-9]{4}' | head -n 1 || date +%Y)
+          echo "TL_YEAR=$YEAR" >> $GITHUB_ENV
+          echo "Detected TeX Live version: $YEAR"
+
+      # 缓存 TeX Live 用户数据
       - name: Cache TeX Live user data
         uses: actions/cache@v4
         with:
           path: |
-            ~/.texlive*
-            /usr/local/texlive/*
-            /var/lib/texmf/*
-          key: ${{ runner.os }}-texlive-user-${{ hashFiles('**/scripts/texlive-deps.txt') }}
+            ~/.texlive${{ env.TL_YEAR }}
+            /usr/local/texlive
+            /var/lib/texmf
+          key: ${{ runner.os }}-texlive-${{ env.TL_YEAR }}-${{ hashFiles('scripts/texlive-deps.txt') }}
           restore-keys: |
-            ${{ runner.os }}-texlive-user-
+            ${{ runner.os }}-texlive-${{ env.TL_YEAR }}-
 
-      # 安装 Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
           cache: 'pipenv'
 
-      # 下载 Mkdocs 以及相关依赖
       - name: Set up Mkdocs
         run: |
           pip install pipenv
           pipenv install
-        
-      # 调用 Python 脚本构建 MD
+
       - name: Build Markdown
         run: pipenv run python scripts/build_docs.py
 
-      # 调用 Python 脚本构建 PDF
       - name: Build PDF
         run: pipenv run python scripts/build_print.py
 
-      # 使用 MkDocs 构建网站
       - name: Build Web
-        run: pipenv run mkdocs build
+        run: |
+          pipenv run mkdocs build
+          ls -R ./site
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./site  # 上传构建后的文件
+          path: ./site
 
-  # 部署网页
   deploy:
     needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v3
+        id: deploy
+        uses: actions/deploy-pages@v4
