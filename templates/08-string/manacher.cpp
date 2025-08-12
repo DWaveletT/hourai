@@ -1,5 +1,4 @@
 #include "../header.cpp"
-const int MAXN= 2.2e7 + 11;
 char S[MAXN], T[MAXN]; int n, R[MAXN];
 int main(){
   scanf("%s", S + 1);

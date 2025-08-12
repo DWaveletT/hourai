@@ -16,11 +16,8 @@ int K[MAXN], H[MAXN];
 int qread();
 int n, m, D[MAXM];
 namespace BIT{
-  void increase(int x, int w){
+  void modify(int x, int w){
     while(x <= m) D[x] += w, x += x & -x;
-  }
-  void decrease(int x, int w){
-    while(x <= m) D[x] -= w, x += x & -x;
   }
   void query(int x, int &r){
     while(x) r += D[x], x -= x & -x;
@@ -32,13 +29,13 @@ void cdq(int l, int r){
     int p = l, q = t + 1, u = l;
     while(p <= t && q <= r){
       if(A[p].b <= A[q].b)
-        BIT :: increase(A[p].c, 1), B[u ++] = A[p ++];
-       else
+        BIT :: modify(A[p].c, 1), B[u ++] = A[p ++];
+      else
         BIT :: query(A[q].c, K[A[q].id]), B[u ++] = A[q ++];
     }
-    while(p <= t) BIT :: increase(A[p].c, 1),     B[u ++] = A[p ++];
+    while(p <= t) BIT :: modify(A[p].c, 1), B[u ++] = A[p ++];
     while(q <= r) BIT :: query(A[q].c, K[A[q].id]), B[u ++] = A[q ++];
-    up(l, t, i) BIT :: decrease(A[i].c, 1);
+    up(l, t, i) BIT :: modify(A[i].c, -1);
     up(l, r, i) A[i] = B[i];
   }
 }

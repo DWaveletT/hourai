@@ -1,12 +1,10 @@
 #include "../header.cpp"
 namespace SAM{
-  const int SIZ = 2e6 + 3;
-  int M[SIZ][MAXM];
-  int L[SIZ], F[SIZ], S[SIZ];
-  int s = 0, h = 25;
+  int M[MAXN][MAXM], L[MAXN], F[MAXN], S[MAXN], s = 0, h = 25;
   void init(){
     F[0] = -1, s = 0;
   }
+  // 每次插入新字符串前将 last 清零
   void extend(int &last, char c){
     int e = c - 'a';
     if(M[last][e]){
@@ -51,11 +49,4 @@ namespace SAM{
       last = cur;
     }
   }
-  void solve(){
-    i64 ans = 0;
-    for(int i = 1;i <= s;++ i)
-      ans += L[i] - L[F[i]];
-    cout << ans << endl;
-  }
 }
-// 每次插入新字符串前将 last 清零

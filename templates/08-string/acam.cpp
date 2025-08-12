@@ -15,9 +15,8 @@ namespace ACAM{
     while(!Q.empty()){
       int u = Q.front(); Q.pop();
       for(int i = 0;i < 26;++ i){
-        int v = C[u][i];
+        int p = F[u], v = C[u][i];
         if(v == 0) continue;
-        int p = F[u];
         while(!C[p][i] && p != 0) p = F[p];
         if(C[p][i] && C[p][i] != v)
           F[v] = C[p][i];

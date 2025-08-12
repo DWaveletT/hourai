@@ -1,9 +1,6 @@
 #include "../header.cpp"
 namespace SAM{
-  const int SIZ = 2e6 + 3;
-  int M[SIZ][MAXM];
-  int L[SIZ], F[SIZ], S[SIZ];
-  int last = 0, s = 0, h = 25;
+  int M[MAXN][MAXM], L[MAXN], F[MAXN], S[MAXN], last = 0, s = 0, h = 25;
   void init(){
     F[0] = -1, last = s = 0;
   }
@@ -33,19 +30,5 @@ namespace SAM{
       }
     }
     last = cur;
-  }
-  vector <int> E[SIZ];
-  void build(){
-    for(int i = 1;i <= s;++ i){
-      E[F[i]].push_back(i);
-    }
-  }
-  i64 ans = 0;
-  void dfs(int u){
-    for(auto &v : E[u]){
-      dfs(v), S[u] += S[v];
-    }
-    if(S[u] > 1)
-      ans = max(ans, 1ll * S[u] * L[u]);
   }
 }

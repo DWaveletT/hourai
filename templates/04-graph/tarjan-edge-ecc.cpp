@@ -2,15 +2,14 @@
 vector <vector<int>> A;
 vector <pair<int, int>> V[MAXN];
 stack  <int> S;
-int D[MAXN], L[MAXN], o;
-bool I[MAXN];
+int D[MAXN], L[MAXN], o; bool I[MAXN];
 void dfs(int u, int l){
   D[u] = L[u] = ++ o; I[u] = true, S.push(u); int s = 0;
   for(auto &p : V[u]) {
     int v = p.first, id = p.second;
     if(id != l){
       if(D[v]){
-        if(I[v])  L[u] = min(L[u], D[v]);
+        if(I[v])    L[u] = min(L[u], D[v]);
       } else {
         dfs(v, id), L[u] = min(L[u], L[v]), ++ s;
       }

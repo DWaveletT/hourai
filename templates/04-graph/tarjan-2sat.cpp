@@ -3,35 +3,8 @@
 
 $n$ 个变量 $m$ 个条件，形如若 $x_i = a$ 则 $y_j = b$，找到任意一组可行解或者报告无解。
 **/
-#include "../header.cpp"
-namespace SCC{
-  const int MAXN= 2e6 + 3;
+#include "tarjan-scc.cpp"
 
-  vector <int> V[MAXN];
-  stack  <int> S;
-  int D[MAXN], L[MAXN], C[MAXN], o, s;
-  bool F[MAXN], I[MAXN];
-  void add(int u, int v){ V[u].push_back(v); }
-  void dfs(int u){
-    L[u] = D[u] = ++ o, S.push(u), I[u] = F[u] = true;
-    for(auto &v : V[u]){
-      if(F[v]){
-        if(I[v]) L[u] = min(L[u], D[v]);
-      } else {
-        dfs(v),  L[u] = min(L[u], L[v]);
-      }
-    }
-    if(L[u] == D[u]){
-      int c = ++ s;
-      while(S.top() != u){
-        int v = S.top(); S.pop();
-        I[v] = false;
-        C[v] = c;
-      }
-      S.pop(), I[u] = false, C[u] = c;
-    }
-  }
-}
 const int MAXN = 1e6 + 3;
 int X[MAXN][2], o;
 int main(){
@@ -40,9 +13,7 @@ int main(){
   cin >> n >> m;
   
   for(int i = 1;i <= n;++ i)
-    X[i][0] = ++ o;
-  for(int i = 1;i <= n;++ i)
-    X[i][1] = ++ o;
+    X[i][0] = ++ o, X[i][1] = ++ o;
   for(int i = 1;i <= m;++ i){
     int a, x, b, y;
     cin >> a >> x >> b >> y;
@@ -62,10 +33,7 @@ int main(){
     for(int i = 1;i <= n;++ i){
       int a = SCC :: C[X[i][0]];
       int b = SCC :: C[X[i][1]];
-      if(a < b)
-        cout << 0 << " ";
-      else 
-        cout << 1 << " ";
+      cout << (a >= b) << " ";
     }
     cout << endl;
   } else {

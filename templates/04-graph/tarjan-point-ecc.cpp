@@ -22,7 +22,6 @@ void dfs(int u, int f){
       }
     }
   }
-  if(f == 0 && s == 0){
-    A.push_back({u});
-  }
+  if(f == 0 && s == 0)
+    A.push_back({u}); // 孤立点特判
 }

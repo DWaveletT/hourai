@@ -1,12 +1,8 @@
 #include "../header.cpp"
 namespace SAM{
   const int SIZ = 2e6 + 3;
-  int M[SIZ][MAXM];
-  int L[SIZ], F[SIZ], S[SIZ];
-  int s = 0, h = 25;
-  void init(){
-    F[0] = -1, s = 0;
-  }
+  int M[SIZ][MAXM], L[SIZ], F[SIZ], S[SIZ], s = 0, h = 25;
+  void init(){ F[0] = -1, s = 0; }
   void extend(int &last, char c){
     int e = c - 'a';
     int cur = ++ s;
@@ -33,33 +29,13 @@ namespace SAM{
     }
     last = cur;
   }
-  void solve(){
-    i64 ans = 0;
-    for(int i = 1;i <= s;++ i)
-      ans += L[i] - L[F[i]];
-    cout << ans << endl;
-  }
 }
 
 namespace Trie{
-  const int SIZ = 1e6 + 3;
-  int M[SIZ][MAXM], s, h = 25;
-
-  void insert(char *S){
-    int p = 0;
-    for(int i = 0;S[i];++ i){
-      int e = S[i] - 'a';
-      if(M[p][e]){
-        p = M[p][e];
-      } else 
-        p = M[p][e] = ++ s;
-    }
-  }
-  int O[SIZ];
-
+  int M[MAXN][MAXM], O[MAXN], s, h = 25;
+  void insert(char *S);
   void build_sam(){
-    queue <int> Q;
-    Q.push(0);
+    queue <int> Q; Q.push(0);
     while(!Q.empty()){
       int u = Q.front(); Q.pop();
       for(int i = 0;i <= h;++ i){

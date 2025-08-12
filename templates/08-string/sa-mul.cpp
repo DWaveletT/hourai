@@ -1,6 +1,5 @@
 #include "../header.cpp"
-int n, m, A[MAXN], B[MAXN];
-int C[MAXN], R[MAXN], P[MAXN], Q[MAXN];
+int n, m, A[MAXN], B[MAXN], C[MAXN], R[MAXN], P[MAXN], Q[MAXN];
 char S[MAXN];
 int main(){
   scanf("%s", S), n = strlen(S), m = 256;
@@ -12,8 +11,8 @@ int main(){
       m = max(m, R[i]);
     }
 #define fun(a, b, c) \
-    memset(C, 0, sizeof(int) * (m + 1));          \
-    for(int i = 0;i <  n;++ i) C[a] +=    1;      \
+    memset(C, 0, sizeof(int) * (m + 1));  \
+    for(int i = 0;i <  n;++ i) C[a] += 1; \
     for(int i = 1;i <= m;++ i) C[i] += C[i - 1];  \
     for(int i = n - 1;i >= 0;-- i) c[-- C[a]] = b;
     fun(Q[  i ],   i , B)

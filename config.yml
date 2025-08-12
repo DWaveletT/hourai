@@ -108,9 +108,9 @@ title:
   tree-hash: 树哈希
   tree-prufer: Prufer 序列
   virtual-tree: 虚树
+  header: 公共头文件
 
 wf_files:
-  - dp-slope
   - balanced-tree
   - ds-fhq-treap
   - ds-odtree

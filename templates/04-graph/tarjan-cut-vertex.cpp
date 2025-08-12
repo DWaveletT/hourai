@@ -2,6 +2,8 @@
 vector<int> V[MAXN];
 int n, m, o, D[MAXN], L[MAXN];
 bool F[MAXN], C[MAXN];
+
+// 对每个连通块调用 dfs(i, i)
 void dfs(int u, int g){
   L[u] = D[u] = ++ o, F[u] = true; int s = 0;
   for(auto &v : V[u]){
@@ -13,23 +15,6 @@ void dfs(int u, int g){
       L[u] = min(L[u], D[v]);
     }
   }
+  // C[u] 为真表示该点是割点
   if(u == g && s > 1) C[u] = true;
-}
-int main(){
-  cin >> n >> m;
-  for(int i = 1;i <= m;++ i){
-    int u, v;
-    cin >> u >> v;
-    V[u].push_back(v);
-    V[v].push_back(u);
-  }
-  for(int i = 1;i <= n;++ i)
-    if(!F[i]) dfs(i, i);
-  vector <int> ANS;
-  for(int i = 1;i <= n;++ i)
-    if(C[i]) ANS.push_back(i);
-  cout << ANS.size() << endl;
-  for(auto &u : ANS)
-    cout << u << " ";
-  return 0;
 }
