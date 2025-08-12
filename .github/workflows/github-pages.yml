@@ -39,7 +39,6 @@ jobs:
           sudo apt-get install -y \
             texlive-latex-base \
             texlive-latex-recommended \
-            texlive-latex-extra \
             texlive-xetex \
             texlive-lang-chinese \
             texlive-fonts-recommended \
