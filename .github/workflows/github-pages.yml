@@ -52,6 +52,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
+          cache: 'pipenv'
 
       # 下载 Mkdocs 以及相关依赖
       - name: Set up Mkdocs
