@@ -42,7 +42,6 @@ jobs:
             texlive-xetex \
             texlive-lang-chinese \
             texlive-fonts-recommended \
-            texlive-fonts-extra \
             texlive-science \
             lmodern \
             latexmk pandoc
