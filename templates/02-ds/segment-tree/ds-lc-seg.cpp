@@ -18,7 +18,7 @@ namespace LCSeg{
     if(cmp(a, y, x)){
       T[t] = x; if(a != b) merge(rc(t), c + 1, b, T[rc(t)], y);
     } else {
-      T[t] = x; if(a != b) merge(lc(t), a,   c, T[lc(t)], y);
+      T[t] = x; if(a != b) merge(lc(t), a, c, T[lc(t)], y);
     }
   }
   // 插入线段 (l, f(l)) -- (r, f(r))
@@ -26,7 +26,7 @@ namespace LCSeg{
     if(l <= a && b <= r) merge(t, a, b, T[t], x);
     else {
       int c = a + b >> 1;
-      if(l <= c) modify(lc(t), a,   c, l, r, x);
+      if(l <= c) modify(lc(t), a, c, l, r, x);
       if(r >  c) modify(rc(t), c + 1, b, l, r, x);
     }
   }

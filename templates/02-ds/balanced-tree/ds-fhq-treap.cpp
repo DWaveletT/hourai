@@ -36,17 +36,16 @@ namespace Treap{
     }
   }
   void insert(int &root, int w){
-    auto [p, q] = split(root, w  );
-    auto [a, b] = split(   p, w - 1);
+    auto [p, q] = split(root, w);
+    auto [a, b] = split(p, w - 1);
     if(b != 0){
       ++ S[b], ++ C[b];
     } else b = newnode(w);
-    p  = merge(a, b);
-    root = merge(p, q);
+    p = merge(a, b), root = merge(p, q);
   }
   void erase(int &root, int w){
-    auto [p, q] = split(root, w  );
-    auto [a, b] = split(   p, w - 1);
+    auto [p, q] = split(root, w);
+    auto [a, b] = split(p, w - 1);
     -- C[b], -- S[b];
     p  = C[b] == 0 ? a : merge(a, b);
     root = merge(p, q);
@@ -58,9 +57,7 @@ namespace Treap{
         o = x, x = X[x][0];
       else {
         a += S[X[x][0]];
-        if(w == W[x]){
-          o = x; break;
-        }
+        if(w == W[x]){ o = x; break; }
         a += C[x];
         o = x, x = X[x][1];
       }
@@ -74,9 +71,7 @@ namespace Treap{
         o = x, x = X[x][0];
       else {
         w -= S[X[x][0]];
-        if(w <= C[x]){
-          o = x; break;
-        }
+        if(w <= C[x]){ o = x; break; }
         w -= C[x];
         o = x, x = X[x][1];
       } 

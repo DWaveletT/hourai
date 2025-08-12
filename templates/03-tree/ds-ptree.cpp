@@ -12,7 +12,7 @@ vector<int> E[MAXN];
 namespace LCA{
   const int SIZ = 1e5 + 3;
   int D[SIZ], F[SIZ];
-  int P[SIZ], Q[SIZ], o;
+  int P[SIZ], Q[SIZ], o, h = 18;
   void dfs(int u, int f){
     P[u] = ++ o;
     Q[o] = u;
@@ -23,39 +23,21 @@ namespace LCA{
     }
   }
   const int MAXH = 18 + 3;
-  int h = 18;
   int ST[SIZ][MAXH];
   int cmp(int a, int b){
     return D[a] < D[b] ? a : b;
   }
   int T[SIZ], n;
-  void init(int _n){
-    n = _n;
-    dfs(1, 0);
-    for(int i = 1;i <= n;++ i)
-      ST[i][0] = Q[i];
-    for(int i = 2;i <= n;++ i)
-      T[i] = T[i >> 1] + 1;
-    for(int i = 1;i <= h;++ i){
-      for(int j = 1;j <= n;++ j) if(j + (1 << i - 1) <= n){
-        ST[j][i] = cmp(ST[j][i - 1], ST[j + (1 << i - 1)][i - 1]);
-      }
-    }
-  }
+  void init(int _n);  // 初始化 ST 表
   int lca(int a, int b){
-    if(a == b)
-      return a;
-    int l = P[a];
-    int r = P[b];
-    if(l > r)
-      swap(l, r);
+    if(a == b) return a;
+    int l = P[a], r = P[b];
+    if(l > r) swap(l, r);
     ++ l;
     int d = T[r - l + 1];
     return F[cmp(ST[l][d], ST[r - (1 << d) + 1][d])];
   }
-  int dis(int a, int b){
-    return D[a] + D[b] - 2 * D[lca(a, b)];
-  }
+  int dis(int a, int b);
 }
 
 namespace BIT{
@@ -115,7 +97,7 @@ namespace PTree{
       dfs2(v, u);
     }
   }
-  void build(int _n){
+  void build(int _n){   // 建树（需先调用 LCA::init）
     n = _n;
     int s = n, g = 0;
     dfs1(s, g, 1, 0);
@@ -123,7 +105,7 @@ namespace PTree{
     for(auto &u : E[g]){
       int h = 0;
       if(S[u] < S[g]) build(S[u], h, u, 0);
-      else      build(s - S[g], h, u, 0);
+      else build(s - S[g], h, u, 0);
       EE[g].push_back(h);
       EE[h].push_back(g);
     }
@@ -136,7 +118,7 @@ namespace PTree{
         D1[i][j] = D2[i][j] = 0;
     }
   }
-  void modify(int x, int w){
+  void modify(int x, int w){  // 修改点权
     int u = x;
     while(1){
       BIT :: modify(D1[x], L[x], LCA :: dis(u, x), w);
@@ -161,47 +143,4 @@ namespace PTree{
     }
     return ans;
   }
-}
-
-int W[MAXN];
-
-int main(){
-  ios :: sync_with_stdio(false);
-  int n, m;
-  cin >> n >> m;
-  for(int i = 1;i <= n;++ i){
-    cin >> W[i];
-  }
-  for(int i = 2;i <= n;++ i){
-    int u, v;
-    cin >> u >> v;
-    E[u].push_back(v);
-    E[v].push_back(u);
-  }
-  LCA :: init(n);
-
-  PTree :: build(n);
-
-  for(int i = 1;i <= n;++ i)
-    PTree :: modify(i, W[i]);
-
-  int lastans = 0;
-  for(int i = 1;i <= m;++ i){
-    int op; cin >> op;
-    if(op == 0){
-      int x, d;
-      cin >> x >> d;
-      x ^= lastans;
-      d ^= lastans;
-      cout << (lastans = PTree :: query(x, d)) << endl;
-    } else {
-      int x, w;
-      cin >> x >> w;
-      x ^= lastans;
-      w ^= lastans;
-      PTree :: modify(x, -W[x]  );
-      PTree :: modify(x,  W[x] = w);
-    }
-  }
-  return 0;
 }

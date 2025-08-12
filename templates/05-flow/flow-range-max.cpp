@@ -11,8 +11,7 @@
 namespace Dinic{
   int G[MAXN];
   void add(int u, int v, int l, int r){
-    G[v] += l;
-    G[u] -= l;
+    G[v] += l, G[u] -= l;
     add0(u, v, r - l);
   }
   void clear(){
@@ -24,9 +23,8 @@ namespace Dinic{
     }
     t = 1, n = 0;
   }
-  bool solve(){
-    int s = ++ n;
-    int t = ++ n;
+  bool solve(){ // 为真表示有解
+    int s = ++ n, t = ++ n;
     i64 sum = 0;
     for(int i = 1;i <= n - 2;++ i){
       if(G[i] < 0)
@@ -34,15 +32,11 @@ namespace Dinic{
       else
         add0(s, i,  G[i]), sum += G[i];
     }
-    auto res = dinic(s, t);
-    if(res != sum)
-      return true;
-    return false;
+    return sum != dinic(s, t);
   }
   i64 solve(int s0, int t0){
     add0(t0, s0, INF);
-    int s = ++ n;
-    int t = ++ n;
+    int s = ++ n, t = ++ n;
     i64 sum = 0;
     for(int i = 1;i <= n - 2;++ i){
       if(G[i] < 0)
@@ -50,9 +44,6 @@ namespace Dinic{
       else
         add0(s, i,  G[i]), sum += G[i];
     }
-    auto res = dinic(s, t);
-    if(res != sum)
-      return -1;
-    return dinic(s0, t0);
+    return dinic(s, t) == sum ? dinic(s0, t0) : -1;
   }
 }

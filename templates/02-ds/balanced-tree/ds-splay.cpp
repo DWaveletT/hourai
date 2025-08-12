@@ -3,7 +3,7 @@ namespace Splay{
   const int SIZ = 1e6 + 1e5 + 3;
   int F[SIZ], C[SIZ], S[SIZ], X[SIZ][2], size;
   bool T[SIZ];
-  bool is_root(int x){ return   F[x]   == 0;}
+  bool is_root(int x){ return   F[x]     == 0;}
   bool is_rson(int x){ return X[F[x]][1] == x;}
   void push_down(int x){
     if(!T[x]) return;
@@ -17,11 +17,10 @@ namespace Splay{
   }
   void rotate(int x){
     int y = F[x], z = F[y];
-    bool f = is_rson(x);
-    bool g = is_rson(y);
+    bool f = is_rson(x), g = is_rson(y);
     int &t = X[x][!f];
     if(z){ X[z][g] = x; }
-    if(t){ F[t]  = y; }
+    if(t){ F[t]    = y; }
     X[y][f] = t, t = y;
     F[y] = x, pushup(y);
     F[x] = z, pushup(x);
@@ -51,11 +50,5 @@ namespace Splay{
     if(l <= c - 1) a = build(l, c - 1), F[a] = c, X[c][0] = a;
     if(c + 1 <= r) b = build(c + 1, r), F[b] = c, X[c][1] = b;
     C[c] = 1, pushup(c); return c;
-  }
-  void output(int n, int &r){
-    push_down(r);
-    if(X[r][0]) output(n, X[r][0]);
-    if(r != 1 && r != n + 2) printf("%d ", r - 1);
-    if(X[r][1]) output(n, X[r][1]);
   }
 }

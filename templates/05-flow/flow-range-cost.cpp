@@ -9,17 +9,14 @@
 #include "flow-cost.cpp"
 #undef add
 namespace MCMF{
-  i64 cost0;
-  int G[MAXN];
+  i64 cost0; int G[MAXN];
   void add(int u, int v, int l, int r, int c){
-    G[v] += l;
-    G[u] -= l;
+    G[v] += l, G[u] -= l;
     cost0 += 1ll * l * c;
     add0(u, v, r - l, c);
   }
   i64 solve(){
-    int s = ++ n;
-    int t = ++ n;
+    int s = ++ n, t = ++ n;
     i64 sum = 0;
     for(int i = 1;i <= n - 2;++ i){
       if(G[i] < 0)

@@ -17,25 +17,20 @@ namespace Dinic{
     return t - 1;
   }
   void clear(){
-    for(int i = 1;i <= n;++ i)
-      H[i] = 0;
+    for(int i = 1;i <= n;++ i) H[i] = 0;
     n = m = 0, t = 1;
   }
   int D[SIZ];
   bool bfs(int s, int t){
     queue <int> Q;
-    for(int i = 1;i <= n;++ i)
-      D[i] = 0;
+    for(int i = 1;i <= n;++ i) D[i] = 0;
     Q.push(s), D[s] = 1;
     while(!Q.empty()){
       int u = Q.front(); Q.pop();
       for(int i = H[u];i;i = N[i]){
-        const int &v = V[i];
-        const int &f = F[i];
-        if(f != 0 && !D[v]){
-          D[v] = D[u] + 1;
-          Q.push(v);
-        }
+        const int &v = V[i], &f = F[i];
+        if(f != 0 && !D[v])
+          D[v] = D[u] + 1, Q.push(v);
       }
     }
     return D[t] != 0;
@@ -49,13 +44,10 @@ namespace Dinic{
       const int &v = V[i];
       const int &f = F[i];
       if(D[v] == D[u] + 1){
-        long long resf = dfs(s, t, v, min(maxf, 1ll * f));
-        totf += resf;
-        maxf -= resf;
-        F[i  ] -= resf;
-        F[i ^ 1] += resf;
-        if(maxf == 0)
-          return totf;
+        long long ff = dfs(s, t, v, min(maxf, 1ll * f));
+        totf += ff, maxf -= ff;
+        F[i] -= ff, F[i ^ 1] += ff;
+        if(maxf == 0) return totf;
       }
     }
     return totf;
@@ -77,18 +69,14 @@ namespace GHTree{
   int n, m, U[MAXM], V[MAXM], W[MAXM], A[MAXM], B[MAXM];
   void add(int u, int v, int w){
     ++ m;
-    U[m] = u;
-    V[m] = v;
-    W[m] = w;
+    U[m] = u, V[m] = v, W[m] = w;
     A[m] = Dinic :: add(u, v, w);
     B[m] = Dinic :: add(v, u, w);
-    n = max(n, u);
-    n = max(n, v);
+    n = max({n, u, v});
   }
   vector <pair<int, int> > E[MAXN];
   void build(vector <int> N){
-    int s = N.front();
-    int t = N.back();
+    int s = N.front(), t = N.back();
     if(s == t) return;
     for(int i = 1;i <= m;++ i){
       int a = A[i]; Dinic :: F[a] = W[i], Dinic :: F[a ^ 1] = 0;
@@ -98,8 +86,7 @@ namespace GHTree{
     E[s].push_back(make_pair(t, w));
     E[t].push_back(make_pair(s, w));
     
-    vector <int> P;
-    vector <int> Q;
+    vector <int> P, Q;
     for(auto &u : N){
       if(Dinic :: D[u] != 0)
         P.push_back(u);
@@ -116,9 +103,7 @@ namespace GHTree{
     D[s] = INF;
     while(!Q.empty()){
       int u = Q.front(); Q.pop();
-      for(auto &e : E[u]){
-        int v = e.first;
-        int w = e.second;
+      for(auto &[v, w] : E[u]){
         if(D[v] == -1){
           D[v] = min(D[u], w);
           Q.push(v);
