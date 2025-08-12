@@ -5,13 +5,15 @@ on:
     branches:
       - master
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
+  # 构建网页
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      packages: read
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -86,10 +88,19 @@ jobs:
       - name: Build Web
         run: pipenv run mkdocs build
 
-      # 部署到 Pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        if: github.ref == 'refs/heads/master'
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./site
+          path: ./site  # 上传构建后的文件
+
+  # 部署网页
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3
