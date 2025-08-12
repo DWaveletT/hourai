@@ -39,9 +39,8 @@ jobs:
           sudo apt-get install -y \
             texlive-latex-base \
             texlive-latex-recommended \
-            texlive-latex-extra \
             texlive-fonts-recommended \
-            latexmk
+            latexmk pandoc
 
       # 缓存 TeX Live 用户配置（字体缓存等）
       - name: Cache TeX Live cache
