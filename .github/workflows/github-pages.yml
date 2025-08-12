@@ -27,12 +27,6 @@ jobs:
       - name: Update apt
         run: sudo apt-get update
 
-      # 安装 Python
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-
       # 安装最小 TeX Live
       - name: Install TeX Live (minimal)
         run: |
@@ -53,13 +47,24 @@ jobs:
           path: ~/.texlive*
           key: ${{ runner.os }}-texlive-cache
 
+      # 安装 Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      # 下载 Mkdocs 以及相关依赖
+      - name: Set up Mkdocs
+        run: |
+          pipenv install
+        
       # 调用 Python 脚本构建 MD
-      - name: Build Web
-        run: python scripts/build_print.py
+      - name: Build Markdown
+        run: pipenv run python scripts/build_docs.py
 
       # 调用 Python 脚本构建 PDF
       - name: Build PDF
-        run: python scripts/build_print.py
+        run: pipenv run python scripts/build_print.py
 
       # 使用 MkDocs 构建网站
       - name: Build Web
