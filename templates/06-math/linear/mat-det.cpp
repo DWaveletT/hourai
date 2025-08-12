@@ -41,13 +41,3 @@ int mat_det(Mat a){
     ans = 1ll * ans * a.W[i][i] % MOD;
   return ans;
 }
-
-int main(){
-  int n; cin >> n;
-  Mat A(n, n);
-  for(int i = 1;i <= n;++ i)
-    for(int j = 1;j <= n;++ j)
-      cin >> A.W[i][j], A.W[i][j] %= MOD;
-  cout << mat_det(A) << endl;
-  return 0;
-}

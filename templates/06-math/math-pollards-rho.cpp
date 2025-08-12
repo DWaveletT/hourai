@@ -6,10 +6,10 @@
 **/
 #include "../header.cpp"
 i64 step(i64 a, i64 c, i64 m){
-  return ((__int128)a * a + c) % m;
+  return ((i80)a * a + c) % m;
 }
 i64 multi(i64 a, i64 b, i64 m){
-  return (__int128) a * b % m;
+  return (i80) a * b % m;
 }
 i64 power(i64 a, i64 b, i64 m){
   i64 r = 1;

@@ -63,9 +63,8 @@ int main(){
       }
       P.push_back({ w, c });
     }
-    if(t != 1){
+    if(t != 1)
       P.push_back({ t, 1 });
-    }
     int ans = 0;
     solve(0, n, 1, 1, ans);
     ans = 1ll * ans * power(n, MOD - 2) % MOD;

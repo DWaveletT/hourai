@@ -86,8 +86,7 @@ int main(){
   cin >> N;
   for(int i = 1;i <= p && 1ll * P[i] * P[i] <= N;i ++){
     int &p = P[i];
-    hc[i].push_back(1);
-    gc[i].push_back(1);
+    hc[i].push_back(1), gc[i].push_back(1);
     for(i64 c = 1, t = p;t <= N;t = t * p, ++ c){
       if(c == 1){
         gc[i].push_back(1ll * p * (p - 1) % MOD);

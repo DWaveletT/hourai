@@ -6,6 +6,7 @@ using namespace std;
 #define dn(r, l, i) for(int i = r, END##i = l;i >= END##i;-- i)
 
 using i64 = long long;
+using i80 = __int128;
 using f80 = long double;
 using u32 = unsigned;
 using u64 = unsigned long long;
