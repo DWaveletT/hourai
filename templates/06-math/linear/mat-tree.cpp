@@ -4,24 +4,18 @@
 设 $G$ 是一张有向无环图，边带权，每个点的度数有限。给定起点集合 $A=\{a_1,a_2, \cdots,a_n\}$，终点集合 $B = \{b_1, b_2, \cdots,b_n\}$。
 
 - 一段路径 $p:v_0\to^{w_1} v_1\to^{w_2} v_2\to \cdots \to^{w_k} v_k$ 的边权被定义为 $\omega (p) = \prod w_i$。
-- 一对顶点 $(a, b)$ 的权值被定义为 $e(a, b) = \sum_{p:a\to b}\omega (p)$。
+- 一对顶点 $(a, b)$ 的权值定义为 $e(a, b) = \sum_{p:a\to b}\omega (p)$。
 
-设矩阵 $M$ 如下：
-
-$$
+设矩阵 $M$ 如下：$$
 M = \begin{pmatrix}
 e(a_1, b_1) & e(a_1, b_2) & \cdots & e(a_1, b_n) \\
 e(a_2, b_1) & e(a_2, b_2) & \cdots & e(a_2, b_n) \\
 \vdots & \vdots & \ddots & \vdots \\
 e(a_n, b_1) & e(a_n, b_2) & \cdots & e(a_n, b_n) \\
 \end{pmatrix}
-$$
+$$ 从 $A$ 到 $B$ 得到一个**不相交**的路径组 $p=(p_1, p_2, \cdots,p_n)$，其中从 $a_i$ 到达 $b_{\pi_i}$，$\pi$ 是一个排列。定义 $\sigma(\pi)$ 是 $\pi$ 逆序对的数量。
 
-从 $A$ 到 $B$ 得到一个**不相交**的路径组 $p=(p_1,p_2,\cdots,p_n)$，其中从 $a_i$ 到达 $b_{\pi_i}$，$\pi$ 是一个排列。定义 $\sigma(\pi)$ 是 $\pi$ 逆序对的数量。
-
-给出 LGV 的叙述如下：
-
-$$
+给出 LGV 的叙述如下：$$
 \det(M) = \sum_{p:A\to B} (-1)^{\sigma (\pi)} \prod_{i=1}^n \omega(p_i)
 $$
 
@@ -56,95 +50,86 @@ t^{\mathrm{root}}(G, k) &= \det(L^{\mathrm{out}}_k) \\
 
 $$T \prod_{i}(\mathrm{out}_i - 1)!$$
 **/
-#include<bits/stdc++.h>
-using namespace std;
-
-using i64 = long long;
-const int INF  =  1e9;
-const i64 INFL = 1e18;
-
-const int MAXN = 300 + 3;
-const int MOD  = 1e9 + 7;
-
+#include "../../header.cpp"
 struct Mat{
-    int n, m;
-    int W[MAXN][MAXN];
-    Mat(int _n = 0, int _m = 0){
-        n = _n;
-        m = _m;
-        for(int i = 1;i <= n;++ i)
-            for(int j = 1;j <= m;++ j)
-                W[i][j] = 0;
-    }
+  int n, m;
+  int W[MAXN][MAXN];
+  Mat(int _n = 0, int _m = 0){
+    n = _n;
+    m = _m;
+    for(int i = 1;i <= n;++ i)
+      for(int j = 1;j <= m;++ j)
+        W[i][j] = 0;
+  }
 };
 
 int mat_det(Mat a){
-    int ans = 1;
+  int ans = 1;
 
-    const int &n = a.n;
-    for(int i = 1;i <= n;++ i){
-        int f = -1;
-        for(int j = i;j <= n;++ j) if(a.W[j][i] != 0){
-            f = j;
-            break;
-        }
-        if(f == -1){
-            return 0;
-        }
-        if(f != i){
-            for(int j = 1;j <= n;++ j)
-                swap(a.W[i][j], a.W[f][j]);
-            ans = MOD - ans;
-        }
-        for(int j = i + 1;j <= n;++ j) if(a.W[j][i]){
-            while(a.W[j][i]){
-                int u = a.W[i][i];
-                int v = a.W[j][i];
-                if(u > v){
-                    for(int k = 1;k <= n;++ k)
-                        swap(a.W[i][k], a.W[j][k]);
-                    ans = MOD - ans;
-                    swap(u, v);
-                }
-                int rate = v / u;
-                for(int k = 1;k <= n;++ k){
-                    a.W[j][k] = (a.W[j][k] - 1ll * rate * a.W[i][k] % MOD + MOD) % MOD;
-                }
-            }
-        }
+  const int &n = a.n;
+  for(int i = 1;i <= n;++ i){
+    int f = -1;
+    for(int j = i;j <= n;++ j) if(a.W[j][i] != 0){
+      f = j;
+      break;
     }
-    for(int i = 1;i <= n;++ i)
-        ans = 1ll * ans * a.W[i][i] % MOD;
-    return ans;
+    if(f == -1){
+      return 0;
+    }
+    if(f != i){
+      for(int j = 1;j <= n;++ j)
+        swap(a.W[i][j], a.W[f][j]);
+      ans = MOD - ans;
+    }
+    for(int j = i + 1;j <= n;++ j) if(a.W[j][i]){
+      while(a.W[j][i]){
+        int u = a.W[i][i];
+        int v = a.W[j][i];
+        if(u > v){
+          for(int k = 1;k <= n;++ k)
+            swap(a.W[i][k], a.W[j][k]);
+          ans = MOD - ans;
+          swap(u, v);
+        }
+        int rate = v / u;
+        for(int k = 1;k <= n;++ k){
+          a.W[j][k] = (a.W[j][k] - 1ll * rate * a.W[i][k] % MOD + MOD) % MOD;
+        }
+      }
+    }
+  }
+  for(int i = 1;i <= n;++ i)
+    ans = 1ll * ans * a.W[i][i] % MOD;
+  return ans;
 }
 
 int D[MAXN];
 int W[MAXN][MAXN];
 
 int main(){
-    int n, m, t;
-    cin >> n >> m >> t;
-    for(int i = 1;i <= m;++ i){
-        int u, v, w;
-        cin >> u >> v >> w;
-        if(u != v){
-            if(t == 0){ // 无向图
-                D[u] = (D[u] + w) % MOD;
-                D[v] = (D[v] + w) % MOD;
-                W[u][v] = (W[u][v] + w) % MOD;
-                W[v][u] = (W[v][u] + w) % MOD;
-            } else {    // 叶向树
-                D[v] = (D[v] + w) % MOD;
-                W[u][v] = (W[u][v] + w) % MOD;
-            }
-        }
+  int n, m, t;
+  cin >> n >> m >> t;
+  for(int i = 1;i <= m;++ i){
+    int u, v, w;
+    cin >> u >> v >> w;
+    if(u != v){
+      if(t == 0){ // 无向图
+        D[u] = (D[u] + w) % MOD;
+        D[v] = (D[v] + w) % MOD;
+        W[u][v] = (W[u][v] + w) % MOD;
+        W[v][u] = (W[v][u] + w) % MOD;
+      } else {  // 叶向树
+        D[v] = (D[v] + w) % MOD;
+        W[u][v] = (W[u][v] + w) % MOD;
+      }
     }
-    Mat A(n - 1, n - 1);
-    for(int i = 2;i <= n;++ i)
-        for(int j = 2;j <= n;++ j)  // 以 1 为根的叶向树
-            A.W[i - 1][j - 1] = MOD - W[i][j];
-    for(int i = 2;i <= n;++ i)
-        A.W[i - 1][i - 1] = (D[i] + A.W[i - 1][i - 1]) % MOD;
-    cout << mat_det(A) << endl;
-    return 0;
+  }
+  Mat A(n - 1, n - 1);
+  for(int i = 2;i <= n;++ i)
+    for(int j = 2;j <= n;++ j)  // 以 1 为根的叶向树
+      A.W[i - 1][j - 1] = MOD - W[i][j];
+  for(int i = 2;i <= n;++ i)
+    A.W[i - 1][i - 1] = (D[i] + A.W[i - 1][i - 1]) % MOD;
+  cout << mat_det(A) << endl;
+  return 0;
 }

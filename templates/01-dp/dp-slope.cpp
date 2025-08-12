@@ -28,12 +28,7 @@ $$
 
 在原始的玩具装箱中，$s_j$ 单调增加，也就是斜率单调增加。因此可以直接使用单调栈维护凸包。同时 $s_i$ 也单调增加，因此可以用指针维护。
 **/
-#include<bits/stdc++.h>
-using namespace std;
-typedef long long   i64;
-typedef long double f80;
-const int INF = 2147483647;
-const int MAXN= 5e4 + 3;
+#include "../header.cpp"
 int n, L, p, e, C[MAXN], Q[MAXN];
 f80 S[MAXN], F[MAXN];
 f80 gtx(int x){ return S[x]; }
@@ -41,24 +36,24 @@ f80 gty(int x){ return F[x] + S[x] * S[x]; }
 f80 gtw(int x){ return -2.0 * (L - S[x]); }
 f80 gtk(int x,int y){ return (gty(y) - gty(x)) / (gtx(y) - gtx(x)); }
 int main(){ 
-    cin >> n >> L;
-    for(int i = 1;i <= n;++ i){
-        cin >> C[i];
-        S[i] = S[i - 1] + C[i];
-    }
-    for(int i = 1;i <= n;++ i){
-        S[i] += i;
-    }
-    e = p = 1, L ++, Q[p] = 0;
-    for(int i = 1;i <= n;++ i){
-        while(e < p && gtk(Q[e], Q[e + 1]) < gtw(i))
-            ++ e;
-        int j = Q[e];
-        F[i] = F[j] + pow(S[i] - S[j] - L, 2);
-        while(1 < p && gtk(Q[p - 1], Q[p]) > gtk(Q[p], i))
-            e -= (e == p), -- p;
-        Q[++ p] = i;
-    }
-    printf("%.0Lf\n", F[n]);
-    return 0;
+  cin >> n >> L;
+  for(int i = 1;i <= n;++ i){
+    cin >> C[i];
+    S[i] = S[i - 1] + C[i];
+  }
+  for(int i = 1;i <= n;++ i){
+    S[i] += i;
+  }
+  e = p = 1, L ++, Q[p] = 0;
+  for(int i = 1;i <= n;++ i){
+    while(e < p && gtk(Q[e], Q[e + 1]) < gtw(i))
+      ++ e;
+    int j = Q[e];
+    F[i] = F[j] + pow(S[i] - S[j] - L, 2);
+    while(1 < p && gtk(Q[p - 1], Q[p]) > gtk(Q[p], i))
+      e -= (e == p), -- p;
+    Q[++ p] = i;
+  }
+  printf("%.0Lf\n", F[n]);
+  return 0;
 }

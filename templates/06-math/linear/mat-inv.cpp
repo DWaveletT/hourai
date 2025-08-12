@@ -12,8 +12,7 @@ struct Mat{
     int n, m;
     int W[MAXN][MAXN];
     Mat(int _n = 0, int _m = 0){
-        n = _n;
-        m = _m;
+        n = _n, m = _m;
         for(int i = 1;i <= n;++ i)
             for(int j = 1;j <= m;++ j)
                 W[i][j] = 0;

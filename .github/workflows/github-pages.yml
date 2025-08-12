@@ -1,48 +1,69 @@
-name: Build & Deploy
- 
+name: Build and Deploy
+
 on:
   push:
     branches:
       - master
-  pull_request:
 
 jobs:
-  build-deploy:
-    runs-on: ubuntu-22.04
-    permissions:
-      contents: write
-      packages: read
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-    steps:
+  build:
+    runs-on: ubuntu-latest
 
-      - name: Checkout
+    steps:
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      # 缓存 apt 包
+      - name: Cache apt packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            /var/lib/apt/lists
+            /var/cache/apt/archives
+          key: ${{ runner.os }}-apt-texlive
+          restore-keys: |
+            ${{ runner.os }}-apt-
+
+      - name: Update apt
+        run: sudo apt-get update
+
+      # 安装 Python
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-          cache: pipenv
-      
-      - name: Install Python dependencies
+          python-version: '3.x'
+
+      # 安装最小 TeX Live
+      - name: Install TeX Live (minimal)
         run: |
-          pip install pipenv
-          pipenv install
+          sudo apt-get install -y \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            latexmk
 
-      - name: Build Markdown
-        run: pipenv run mkdocs build -v
-
-      - name: Build LaTeX
-        uses: docker://pandoc/extra:3.5.0.0
+      # 缓存 TeX Live 用户配置（字体缓存等）
+      - name: Cache TeX Live cache
+        uses: actions/cache@v4
         with:
-          args: >-
-            docs/print/full-version.md -o site/print/full-version.pdf
-            --template=utils/hourai.tex
-            --pdf-engine=xelatex
-            --listings
- 
-      - name: Deploy
+          path: ~/.texlive*
+          key: ${{ runner.os }}-texlive-cache
+
+      # 调用 Python 脚本构建 MD
+      - name: Build Web
+        run: python scripts/build_print.py
+
+      # 调用 Python 脚本构建 PDF
+      - name: Build PDF
+        run: python scripts/build_print.py
+
+      # 使用 MkDocs 构建网站
+      - name: Build Web
+        run: mkdocs build
+
+      # 部署到 Pages
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         if: github.ref == 'refs/heads/master'
         with:
