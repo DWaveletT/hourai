@@ -18,11 +18,16 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            /var/lib/apt/lists
             /var/cache/apt/archives
-          key: ${{ runner.os }}-apt-texlive
+            /var/lib/apt/lists/*
+          key: ${{ runner.os }}-apt-${{ hashFiles('**/scripts/texlive-deps.txt') }}
           restore-keys: |
             ${{ runner.os }}-apt-
+
+      # 创建 TeX Live 依赖文件
+      - name: Create TeX Live deps file
+        run: |
+          echo "texlive-latex-base texlive-latex-recommended texlive-xetex texlive-lang-chinese texlive-fonts-recommended texlive-science lmodern latexmk pandoc" > scripts/texlive-deps.txt
 
       - name: Update apt
         run: sudo apt-get update
@@ -38,14 +43,20 @@ jobs:
             texlive-fonts-recommended \
             texlive-science \
             lmodern \
-            latexmk pandoc
+            latexmk \
+            pandoc
 
-      # 缓存 TeX Live 用户配置（字体缓存等）
-      - name: Cache TeX Live cache
+      # 缓存 TeX Live 用户配置
+      - name: Cache TeX Live user data
         uses: actions/cache@v4
         with:
-          path: ~/.texlive*
-          key: ${{ runner.os }}-texlive-cache
+          path: |
+            ~/.texlive*
+            /usr/local/texlive/*
+            /var/lib/texmf/*
+          key: ${{ runner.os }}-texlive-user-${{ hashFiles('**/scripts/texlive-deps.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-texlive-user-
 
       # 安装 Python
       - name: Set up Python
@@ -70,7 +81,7 @@ jobs:
 
       # 使用 MkDocs 构建网站
       - name: Build Web
-        run: mkdocs build
+        run: pipenv run mkdocs build
 
       # 部署到 Pages
       - name: Deploy to GitHub Pages
