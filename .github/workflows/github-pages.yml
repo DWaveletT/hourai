@@ -40,7 +40,12 @@ jobs:
             texlive-latex-base \
             texlive-latex-recommended \
             texlive-latex-extra \
+            texlive-xetex \
+            texlive-lang-chinese \
             texlive-fonts-recommended \
+            texlive-fonts-extra \
+            texlive-science \
+            lmodern \
             latexmk pandoc
 
       # 缓存 TeX Live 用户配置（字体缓存等）
