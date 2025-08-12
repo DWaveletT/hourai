@@ -1695,7 +1695,7 @@ e(a_2, b_1) & e(a_2, b_2) & \cdots & e(a_2, b_n) \\
 \vdots & \vdots & \ddots & \vdots \\
 e(a_n, b_1) & e(a_n, b_2) & \cdots & e(a_n, b_n) \\
 \end{pmatrix}
-$$ 从 $A$ 到 $B$ 得到一个**不交**的路径组 $p=(p_1, p_2, \cdots,p_n)$，其中从 $a_i$ 到达 $b_{\pi_i}$，$\pi$ 是一个排列。定义 $\sigma(\pi)$ 是 $\pi$ 逆序对的数量。
+$$ 从 $A$ 到 $B$ 得到一个**不相交**的路径组 $p=(p_1, p_2, \cdots,p_n)$，其中从 $a_i$ 到达 $b_{\pi_i}$，$\pi$ 是一个排列。定义 $\sigma(\pi)$ 是 $\pi$ 逆序对的数量。
 
 给出 LGV 的叙述如下：$$
 \det(M) = \sum_{p:A\to B} (-1)^{\sigma (\pi)} \prod_{i=1}^n \omega(p_i)

@@ -6,9 +6,13 @@ import pymdownx.slugs
 import pymdownx.arithmatex
 from pathlib import Path
 from typing import List, Dict, Any
+import shutil
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 ROOT_DIR = SCRIPT_DIR.parent
+
+STATIC_DIR = ROOT_DIR / 'static'
+DOCS_DIR = ROOT_DIR / 'docs'
 
 CONFIG_PATH = ROOT_DIR / 'config.yml'
 TEMPLATE_DIR = ROOT_DIR / 'templates'
@@ -64,8 +68,7 @@ class MkDocsBuilder:
         if is_wf:
             self.wf_doc_lines.append(f"{'#' * layer} {title}\n\n")
         
-        out_path    = self.   website_dir / f"{name}.md"
-        out_wf_path = self.website_wf_dir / f"{name}.md"
+        out_path = self.website_dir / f"{name}.md"
         lines = file_path.read_text(encoding='utf-8').splitlines(keepends=True)
 
         out_lines, code_lines = self.extract_content(lines, layer, is_wf)
@@ -125,6 +128,8 @@ class MkDocsBuilder:
                 file.unlink()
 
     def save_outputs(self):
+        self.offline_dir.mkdir(parents=True, exist_ok=True)
+
         # 保存 print-all.md
         (self.offline_dir / 'print.md'   ).write_text(''.join(self.full_doc_lines), encoding='utf-8')
         (self.offline_dir / 'print-wf.md').write_text(''.join(self.  wf_doc_lines), encoding='utf-8')
@@ -158,6 +163,22 @@ class MkDocsBuilder:
         self.process_directory(self.template_dir)
         self.clean_extra_files()
         self.save_outputs()
+    
+def copy_static_files():
+    if not STATIC_DIR.exists():
+        print(f"[WARN] 静态目录不存在: {STATIC_DIR}")
+        return
+    for item in STATIC_DIR.iterdir():
+        src = item
+        dst = DOCS_DIR / item.name
+        if src.is_dir():
+            # copytree 不支持直接覆盖，需要先删除再复制
+            if dst.exists():
+                shutil.rmtree(dst)
+            shutil.copytree(src, dst)
+        else:
+            shutil.copy2(src, dst)
+    print(f"[INFO] 已将 {STATIC_DIR} 的内容复制到 {DOCS_DIR}")
 
 def main():
     builder = MkDocsBuilder(
@@ -170,6 +191,7 @@ def main():
         MKDOCS_OUTPUT
     )
     builder.run()
+    copy_static_files()
 
 if __name__ == "__main__":
     main()
