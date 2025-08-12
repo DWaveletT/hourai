@@ -10,7 +10,7 @@
 - `5 l r`：对于所有的 $i\in[l,r]$，求 $B_i$ 的最大值。
 
 在每一次操作后，我们都进行一次更新，让 $B_i\gets\max(B_i,A_i)$。
-***/
+**/
 #include "../../header.cpp"
 int A[MAXN];
 struct Node{
