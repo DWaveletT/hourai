@@ -57,6 +57,7 @@ jobs:
       # 下载 Mkdocs 以及相关依赖
       - name: Set up Mkdocs
         run: |
+          pip install pipenv
           pipenv install
         
       # 调用 Python 脚本构建 MD
