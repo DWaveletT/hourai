@@ -5,7 +5,6 @@ TEXMFCONFIG /home/runner/.texliveYYYY/texmf-config
 TEXMFVAR /home/runner/.texliveYYYY/texmf-var
 binary_x86_64-linux 1
 collection-latexrecommended 1
-collection-latexextra 1
 collection-xetex 1
 collection-langchinese 1
 collection-fontsrecommended 1

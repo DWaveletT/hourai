@@ -23,7 +23,7 @@ jobs:
       - name: Install Pandoc
         run: |
           sudo apt-get install -y \
-            pandoc
+            pandoc perl wget
 
       - name: Detect TeX Live year
         id: detect-texlive
@@ -45,14 +45,13 @@ jobs:
         run: |
           if [ ! -x "$HOME/texlive/${TL_YEAR}/bin/x86_64-linux/tlmgr" ]; then
             echo "TeX Live not found in cache, installing..."
-            sudo apt-get update && sudo apt-get install -y perl wget
             wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
             tar -xzf install-tl-unx.tar.gz
             TL_DIR=$(find . -maxdepth 1 -type d -name "install-tl-*" | head -n 1)
             cd "$TL_DIR"
             sed "s/YYYY/${TL_YEAR}/g" $GITHUB_WORKSPACE/scripts/texlive.profile > profile
             sudo ./install-tl --profile=profile
-            sudo tlmgr install latexmk
+            sudo tlmgr install fancyhdr geometry multicol listings zref epigraph fontspec latexmk
           else
             echo "Using cached TeX Live"
           fi
