@@ -17,47 +17,33 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Update apt
-        run: sudo apt-get update
-
-      - name: Install Pandoc
+      - name: Create TeX Live deps file
         run: |
-          sudo apt-get install -y \
-            pandoc perl wget
+          echo "texlive-latex-base texlive-latex-recommended texlive-xetex texlive-lang-chinese texlive-fonts-recommended texlive-science lmodern latexmk pandoc" > scripts/texlive-deps.txt
 
-      - name: Detect TeX Live year
-        id: detect-texlive
-        run: |
-          YEAR=$(date +%Y)
-          echo "TL_YEAR=$YEAR" >> $GITHUB_ENV
-
-      - name: Cache TeX Live
+      # 缓存 apt 包和 TeX Live
+      - name: Cache TeX Live and apt packages
         uses: actions/cache@v4
         with:
           path: |
-            ~/texlive
-            ~/.texlive${{ env.TL_YEAR }}
-          key: ${{ runner.os }}-texlive-${{ env.TL_YEAR }}
+            /var/cache/apt/archives
+            /usr/share/texlive
+            /var/lib/texmf
+          key: ${{ runner.os }}-texlive-apt-${{ hashFiles('scripts/texlive-deps.txt') }}
           restore-keys: |
-            ${{ runner.os }}-texlive-
+            ${{ runner.os }}-texlive-apt-
 
-      - name: Install TeX Live if not cached
+      - name: Update apt
+        run: sudo apt-get update
+
+      - name: Install TeX Live deps
         run: |
-          if [ ! -x "$HOME/texlive/${TL_YEAR}/bin/x86_64-linux/tlmgr" ]; then
-            echo "TeX Live not found in cache, installing..."
-            wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
-            tar -xzf install-tl-unx.tar.gz
-            TL_DIR=$(find . -maxdepth 1 -type d -name "install-tl-*" | head -n 1)
-            cd "$TL_DIR"
-            sed "s/YYYY/${TL_YEAR}/g" $GITHUB_WORKSPACE/scripts/texlive.profile > profile
-            sudo ./install-tl --profile=profile
-            sudo tlmgr install fancyhdr geometry multicol listings zref epigraph fontspec latexmk
-          else
-            echo "Using cached TeX Live"
-          fi
+          sudo apt-get install -y $(cat scripts/texlive-deps.txt)
 
-      - name: Add TeX Live to PATH
-        run: echo "$HOME/texlive/${TL_YEAR}/bin/x86_64-linux" >> $GITHUB_PATH
+      # 修复 restore 后的权限
+      - name: Fix TeX Live permissions
+        run: |
+          sudo chown -R $USER:$USER /usr/share/texlive /var/lib/texmf
 
       - name: Set up Python
         uses: actions/setup-python@v5
