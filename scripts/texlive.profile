@@ -8,4 +8,3 @@ collection-latexrecommended 1
 collection-xetex 1
 collection-langchinese 1
 collection-fontsrecommended 1
-collection-science 1
