@@ -17,55 +17,57 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Create TeX Live deps file
-        run: |
-          echo "texlive-latex-base texlive-latex-recommended texlive-xetex texlive-lang-chinese texlive-fonts-recommended texlive-science lmodern latexmk pandoc" > scripts/texlive-deps.txt
-
-      - name: Cache apt packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            /var/cache/apt/archives
-            /var/lib/apt/lists
-          key: ${{ runner.os }}-apt-${{ hashFiles('scripts/texlive-deps.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-apt-
-
       - name: Update apt
         run: sudo apt-get update
 
-      - name: Install TeX Live (minimal)
+      - name: Install Pandoc
         run: |
           sudo apt-get install -y \
-            texlive-latex-base \
-            texlive-latex-recommended \
-            texlive-xetex \
-            texlive-lang-chinese \
-            texlive-fonts-recommended \
-            texlive-science \
-            lmodern \
-            latexmk \
             pandoc
 
-      # 获取当前 TeX Live 版本号
-      - name: Detect TeX Live version
+      - name: Detect TeX Live year
         id: detect-texlive
         run: |
-          YEAR=$(tlmgr --version 2>/dev/null | grep -oE '[0-9]{4}' | head -n 1 || date +%Y)
+          YEAR=$(date +%Y)
           echo "TL_YEAR=$YEAR" >> $GITHUB_ENV
-          echo "Detected TeX Live version: $YEAR"
 
-      # 缓存 TeX Live 用户数据
-      - name: Cache TeX Live user data
+      - name: Cache TeX Live
         uses: actions/cache@v4
         with:
           path: |
+            ~/texlive
             ~/.texlive${{ env.TL_YEAR }}
-            /usr/local/texlive
-            /var/lib/texmf
-          key: ${{ runner.os }}-texlive-${{ env.TL_YEAR }}-${{ hashFiles('scripts/texlive-deps.txt') }}
+          key: ${{ runner.os }}-texlive-${{ env.TL_YEAR }}
           restore-keys: |
-            ${{ runner.os }}-texlive-${{ env.TL_YEAR }}-
+            ${{ runner.os }}-texlive-
+
+      - name: Install TeX Live if not cached
+        run: |
+          if [ ! -x "$HOME/texlive/${TL_YEAR}/bin/x86_64-linux/tlmgr" ]; then
+            echo "TeX Live not found in cache, installing..."
+            sudo apt-get update && sudo apt-get install -y perl wget
+            wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+            tar -xzf install-tl-unx.tar.gz
+            cd install-tl-*
+            cat <<EOF > profile
+            selected_scheme scheme-medium
+            TEXDIR $HOME/texlive/${TL_YEAR}
+            TEXMFCONFIG ~/.texlive${TL_YEAR}/texmf-config
+            TEXMFVAR ~/.texlive${TL_YEAR}/texmf-var
+            binary_x86_64-linux 1
+            collection-latexrecommended 1
+            collection-xetex 1
+            collection-langchinese 1
+            collection-fontsrecommended 1
+            collection-science 1
+            EOF
+            ./install-tl --profile=profile
+          else
+            echo "Using cached TeX Live"
+          fi
+
+      - name: Add TeX Live to PATH
+        run: echo "$HOME/texlive/${TL_YEAR}/bin/x86_64-linux" >> $GITHUB_PATH
 
       - name: Set up Python
         uses: actions/setup-python@v5
