@@ -1,24 +1,28 @@
-#include "2d.cpp"
+#include "2d-lines.cpp"
 
-std::vector<p2> HPI(std::vector<line> vs) { 
-  auto cmp = [](line a, line b) { 
-    if(paraS(a, b)) return dist(a) < dist(b); 
-    return ::cmp(p2(a), p2(b)); 
+vector<pp> HPI(vector<line> vs) {
+  auto cmp = [](line a, line b) {
+    return paraS(a, b) ? dis(a) < dis(b)
+      : ::cmp(pp(a), pp(b));
   }; 
   sort(vs.begin(), vs.end(), cmp); 
   int ah = 0, at = 0, n = size(vs); 
-  std::vector<line> deq(n + 1); 
-  std::vector<p2> ans(n); 
+  vector<line> deq(n + 1); 
+  vector<pp> ans(n);
   deq[0] = vs[0]; 
   for(int i = 1;i <= n;++i) { 
-  line o = i < n ? vs[i] : deq[ah]; 
-  if(paraS(vs[i - 1], o)) continue; 
-  for(;ah < at && check(deq[at - 1], deq[at], o) < 0;) -- at;//maybe <= 
-  if(i != n) for(;ah < at && check(deq[ah], deq[ah + 1], o) < 0;) ++ ah; 
-  if(!is_para(o, deq[at])) { 
-  ans[at] = o & deq[at]; 
-  deq[++at] = o; 
-  }
+    line o = i < n ? vs[i] : deq[ah];
+    if(paraS(vs[i - 1], o)) continue;
+
+    // maybe <=
+    while(ah < at && check(deq[at - 1], deq[at], o) < 0)
+      -- at;
+    if(i != n)
+    while(ah < at && check(deq[ah], deq[ah + 1], o) < 0)
+      ++ ah;
+    if(!is_parallel(o, deq[at])) { 
+      ans[at] = o & deq[at], deq[++at] = o; 
+    }
   }
   if(at - ah <= 2) return {}; 
   return {ans.begin() + ah, ans.begin() + at};
