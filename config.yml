@@ -34,10 +34,13 @@ title:
   flow-range-cost: 上下界费用流
   flow-range-max: 上下界最大流
   09-geometry: 计算几何
+  2d: 二维基础
   2d-convex: 二维凸包
   2d-circle: 二维圆形
+  2d-lines: 二维线段
+  2d-voronoi: Voronoi 图
+  2d-hpi: 半平面交
   2d-planer-duel: 最左转线
-  2d: 二维基础
   04-graph: 图论
   cactus: 仙人掌
   count-circle-3: 三元环计数
@@ -175,3 +178,6 @@ wf_files:
   - virtual-tree
   - 2d
   - 2d-circle
+  - 2d-lines
+  - 2d-hpi
+  - 2d-voronoi
