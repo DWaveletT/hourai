@@ -48,7 +48,8 @@ jobs:
             sudo apt-get update && sudo apt-get install -y perl wget
             wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
             tar -xzf install-tl-unx.tar.gz
-            cd install-tl-*
+            TL_DIR=$(find . -maxdepth 1 -type d -name "install-tl-*" | head -n 1)
+            cd "$TL_DIR"
             sed "s/YYYY/${TL_YEAR}/g" $GITHUB_WORKSPACE/scripts/texlive.profile > profile
             ./install-tl --profile=profile
           else
