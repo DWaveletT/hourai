@@ -35,7 +35,7 @@ title:
   flow-range-max: 上下界最大流
   09-geometry: 计算几何
   2d-convex: 二维凸包
-  2d-minimal-circle: 最小圆覆盖
+  2d-circle: 二维圆形
   2d-planer-duel: 最左转线
   2d: 二维基础
   04-graph: 图论
@@ -173,3 +173,5 @@ wf_files:
   - tree-hash
   - tree-prufer
   - virtual-tree
+  - 2d
+  - 2d-circle

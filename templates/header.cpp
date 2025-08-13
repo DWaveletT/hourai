@@ -24,3 +24,5 @@ int power(int a, int b, int p);
 
 ll qpow(ll a, ll b);
 ll inv(ll x);
+
+mt19937 MT;
