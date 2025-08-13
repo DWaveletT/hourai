@@ -46,7 +46,8 @@ title:
   count-circle-3: 三元环计数
   count-circle-4: 四元环计数
   graph-base-circle-tree: 基环树
-  bipart-matching: 二分图最大匹配
+  matching-bipart: 二分图最大匹配
+  matching-general: 一般图最大匹配
   path-johnson: 全源最短路
   tarjan-2sat: 2-SAT
   tarjan-cut-vertex: 割点
@@ -130,7 +131,8 @@ wf_files:
   - flow-range-max
   - count-circle-3
   - count-circle-4
-  - bipart-matching
+  - matching-bipart
+  - matching-general
   - tarjan-2sat
   - tarjan-cut-vertex
   - tarjan-edge-ecc

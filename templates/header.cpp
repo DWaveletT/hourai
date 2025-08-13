@@ -17,6 +17,8 @@ const int MOD  = 998244353, MD = MOD;
 const int inv2;
 
 using ll = i64;
+using db = double;
+using ld = long double;
 
 int qread();
 int power(int a, int b);

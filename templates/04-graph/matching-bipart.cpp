@@ -16,10 +16,9 @@ bool kuhn(int u){
     return false;
 }
 void solve(int L, int R){
-    mt19937 MT;     // 需要打乱避免构造
     for(int i = 1;i <= L;++ i){
         shuffle(G[i].begin(), G[i].end(), MT);
-    }
+    } // 需要打乱避免构造
     while(1){
         bool ok = false;
         memset(V, false, sizeof(V));
