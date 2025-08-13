@@ -12,9 +12,15 @@ using u32 = unsigned;
 using u64 = unsigned long long;
 const int INF  =  1e9;
 const i64 INFL = 1e18;
+const int MAXN = 10 + 3, MAXM = 10 + 3;
+const int MOD  = 998244353, MD = MOD;
+const int inv2;
+
+using ll = i64;
 
 int qread();
 int power(int a, int b);
 int power(int a, int b, int p);
-const int MAXN = 10 + 3, MAXM = 10 + 3;
-const int MOD  = 998244353;
+
+ll qpow(ll a, ll b);
+ll inv(ll x);

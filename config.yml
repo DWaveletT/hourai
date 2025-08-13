@@ -43,6 +43,7 @@ title:
   count-circle-3: 三元环计数
   count-circle-4: 四元环计数
   graph-base-circle-tree: 基环树
+  bipart-matching: 二分图最大匹配
   path-johnson: 全源最短路
   tarjan-2sat: 2-SAT
   tarjan-cut-vertex: 割点
@@ -87,6 +88,7 @@ title:
   07-poly: 多项式
   poly-family: NTT 全家桶
   poly-fwt: FWT 全家桶
+  poly-fwt-short: 定系数短多项式卷积
   poly-mtt: 任意模数 NTT
   08-string: 字符串
   acam: AC 自动机
@@ -125,6 +127,7 @@ wf_files:
   - flow-range-max
   - count-circle-3
   - count-circle-4
+  - bipart-matching
   - tarjan-2sat
   - tarjan-cut-vertex
   - tarjan-edge-ecc
@@ -157,6 +160,7 @@ wf_files:
   - xor-shift
   - poly-family
   - poly-fwt
+  - poly-fwt-short
   - poly-mtt
   - acam
   - kmp-ex

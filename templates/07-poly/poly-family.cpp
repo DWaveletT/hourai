@@ -1,155 +1,150 @@
-/**
-## 用法
-
-多项式全家桶。
-
-- 包含基础多项式算法：快速傅里叶变换（`FFT`）及其逆变换（`IFFT`）、快速数论变换（`NTT`）及其逆变换（`INTT`）；
-- 包含基于 NTT 的扩展多项式算法：多项式乘法（`MUL`）、多项式乘法逆元（`INV`）、多项式微分（`DIF`）、多项式积分（`INT`）、多项式对数（`LN`）、多项式指数（`EXP`）、多项式开根（`SQT`）、多项式平移（即计算 $G(x) = F(x + c)$，`SHF`）。
-**/
 #include "../header.cpp"
-int inv(int x);
-const int MAX_ = (1 << 19) + 3;
-using cplx = complex<double>;
-const long double pi = acos(-1);
-namespace Poly{
-  void FFT(int n, cplx Z[]){
-    static int W[MAX_];
-    int l = 1; W[0] = 0;
-    while (n >>= 1)
-      up(0, l - 1, i)
-        W[l++] = W[i] << 1 | 1, W[i] <<= 1;
-    up(0, l - 1, i)
-      if(W[i] > i) swap(Z[i], Z[W[i]]);
-    for (n = l >> 1, l = 1;n;n >>= 1, l <<= 1){
-      cplx* S = Z, o(cos(pi / l), sin(pi / l));
-      up(0, n - 1, i){
-        cplx s(1, 0);
-        up(0, l - 1, j){
-          cplx x = S[j] + s * S[j + l];
-          cplx y = S[j] - s * S[j + l];
-          S[j] = x, S[j + l] = y, s = s * o;
-        }
-        S += l << 1;
-      }
-    }
-  }
-  void IFFT(int n, cplx Z[]){
-    FFT(n, Z); reverse(Z + 1, Z + n);
-    up(0, n - 1, i) Z[i] /= n;
-  }
-  void NTT(int n, int Z[]){
-    static int W[MAX_];
-    int g = 3, l = 1; W[0] = 0;
-    while (n >>= 1)
-      up(0, l - 1, i)
-        W[l++] = W[i] << 1 | 1, W[i] <<= 1;
-    up(0, l - 1, i)
-      if (W[i] > i)swap(Z[i], Z[W[i]]);
-    for (n = l >> 1, l = 1;n;n >>= 1, l <<= 1){
-      int* S = Z, o = power(g, (MOD - 1) / l / 2);
-      up(0, n - 1, i){
-        int s = 1;
-        up(0, l - 1, j){
-          int x = (S[j] + 1ll * s * S[j + l] % MOD    ) % MOD;
-          int y = (S[j] - 1ll * s * S[j + l] % MOD + MOD) % MOD;
-          S[j] = x, S[j + l] = y;
-          s = 1ll * s * o % MOD;
-        }
-        S += l << 1;
-      }
-    }
-  }
-  void INTT(int n, int Z[]){
-    NTT(n, Z); reverse(Z + 1, Z + n);
-    int o = inv(n);
-    up(0, n - 1, i)
-      Z[i] = 1ll * Z[i] * o % MOD;
-  }
-  void MUL(int n, int A[], int B[]){      // 乘法
-    NTT(n, A), NTT(n, B);
-    up(0, n - 1, i)
-      A[i] = 1ll * A[i] * B[i] % MOD;
-    INTT(n, A);
-  }
-  void INV(int n, int Z[], int T[]){      // 乘法逆
-    static int A[MAX_];
-    up(0, n - 1, i)
-      T[i] = 0;
-    T[0] = power(Z[0], MOD - 2);
-    for (int l = 1;l < n;l <<= 1){
-      up(  0, 2 * l - 1, i) A[i] = Z[i];
-      up(2 * l, 4 * l - 1, i) A[i] = 0;
-      NTT(4 * l, A), NTT(4 * l, T);
-      up(0, 4 * l - 1, i)
-        T[i] = (2ll * T[i] - 1ll * A[i] * T[i] % MOD * T[i] % MOD + MOD) % MOD;
-      INTT(4 * l, T);
-      up(2 * l, 4 * l - 1, i)
-        T[i] = 0;
-    }
-  }
-  void DIF(int n, int Z[], int T[]){      // 微分
-    up(0, n - 2, i)
-      T[i] = 1ll * Z[i + 1] * (i + 1) % MOD;
-    T[n - 1] = 0;
-  }
-  void INT(int n, int c, int Z[], int T[]){   // 积分
-    up(1, n - 1, i)
-      T[i] = 1ll * Z[i - 1] * inv(i) % MOD;
-    T[0] = c;
-  }
-  void LN(int n, int* Z, int* T){       // 求对数
-    static int A[MAX_], B[MAX_];
-    up(0, 2 * n - 1, i)
-      A[i] = B[i] = 0;
-    DIF(n, Z, A), INV(n, Z, B), MUL(2 * n, A, B), INT(n, 0, A, T);
-  }
-  void EXP(int n, int* Z, int* T){      // 求指数
-    static int A[MAX_], B[MAX_];
-    up(1, 2 * n - 1, i) T[i] = 0;
-    T[0] = 1;
-    for (int l = 1;l < n;l <<= 1){
-      LN (2 * l, T, A);
-      up(  0, 2 * l - 1, i)
-        B[i] = (-A[i] + Z[i] + MOD) % MOD;
-      B[0] = (B[0] + 1) % MOD;
-      up(2 * l, 4 * l - 1, i)
-        T[i] = B[i] = 0;
-      MUL(4 * l, T, B);
-    }
-  }
-  void SQT(int n, int* Z, int* T){      // 开根
-    static int A[MAX_], B[MAX_];
-    up(1, 2 * n - 1, i) T[i] = 0;
-    T[0] = 1;
-    int o = inv(2);
-    for (int l = 1;l < n;l <<= 1){
-      INV(2 * l, T, A);
-      up(0, 2 * l - 1, i)
-        B[i] = Z[i];
-      up(2 * l, 4 * l - 1, i)
-        A[i] = B[i] = 0;
-      MUL(4 * l, A, B);
-      up(0, 2 * l - 1, i)
-        T[i] = 1ll * (T[i] + A[i]) * o % MOD;
-    }
-  }
-  void SHF(int n, int c, int* Z, int* T){   // 平移
-    static int A[MAX_], B[MAX_], F[MAX_], G[MAX_];
-    int o = 1;
-    up(1, n - 1, i)
-      F[i] = 1ll * F[i - 1] *   i  % MOD,
-      G[i] = 1ll * G[i - 1] * inv(i) % MOD;
-    up(0, n - 1, i)
-      A[i] = 1ll * Z[n - 1 - i] * F[n - 1 - i] % MOD;
-    up(0, n - 1, i){
-      B[i] = 1ll * G[i] * o % MOD;
-      o = 1ll * o * c % MOD;
-    }
-    int l = 1; while (l < 2 * n - 1) l <<= 1;
-    up(n, l - 1, i)
-      A[i] = B[i] = 0; 
-    MUL(l, A, B);
-    up(0, n - 1, i)
-      T[n - 1 - i] = 1ll * G[n - 1 - i] * A[i] % MOD;
-  }
+using Poly = vector<ll>;
+#define lg(x) ((x) == 0 ? -1 : __lg(x))
+#define Size(x) int(x.size())
+
+namespace NTT_ns {
+	const long long G = 3, invG = inv(G);
+
+	void Root(ll x = MD) {
+		ll _tp1 = x - 1, _tp2 = 0;
+		while (_tp1 % 2 == 0) _tp1 >>= 1, ++_tp2;
+		fprintf(stderr, "MD = %lld * 2 ^ %lld + 1\n", _tp1, _tp2);
+		vector<ll> p; _tp1 = x - 1;
+		for (ll i = 2; i * i <= _tp1; ++i) if (_tp1 % i == 0) {
+			p.emplace_back(i);
+			while (_tp1 % i == 0) _tp1 /= i;
+		}
+		if (_tp1 != 1) p.emplace_back(_tp1);
+		for (ll r = 1; r < x; ++r) {
+			int cnt = 0;
+			for (auto& i : p) if (qpow(r, (x - 1) / i) == 1) ++cnt;
+			if (cnt == 0) { fprintf(stderr, "%lld\n", r); break; }
+		}
+	}
+
+	vector<int> rev;
+	void NTT(ll* F, int len, int sgn) {
+		rev.resize(len);
+		for (int i = 1; i < len; ++i) {
+			rev[i] = (rev[i >> 1] >> 1) | ((i & 1) * (len >> 1));
+			if (i < rev[i]) swap(F[i], F[rev[i]]);
+		}
+		for (int tmp = 1; tmp < len; tmp <<= 1) {
+			ll w1 = qpow(sgn ? G : invG, (MD - 1) / (tmp << 1));
+			for (int i = 0; i < len; i += tmp << 1) {
+				for (ll j = 0, w = 1; j < tmp; ++j, w = w * w1 % MD) {
+					ll x = F[i + j], y = F[i + j + tmp] * w % MD;
+					F[i + j] = (x + y) % MD, F[i + j + tmp] = (x - y + MD) % MD;
+				}
+			}
+		}
+		if (sgn == 0) {
+			ll inv_len = inv(len);
+			for (int i = 0; i < len; ++i) F[i] = F[i] * inv_len % MD;
+		}
+	}
+
+	vector<ll> Iv(2, 1), jc(1, 1), ijc(1, 1);
+	void Add_Inv(int len) {
+		Iv[0] = 0, Iv[1] = 1, len += 10; if (len < Size(Iv)) return;
+		int i = Size(Iv); Iv.resize(len);
+		while (i < len) Iv[i] = (MD - MD / i * Iv[MD % i] % MD) % MD, ++i;
+	}
+
+	void Add_Fac(int len) {
+		len += 10, Add_Inv(len); if (len < Size(jc)) return;
+		int i = Size(jc); jc.resize(len), ijc.resize(len);
+		for (; i < len; ++i) jc[i] = jc[i - 1] * i % MD, ijc[i] = ijc[i - 1] * Iv[i] % MD;
+	}
+
+	ll Inv(int x) {
+		return Add_Inv(x), Iv[x];
+	}
+
+	ll Binom(int n, int m) {
+		Add_Fac(max(n, m));
+		return n < m ? 0 : jc[n] * ijc[m] % MD * ijc[n - m] % MD;
+	}
+}
+
+Poly operator * (Poly F, Poly G) {
+	int siz = Size(F) + Size(G) - 1, len = 1 << (lg(siz - 1) + 1);
+	if (siz <= 300) {
+		Poly H(siz);
+		for (int i = Size(F) - 1; ~i; --i) for (int j = Size(G) - 1; ~j; --j) {
+			H[i + j] = (H[i + j] + F[i] * G[j]) % MD;
+		}
+		return H;
+	}
+	/*
+		建议写完 NTT 先删掉暴力卷积，测一下对不对。
+
+		别搞半天发现原来一直用的暴力卷积，NTT 根本就不对。
+	*/
+	using NTT_ns::NTT; F.resize(len), G.resize(len);
+	NTT(F.data(), len, 1), NTT(G.data(), len, 1);
+	for (int i = 0; i < len; ++i) F[i] = F[i] * G[i] % MD;
+	return NTT(F.data(), len, 0), F.resize(siz), F;
+}
+
+Poly operator + (Poly F, Poly G) {
+	int siz = max(Size(F), Size(G)); F.resize(siz), G.resize(siz);
+	for (int i = 0; i < siz; ++i) F[i] = (F[i] + G[i]) % MD;
+	return F;
+}
+
+Poly operator - (Poly F, Poly G) {
+	int siz = max(Size(F), Size(G)); F.resize(siz), G.resize(siz);
+	for (int i = 0; i < siz; ++i) F[i] = (F[i] - G[i] + MD) % MD;
+	return F;
+}
+
+Poly lsh(Poly F, int k) {
+	F.resize(Size(F) + k);
+	for (int i = Size(F) - 1; i >= k; --i) F[i] = F[i - k];
+	for (int i = 0; i < k; ++i) F[i] = 0;
+	return F;
+}
+
+Poly rsh(Poly F, int k) {
+	int siz = Size(F) - k;
+	for (int i = 0; i < siz; ++i) F[i] = F[i + k];
+	return F.resize(siz), F;
+}
+
+Poly cut(Poly F, int len) {
+	return F.resize(len), F;
+}
+
+Poly der(Poly F) {
+	int siz = Size(F) - 1;
+	for (int i = 0; i < siz; ++i) F[i] = F[i + 1] * (i + 1) % MD;
+	return F.pop_back(), F;
+}
+
+Poly inte(Poly F) {
+	F.emplace_back(0);
+	for (int i = Size(F) - 1; ~i; --i) F[i] = F[i - 1] * NTT_ns::Inv(i) % MD;
+	return F[0] = 0, F;
+}
+
+Poly inv(Poly F) {
+	int siz = Size(F); Poly G{inv(F[0])};
+	for (int i = 2; (i >> 1) < siz; i <<= 1) {
+		G = G + G - G * G * cut(F, i), G.resize(i);
+	}
+	return G.resize(siz), G;
+}
+
+Poly ln(Poly F) {
+	return cut(inte(cut(der(F) * inv(F), Size(F))), Size(F));
+}
+
+Poly Exp(Poly F) {
+	int siz = Size(F); Poly G{1};
+	for (int i = 2; (i >> 1) < siz; i <<= 1) {
+		G = G * (Poly{1} - ln(cut(G, i)) + cut(F, i)), G.resize(i);
+	}
+	return G.resize(siz), G;
 }
