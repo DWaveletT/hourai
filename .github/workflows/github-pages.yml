@@ -51,7 +51,7 @@ jobs:
             TL_DIR=$(find . -maxdepth 1 -type d -name "install-tl-*" | head -n 1)
             cd "$TL_DIR"
             sed "s/YYYY/${TL_YEAR}/g" $GITHUB_WORKSPACE/scripts/texlive.profile > profile
-            ./install-tl --profile=profile
+            sudo ./install-tl --profile=profile
           else
             echo "Using cached TeX Live"
           fi
