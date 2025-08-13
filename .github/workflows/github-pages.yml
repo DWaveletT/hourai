@@ -49,18 +49,7 @@ jobs:
             wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
             tar -xzf install-tl-unx.tar.gz
             cd install-tl-*
-            cat <<EOF > profile
-            selected_scheme scheme-medium
-            TEXDIR $HOME/texlive/${TL_YEAR}
-            TEXMFCONFIG ~/.texlive${TL_YEAR}/texmf-config
-            TEXMFVAR ~/.texlive${TL_YEAR}/texmf-var
-            binary_x86_64-linux 1
-            collection-latexrecommended 1
-            collection-xetex 1
-            collection-langchinese 1
-            collection-fontsrecommended 1
-            collection-science 1
-            EOF
+            sed "s/YYYY/${TL_YEAR}/g" $GITHUB_WORKSPACE/scripts/texlive.profile > profile
             ./install-tl --profile=profile
           else
             echo "Using cached TeX Live"
