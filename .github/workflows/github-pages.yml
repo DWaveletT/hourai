@@ -52,6 +52,7 @@ jobs:
             cd "$TL_DIR"
             sed "s/YYYY/${TL_YEAR}/g" $GITHUB_WORKSPACE/scripts/texlive.profile > profile
             sudo ./install-tl --profile=profile
+            sudo tlmgr install latexmk
           else
             echo "Using cached TeX Live"
           fi
