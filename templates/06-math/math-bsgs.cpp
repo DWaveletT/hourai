@@ -6,7 +6,7 @@
 #include "../header.cpp"
 namespace BSGS {
   unordered_map <int, int> M;
-  int solve(int a, int y, int p){  // a ^ x = y (mod p)
+  int solve(int a, int y, int p){
     M.clear();
     int B = sqrt(p);
     int w1 = y, u1 = power(a, p - 2, p);
@@ -22,5 +22,5 @@ namespace BSGS {
       w2 = 1ll * w2 * u2 % p;
     }
     return -1;
-  }
+  } // a ^ x = y (mod p)
 }

@@ -19,12 +19,12 @@ namespace LinkCutTree{
   void push_down(int x){
     if(!T[x]) return;
     int lc = X[x][0], rc = X[x][1];
-    if(lc) T[lc] ^= 1, swap(X[lc][0], X[lc][1]);
-    if(rc) T[rc] ^= 1, swap(X[rc][0], X[rc][1]);
+    if(lc)T[lc] ^= 1, swap(X[lc][0],X[lc][1]);
+    if(rc)T[rc] ^= 1, swap(X[rc][0],X[rc][1]);
     T[x] = false;
   }
   void update(int x){
-    if(!is_root(x)) update(F[x]); push_down(x);
+    if(!is_root(x))update(F[x]); push_down(x);
   }
   void rotate(int x){
     int y = F[x], z = F[y];

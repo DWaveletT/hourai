@@ -2,7 +2,7 @@
 namespace ODT {
   // <pos_type, value_type>
   map <int, long long> M;
-  // 分裂为 [1, p) 和 [p, +inf)，返回后者迭代器
+  // 分裂为 [1, p) [p, +inf)，返回后者迭代器
   auto split(int p) {
     auto it = prev(M.upper_bound(p));
     return M.insert(

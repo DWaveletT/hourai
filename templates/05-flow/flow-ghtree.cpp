@@ -5,7 +5,7 @@
 **/
 #include "../header.cpp"
 namespace Dinic{
-  const long long INF = 1e18;
+  const i64 INF = 1e18;
   const int SIZ = 1e5 + 3;
   int n, m;
   int H[SIZ], V[SIZ], N[SIZ], F[SIZ], t = 1;
@@ -36,15 +36,15 @@ namespace Dinic{
     return D[t] != 0;
   }
   int C[SIZ];
-  long long dfs(int s, int t, int u, long long maxf){
+  i64 dfs(int s, int t, int u, i64 maxf){
     if(u == t)
       return maxf;
-    long long totf = 0;
+    i64 totf = 0;
     for(int &i = C[u];i;i = N[i]){
       const int &v = V[i];
       const int &f = F[i];
       if(D[v] == D[u] + 1){
-        long long ff = dfs(s, t, v, min(maxf, 1ll * f));
+        i64 ff = dfs(s, t, v, min(maxf, 1ll * f));
         totf += ff, maxf -= ff;
         F[i] -= ff, F[i ^ 1] += ff;
         if(maxf == 0) return totf;
@@ -52,8 +52,8 @@ namespace Dinic{
     }
     return totf;
   }
-  long long dinic(int s, int t){
-    long long ans = 0;
+  i64 dinic(int s, int t){
+    i64 ans = 0;
     while(bfs(s, t)){
       memcpy(C, H, sizeof(int) * (n + 3));
       ans += dfs(s, t, s, INF);
@@ -63,8 +63,6 @@ namespace Dinic{
 }
 
 namespace GHTree{
-  const int MAXN =  500 + 5;
-  const int MAXM = 1500 + 5;
   const int INF  = 1e9;
   int n, m, U[MAXM], V[MAXM], W[MAXM], A[MAXM], B[MAXM];
   void add(int u, int v, int w){

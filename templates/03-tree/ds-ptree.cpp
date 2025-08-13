@@ -8,26 +8,22 @@
 **/
 #include "../header.cpp"
 vector<int> E[MAXN];
-
 namespace LCA{
-  const int SIZ = 1e5 + 3;
-  int D[SIZ], F[SIZ];
-  int P[SIZ], Q[SIZ], o, h = 18;
-  void dfs(int u, int f){
-    P[u] = ++ o;
-    Q[o] = u;
-    F[u] = f;
-    D[u] = D[f] + 1;
-    for(auto &v : E[u]) if(v != f){
-      dfs(v, u);
-    }
-  }
   const int MAXH = 18 + 3;
-  int ST[SIZ][MAXH];
+  int D[MAXN], F[MAXN];
+  int P[MAXN], Q[MAXN], o, h = 18;
+  void dfs(int u, int f){
+    ++ o;
+    P[u] = o, Q[o] = u;
+    F[u] = f, D[u] = D[f] + 1;
+    for(auto &v : E[u]) if(v != f)
+      dfs(v, u);
+  }
+  int ST[MAXN][MAXH];
   int cmp(int a, int b){
     return D[a] < D[b] ? a : b;
   }
-  int T[SIZ], n;
+  int T[MAXN], n;
   void init(int _n);  // 初始化 ST 表
   int lca(int a, int b){
     if(a == b) return a;
@@ -41,41 +37,34 @@ namespace LCA{
 }
 
 namespace BIT{
-  void modify(int D[], int n, int p, int w){
+  void add(int D[], int n, int p, int w){
     ++ p;
-    while(p <= n)
-      D[p] += w, p += p & -p;
+    while(p <= n) D[p] += w, p += p & -p;
   }
-  int query(int D[], int n, int p){
+  int pre(int D[], int n, int p){
     if(p < 0) return 0;
     p = min(n, p + 1);
     int r = 0;
-    while(p >  0)
-      r += D[p], p -= p & -p;
+    while(p >  0) r += D[p], p -= p & -p;
     return r;
   }
 }
 
 namespace PTree{
-  const int SIZ = 1e5 + 3;
-  bool V[SIZ];
-  int  S[SIZ], L[SIZ];
   vector<int> EE[MAXN];
-  int *D1[MAXN];
-  int *D2[MAXN];
-
+  bool V[MAXN];
+  int S[MAXN], L[MAXN], *D1[MAXN], *D2[MAXN];
+  using LCA :: dis, BIT :: add, BIT :: pre;
   void dfs1(int s, int &g, int u, int f){
     S[u] = 1;
     int maxsize = 0;
     for(auto &v : E[u]) if(v != f && !V[v]){
       dfs1(s, g, v, u);
-      if(S[v] > maxsize)
-        maxsize = S[v];
+      maxsize = max(maxsize, S[v]);
       S[u] += S[v];
     }
     maxsize = max(maxsize, s - S[u]);
-    if(maxsize <= s / 2)
-      g = u;
+    if(maxsize <= s / 2) g = u;
   }
 
   int n;
@@ -85,19 +74,19 @@ namespace PTree{
     for(auto &u : E[g]) if(!V[u]){
       int h = 0;
       if(S[u] < S[g]) build(S[u], h, u, 0);
-      else      build(s - S[g], h, u, 0);
+      else        build(s - S[g], h, u, 0);
       EE[g].push_back(h);
       EE[h].push_back(g);
     }
   }
-  int F[SIZ];
+  int F[MAXN];
   void dfs2(int u, int f){
     F[u] = f;
     for(auto &v : EE[u]) if(v != f){
       dfs2(v, u);
     }
   }
-  void build(int _n){   // 建树（需先调用 LCA::init）
+  void build(int _n){   // 建树（需初始化 LCA）
     n = _n;
     int s = n, g = 0;
     dfs1(s, g, 1, 0);
@@ -121,11 +110,11 @@ namespace PTree{
   void modify(int x, int w){  // 修改点权
     int u = x;
     while(1){
-      BIT :: modify(D1[x], L[x], LCA :: dis(u, x), w);
+      add(D1[x], L[x], dis(u, x), w);
       int y = F[x];
       if(y != 0){
         int e = LCA :: dis(x, y);
-        BIT :: modify(D2[x], L[x], LCA :: dis(u, y), w);
+        add(D2[x], L[x], dis(u, y), w);
         x = y;
       } else break;
     }
@@ -133,11 +122,11 @@ namespace PTree{
   int query(int x, int d){
     int ans = 0, u = x;
     while(1){
-      ans += BIT :: query(D1[x], L[x], d - LCA :: dis(u, x));
+      ans += pre(D1[x], L[x], d - dis(u, x));
       int y = F[x];
       if(y != 0){
-        int e = LCA :: dis(x, y);
-        ans -= BIT :: query(D2[x], L[x], d - LCA :: dis(u, y));
+        int e = dis(x, y);
+        ans-= pre(D2[x], L[x], d - dis(u, y));
         x = y;
       } else break;
     }

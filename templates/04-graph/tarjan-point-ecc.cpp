@@ -4,7 +4,8 @@ vector <int> V[MAXN];
 stack  <int> S;
 int D[MAXN], L[MAXN], o; bool I[MAXN];
 void dfs(int u, int f){
-  D[u] = L[u] = ++ o; I[u] = true, S.push(u); int s = 0;
+  D[u] = L[u] = ++ o; I[u] = true, S.push(u);
+  int s = 0;
   for(auto &v : V[u]) if(v != f){
     if(D[v]){
       if(I[v])   L[u] = min(L[u], D[v]);

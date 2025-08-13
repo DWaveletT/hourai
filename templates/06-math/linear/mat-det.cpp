@@ -13,7 +13,7 @@ int mat_det(Mat a){
   const int &n = a.n;
   for(int i = 1;i <= n;++ i){
     int f = -1;
-    for(int j = i;j <= n;++ j) if(a.W[j][i] != 0){
+    for(int j = i;j <= n;++ j) if(a.W[j][i]){
       f = j; break;
     }
     if(f == -1) return 0;

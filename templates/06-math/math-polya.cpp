@@ -56,11 +56,10 @@ int main(){
     int n, t;
     cin >> n;
     t = n;
-    for(int i = 2;i * i <= n;++ i) if(n % i == 0){
+    for(int i = 2;i <= n / i;++ i) if(n % i == 0){
       int w = i, c = 0;
-      while(t % i == 0){
+      while(t % i == 0)
         t /= i, c ++;
-      }
       P.push_back({ w, c });
     }
     if(t != 1)

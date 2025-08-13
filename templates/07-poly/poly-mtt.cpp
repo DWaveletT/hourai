@@ -42,12 +42,17 @@ Poly polyMul(Poly F, Poly G, int tmp = 0) { // tmp 用于循环卷积技巧, 卡
     int len = 1;
     while (len < tmp) len <<= 1;
     vector<cp> P(len), tP(len), Q(len);
-    for (int i = 0; i <= n; ++i) P[i] = cp(F[i] / M, F[i] % M);
-    for (int i = 0; i <= n; ++i) tP[i] = cp(F[i] / M, -(F[i] % M));
-    for (int i = 0; i <= m; ++i) Q[i] = cp(G[i] / M, G[i] % M);
-    FFT(P.data(), len, 1), FFT(Q.data(), len, 1), FFT(tP.data(), len, 1);
-    for (int i = 0; i < len; ++i) P[i] *= Q[i], tP[i] *= Q[i];
-    FFT(P.data(), len, -1), FFT(tP.data(), len, -1);
+    for (int i = 0; i <= n; ++i)
+        P[i] = cp(F[i] / M, F[i] % M),
+        tP[i] = cp(F[i] / M, -(F[i] % M));
+    for (int i = 0; i <= m; ++i)
+        Q[i] = cp(G[i] / M, G[i] % M);
+    for(auto &X: {&P, &Q, &tP})
+        FFT(X -> data(), len, 1);
+    for (int i = 0; i < len; ++i)
+        P[i] *= Q[i], tP[i] *= Q[i];
+    FFT(P.data(), len, -1);
+    FFT(tP.data(), len, -1);
     vector<ll> H(n + m + 1);
     for (int i = 0; i < tmp; ++i) {
         H[i] = ll((P[i].real() + tP[i].real()) / 2 + 0.5) % MD * M % MD * M % MD

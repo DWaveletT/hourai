@@ -18,9 +18,9 @@ namespace MCMF{
       D[i] = INFL;
     D[s] = 0;
     while(!Q.empty()){
-      int u = Q.front(); Q.pop(), I[u] = false;
+      int u = Q.front();Q.pop(), I[u] = false;
       for(int i = H[u];i;i = N[i]){
-        const int &v = V[i], &f = F[i], &w = W[i];
+        int &v = V[i], &f = F[i], &w = W[i];
         if(f && D[u] + w < D[v]){
           D[v] = D[u] + w;
           if(!I[v]) Q.push(v), I[v] = true;
@@ -36,7 +36,7 @@ namespace MCMF{
     i64 totf = 0, totc = 0;
     T[u] = true;
     for(int &i = C[u];i;i = N[i]){
-      const int &v = V[i], &f = F[i], &w = W[i];
+      int &v = V[i], &f = F[i], &w = W[i];
       if(f && D[v] == D[u] + w && !T[v]){
         auto [f, c] = dfs(s, t, v, min(1ll * F[i], maxf));
         F[i  ] -= f, F[i ^ 1] += f;

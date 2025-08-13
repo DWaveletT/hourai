@@ -9,8 +9,9 @@ int main(){
   T[0] = '#', n = 2 * n;
   int p = 0, x = 0, ans = 0;
   for(int i = 1;i <= n;++ i){
-    if(i <= p) R[i] = min(R[2 * x - i], p - i);
-    while(i - R[i] - 1 >= 0 && T[i + R[i] + 1] == T[i - R[i] - 1])
+    if(i <= p)R[i] = min(R[2 * x - i], p - i);
+    while(i - R[i] - 1 >= 0
+      && T[i + R[i] + 1] == T[i - R[i] - 1])
       ++ R[i];
     if(i + R[i] > p){
       p = i + R[i];

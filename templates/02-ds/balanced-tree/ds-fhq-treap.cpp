@@ -5,7 +5,7 @@ namespace Treap{
   int F[SIZ], C[SIZ], S[SIZ], W[SIZ], X[SIZ][2], sz;
   u64 H[SIZ];
   int  newnode(int w){
-    W[++ sz] = w, C[sz] = S[sz] = 1; H[sz] = MT();
+    W[++ sz] = w, C[sz] = S[sz] = 1, H[sz] = MT();
     return sz;
   }
   void pushup(int x){
@@ -79,9 +79,9 @@ namespace Treap{
     return W[x];
   }
   int  find_pre(int &root, int w){
-    return find_kth(root, find_rank(root, w) - 1);
+return find_kth(root, find_rank(root, w) - 1);
   }
   int  find_suc(int &root, int w){
-    return find_kth(root, find_rank(root, w + 1));
+return find_kth(root, find_rank(root, w + 1));
   }
 }

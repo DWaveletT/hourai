@@ -10,11 +10,11 @@ void solve(int n){
   for(int i = 2;i <= n;++ i){
     if(!V[i]){
       P[++ p] = i;
-      for(int j = 1;j <= n / i;++ j){ // 前缀和
+      for(int j = 1;j <= n / i;++ j){
         A[j * i] += A[j];
-      }
+      } // 前缀和
     }
-    for(int j = 1;j <= p && P[j] <= n / i;++ j){
+    for(int j = 1;j <= p&&P[j] <= n / i;++ j){
       V[i * P[j]] = true;
       if(i % P[j] == 0) break;
     }
