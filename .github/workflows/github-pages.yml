@@ -21,17 +21,12 @@ jobs:
         run: |
           echo "texlive-latex-base texlive-latex-recommended texlive-xetex texlive-lang-chinese texlive-fonts-recommended texlive-science lmodern latexmk pandoc" > scripts/texlive-deps.txt
 
-      # 缓存 apt 包和 TeX Live
-      - name: Cache TeX Live and apt packages
+      # 缓存 apt deb 文件（用户可读，不含 lock/partial）
+      - name: Cache apt debs
         uses: actions/cache@v4
         with:
-          path: |
-            /var/cache/apt/archives
-            /usr/share/texlive
-            /var/lib/texmf
-          key: ${{ runner.os }}-texlive-apt-${{ hashFiles('scripts/texlive-deps.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-texlive-apt-
+          path: /var/cache/apt/archives/*.deb
+          key: ${{ runner.os }}-apt-debs-${{ hashFiles('scripts/texlive-deps.txt') }}
 
       - name: Update apt
         run: sudo apt-get update
@@ -40,10 +35,14 @@ jobs:
         run: |
           sudo apt-get install -y $(cat scripts/texlive-deps.txt)
 
-      # 修复 restore 后的权限
-      - name: Fix TeX Live permissions
-        run: |
-          sudo chown -R $USER:$USER /usr/share/texlive /var/lib/texmf
+      # 缓存 TeX Live 用户数据（如果使用 tlmgr）
+      - name: Cache TeX Live user data
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.texlive*
+            /var/lib/texmf
+          key: ${{ runner.os }}-texlive-user-${{ hashFiles('scripts/texlive-deps.txt') }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
