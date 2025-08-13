@@ -14,7 +14,7 @@ const int INF  =  1e9;
 const i64 INFL = 1e18;
 const int MAXN = 10 + 3, MAXM = 10 + 3;
 const int MOD  = 998244353, MD = MOD;
-const int inv2;
+const int inv2 = (MOD + 1) / 2;
 
 using ll = i64;
 using db = double;

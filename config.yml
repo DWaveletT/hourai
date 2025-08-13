@@ -48,6 +48,7 @@ title:
   graph-base-circle-tree: 基环树
   matching-bipart: 二分图最大匹配
   matching-general: 一般图最大匹配
+  dominate-tree: 支配树
   path-johnson: 全源最短路
   tarjan-2sat: 2-SAT
   tarjan-cut-vertex: 割点
@@ -133,6 +134,7 @@ wf_files:
   - count-circle-4
   - matching-bipart
   - matching-general
+  - dominate-tree
   - tarjan-2sat
   - tarjan-cut-vertex
   - tarjan-edge-ecc
