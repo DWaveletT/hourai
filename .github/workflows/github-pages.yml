@@ -19,14 +19,7 @@ jobs:
 
       - name: Create TeX Live deps file
         run: |
-          echo "texlive-latex-base texlive-latex-recommended texlive-xetex texlive-lang-chinese texlive-fonts-recommended texlive-science lmodern latexmk pandoc" > scripts/texlive-deps.txt
-
-      # 缓存 apt deb 文件（用户可读，不含 lock/partial）
-      - name: Cache apt debs
-        uses: actions/cache@v4
-        with:
-          path: /var/cache/apt/archives/*.deb
-          key: ${{ runner.os }}-apt-debs-${{ hashFiles('scripts/texlive-deps.txt') }}
+          echo "texlive-latex-base texlive-latex-recommended texlive-xetex texlive-lang-chinese texlive-fonts-recommended lmodern latexmk pandoc" > scripts/texlive-deps.txt
 
       - name: Update apt
         run: sudo apt-get update
@@ -34,15 +27,6 @@ jobs:
       - name: Install TeX Live deps
         run: |
           sudo apt-get install -y $(cat scripts/texlive-deps.txt)
-
-      # 缓存 TeX Live 用户数据（如果使用 tlmgr）
-      - name: Cache TeX Live user data
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.texlive*
-            /var/lib/texmf
-          key: ${{ runner.os }}-texlive-user-${{ hashFiles('scripts/texlive-deps.txt') }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
