@@ -5,19 +5,14 @@ vector<line> cut(const vector<line> & o, line l) {
   vector<line> res;
   int n = size(o);
   for(int i = 0;i < n;++i) {
-    line a = o[i];
-    line b = o[(i + 1) % n];
-    line c = o[(i + 2) % n]; 
+    line a = o[i], b = o[(i + 1) % n], c = o[(i + 2) % n]; 
     int va = check(a, b, l), vb = check(b, c, l); 
-    if(va > 0 || vb > 0 || (va == 0 && vb == 0)) { 
+    if(va > 0 || vb > 0 || (va == 0 && vb == 0))
       res.push_back(b); 
-    } 
-    if(va >= 0 && vb < 0) { 
+    if(va >= 0 && vb < 0) 
       res.push_back(l); 
-    } 
   }
-  if(res.size() <= 2) return {}; 
-  return res;
+  return res.size() <= 2 ? vector<line>{}:res;
 } // 切凸包
 line bisector(pp a, pp b) {return line(a.x - b.x, a.y - b.y, (b.norm() - a.norm()) / 2); }
 vector<vector<line>> voronoi(vector<pp> p) { 

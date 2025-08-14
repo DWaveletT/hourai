@@ -17,25 +17,25 @@
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \newcommand{\passthrough}[1]{#1}
 
-\usepackage[a4paper, includehead, headsep=0.1in, left=0.4in, right=0.1in, top=0.1in, bottom=0.1in, landscape]{geometry}
+\usepackage[a4paper, includehead, headsep=0.07in, left=0.45in, right=0.2in, top=0.2in, bottom=0.2in, landscape]{geometry}
 \ctexset{
     section = {
-        beforeskip = { 1.5ex plus 1ex minus .2ex },
-        afterskip  = { 1.3ex plus .2ex }
+        beforeskip = { 0.3ex plus .1ex minus .1ex },
+        afterskip  = { 0.1ex plus .1ex }
     },
     subsection = {
-        beforeskip = { 1.25ex plus 1ex minus .2ex },
-        afterskip  = { 0.5ex plus .2ex }
+        beforeskip = { 0.15ex plus .1ex minus .1ex },
+        afterskip  = { 0.1ex plus .1ex }
     },
     subsubsection = {
-        beforeskip = { 1.25ex plus 1ex minus .2ex },
-        afterskip  = { 0.5ex plus .2ex }
+        beforeskip = { 0.15ex plus .1ex minus .1ex },
+        afterskip  = { 0.1ex plus .1ex }
     },
 }
 
 % Three columns & landscape to make the code tight
 \usepackage{multicol}
-\setlength{\columnsep}{30pt}
+\setlength{\columnsep}{25pt}
 
 % ==================== Begin     Font ====================
 \usepackage{fontspec}
@@ -100,6 +100,8 @@
   columns = fixed,
   numbers = left,
   frame = single,
+  numbersep =5pt,
+  framesep  =2pt,
   lineskip=-1pt
 }
 
