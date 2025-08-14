@@ -71,6 +71,7 @@ nav:
   - 树形背包: bag-tree.md
   - 动态动态规划 1: dp-ddp1.md
   - 插头 dp: dp-plug.md
+  - dp-quad-inequality: dp-quad-inequality.md
   - 斜率优化: dp-slope.md
 - 数据结构:
   - 平衡树:
@@ -93,6 +94,7 @@ nav:
   - 长链剖分: tree-divide-length.md
   - 重链剖分: tree-divide-weight.md
   - 树哈希: tree-hash.md
+  - tree-intersect: tree-intersect.md
   - Prufer 序列: tree-prufer.md
   - 虚树: virtual-tree.md
 - 图论:
@@ -142,6 +144,7 @@ nav:
   - 二次剩余: math-twice.md
   - 单位根反演: math-unit-root.md
 - 多项式:
+  - 最小多项式: poly-bm.md
   - NTT 全家桶: poly-family.md
   - 定系数短多项式卷积: poly-fwt-short.md
   - FWT 全家桶: poly-fwt.md
@@ -170,8 +173,13 @@ nav:
 - 其他:
   - 笛卡尔树: cartesian-tree.md
   - CDQ 分治: cdq.md
-  - Python 提示: py-hint.md
+  - 日期公式: day.md
+  - misc: misc.md
+  - pbds 库: pbds.md
+  - Python 技巧: py-hint.md
+  - 快速测试: run.md
   - 自适应辛普森: simpson.md
   - 模拟退火: simulate-anneal.md
+  - 对拍脚本: stress.md
   - 伪随机生成: xor-shift.md
 - 公共头文件: header.md

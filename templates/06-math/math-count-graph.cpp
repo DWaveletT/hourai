@@ -3,8 +3,8 @@
 
 设 $G$ 是一张有向无环图，边带权，每个点的度数有限。给定起点集合 $A=\{a_1,a_2, \cdots,a_n\}$，终点集合 $B = \{b_1, b_2, \cdots,b_n\}$。
 
-- 一段路径 $p:v_0\to^{w_1} v_1\to^{w_2} v_2\to \cdots \to^{w_k} v_k$ 的边权被定义为 $\omega (p) = \prod w_i$。
-- 一对顶点 $(a, b)$ 的权值定义为 $e(a, b) = \sum_{p:a\to b}\omega (p)$。
+- 一段路径 $p:v_0\to^{w_1} v_1\to^{w_2} v_2\to \cdots \to^{w_k} v_k$ 的权值：$\omega (p) = \prod w_i$。
+- 一对顶点 $(a, b)$ 的权值：$e(a, b) = \sum_{p:a\to b}\omega (p)$。
 
 设矩阵 $M$ 如下：
 $$

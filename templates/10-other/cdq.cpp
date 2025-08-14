@@ -3,18 +3,11 @@
 给定三元组序列 $(a_i, b_i, c_i)$，求解 $f(i) = \sum_{j} [a_j \le a_i \land b_j\le b_i \land c_j\le c_i]$。
 **/
 #include "../header.cpp"
-struct Node{
-  int id, a, b, c;
-}A[MAXN], B[MAXN];
+struct Node{int id, a, b, c;}A[MAXN], B[MAXN];
 bool cmp(Node a, Node b){
-  if(a.a != b.a) return a.a < b.a;
-  if(a.b != b.b) return a.b < b.b;
-  if(a.c != b.c) return a.c < b.c;
-  return a.id < b.id;
+  return a.a == b.a ? (a.b == b.b ? (a.c == b.c ? a.c < b.c : a.id < b.id) : a.b < b.b) : a.a < b.a;
 }
-int K[MAXN], H[MAXN];
-int qread();
-int n, m, D[MAXM];
+int K[MAXN], H[MAXN], n, m, D[MAXM];
 namespace BIT{
   void modify(int x, int w){
     while(x <= m) D[x] += w, x += x & -x;
