@@ -6,9 +6,11 @@
 \def\season{2024-2025}
 
 \usepackage{amsmath, amssymb}
+\usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{float}
-\usepackage{hyperref}
+\usepackage{comment}
+\usepackage[colorlinks, linkcolor = black]{hyperref}
 
 % ==================== Begin     Page ====================
 %%%%%% fix pandoc
@@ -79,7 +81,7 @@
 
 %%%%%% Main Content
 
-\usepackage{xcolor}
+\usepackage[table]{xcolor}
 \usepackage{listings, lstfiracode} % https://ctan.org/pkg/lstfiracode
 
 % Color Palletes from Gihub
@@ -185,6 +187,15 @@
     \tableofcontents
     
     $body$
+
+    \newpage
 \end{multicols}
+
+\appendix
+
+\phantomsection
+\addcontentsline{toc}{section}{附录}
+
+\input{appendix.tex}
 
 \end{document}

@@ -18,8 +18,7 @@ namespace SAM{
         F[cur] = q;
       } else {
         int clone = ++ s;
-        L[clone] = L[p] + 1;
-        F[clone] = F[q];
+        L[clone] = L[p] + 1, F[clone] = F[q];
         for(int i = 0;i <= h;++ i)
           M[clone][i] = M[q][i];
         while(p != -1 && M[p][e] == q)

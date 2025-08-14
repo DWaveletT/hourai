@@ -39,7 +39,9 @@ title:
   2d-circle: 二维圆形
   2d-lines: 二维线段
   2d-voronoi: Voronoi 图
+  2d-delaunay: Delaunay 三角剖分
   2d-hpi: 半平面交
+  2d-dynamic-hull: 动态凸包（不支持删除）
   2d-planer-duel: 最左转线
   04-graph: 图论
   cactus: 仙人掌
@@ -61,7 +63,7 @@ title:
   mat-gauss1: 高斯消元与求秩（实数）
   mat-gauss2: 高斯消元与求秩（整数）
   mat-inv: 矩阵求逆
-  mat-tree: 矩阵树
+  math-count-graph: 树图计数
   math-bsgs: 大步小步
   math-exgcd: 扩展欧几里得
   math-exexgcd: 万能欧几里得
@@ -82,7 +84,6 @@ title:
   math-polya: polya 定理
   math-unit-root: 单位根反演
   math-crt: 中国剩余定理
-  math-table: 常用数表
   10-other: 其他
   cartesian-tree: 笛卡尔树
   cdq: CDQ 分治
@@ -90,6 +91,8 @@ title:
   simpson: 自适应辛普森
   simulate-anneal: 模拟退火
   xor-shift: 伪随机生成
+  day: 日期公式
+  py-hint: Python 技巧
   07-poly: 多项式
   poly-family: NTT 全家桶
   poly-fwt: FWT 全家桶
@@ -141,7 +144,7 @@ wf_files:
   - tarjan-point-ecc
   - tarjan-scc
   - mat-det
-  - mat-tree
+  - math-count-graph
   - math-bsgs
   - math-exgcd
   - math-exexgcd
@@ -152,19 +155,18 @@ wf_files:
   - math-pollards-rho
   - math-seive-min25
   - math-sieve-du
-  - math-sieve-pn
   - math-twice
   - math-lagrange
   - math-min-max
   - math-polya
   - math-unit-root
   - math-crt
-  - math-table
   - cartesian-tree
   - cdq
   - simpson
-  - simulate-anneal
   - xor-shift
+  - py-hint
+  - day
   - poly-family
   - poly-fwt
   - poly-fwt-short
@@ -185,3 +187,5 @@ wf_files:
   - 2d-lines
   - 2d-hpi
   - 2d-voronoi
+  - 2d-dynamic-hull
+  - 2d-delaunay

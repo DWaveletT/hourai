@@ -1,3 +1,4 @@
+// From Let it Rot
 #include "2d-lines.cpp"
 
 vector<line> cut(const vector<line> & o, line l) { 

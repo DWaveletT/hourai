@@ -10,7 +10,7 @@ ROOT_DIR = SCRIPT_DIR.parent
 
 AUX_DIR = ROOT_DIR / 'aux'
 PRINT_DIR = ROOT_DIR / 'docs' / 'offline'
-HOURAI_TEX = ROOT_DIR / 'utils' / 'hourai.tex'
+HOURAI_TEX = ROOT_DIR / 'hourai.tex'
 
 FILES = ['print', 'print-wf']
 

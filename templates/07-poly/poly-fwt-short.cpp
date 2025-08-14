@@ -7,40 +7,40 @@
 #define vv vector
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(nullptr);
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
 
-	ll n, k, m;
-	cin >> n >> m, k = 3;
-	vv<ll> w(k);
-	for (auto &i : w) cin >> i;
-	vv<vv<ll>> a(n, vv<ll>(k));
-	for (auto &i : a) for (auto &j : i) cin >> j;
-	ll uk = 1 << k, V = 1 << m;
-	vv<vv<ll>> c(V, vv<ll>(uk));
-	vv<ll> val(uk);
-	for (ll i = 0; i < uk; ++i) {
-		for (ll p = 0; p < k; ++p) {
-			if ((i >> p) & 1) val[i] = (val[i] - w[p] + MD) % MD;
-			else val[i] = (val[i] + w[p]) % MD;
-		}
-		vv<ll> f(V);
-		for (ll j = 0; j < n; ++j) {
-			ll z = 0;
-			for (ll p = 0; p < k; ++p) if ((i >> p) & 1) z ^= a[j][p];
-			++f[z];
-		}
-		FWT(f.data(), V, 1, 1, 1, MD - 1);
-		for (ll j = 0; j < V; ++j) c[j][i] = f[j];
-	}
-	for (ll i = 0; i < V; ++i) FWT(c[i].data(), uk, inv2, inv2, inv2, MD - inv2);
-	vv<ll> Ans(V, 1);
-	for (ll i = 0; i < V; ++i) {
-		for (ll j = 0; j < uk; ++j) {
-			Ans[i] = Ans[i] * qpow(val[j], c[i][j]) % MD;
-		}
-	}
-	FWT(Ans.data(), V, inv2, inv2, inv2, MD - inv2);
-	for (ll i = 0; i < V; ++i) cout << Ans[i] << " \n"[i == V - 1];
-	return 0;
+  ll n, k, m;
+  cin >> n >> m, k = 3;
+  vv<ll> w(k);
+  for(auto &i : w) cin >> i;
+  vv<vv<ll>> a(n, vv<ll>(k));
+  for(auto &i : a) for(auto &j : i) cin >> j;
+  ll uk = 1 << k, V = 1 << m;
+  vv<vv<ll>> c(V, vv<ll>(uk));
+  vv<ll> val(uk);
+  for (ll i = 0; i < uk; ++i) {
+    for (ll p = 0; p < k; ++p)
+      if ((i >> p) & 1)
+        val[i] = (val[i] - w[p] + MD) % MD;
+      else val[i] = (val[i] + w[p]) % MD;
+    vv<ll> f(V);
+    for (ll j = 0; j < n; ++j) {
+      ll z = 0;
+      for (ll p = 0; p < k; ++p)
+        if ((i >> p) & 1) z ^= a[j][p];
+      ++f[z];
+    }
+    FWT(f.data(), V, 1, 1, 1, MD - 1);
+    for (ll j = 0; j < V; ++j) c[j][i] = f[j];
+  }
+  for (ll i = 0; i < V; ++i) FWT(c[i].data(), uk, inv2, inv2, inv2, MD - inv2);
+  vv<ll> Ans(V, 1);
+  for (ll i = 0; i < V; ++i)
+    for (ll j = 0; j < uk; ++j)
+      Ans[i] = Ans[i] * qpow(val[j], c[i][j]) % MD;
+  FWT(Ans.data(), V, inv2, inv2, inv2, MD - inv2);
+  for (ll i = 0; i < V; ++i)
+    cout << Ans[i] << " \n"[i == V - 1];
+  return 0;
 }

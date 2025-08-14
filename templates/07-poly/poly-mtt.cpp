@@ -36,7 +36,7 @@ void FFT(cp* F, int len, int sgn) {
 ll MD, M; // 输入 MD 后, 需要设置 M 为 sqrt(MD)
 
 using Poly = vector<ll>;
-Poly polyMul(Poly F, Poly G, int tmp = 0) { // tmp 用于循环卷积技巧, 卡常.
+Poly polyMul(Poly F, Poly G, int tmp = 0) { // tmp 用于循环卷积技巧, 卡常
   for (auto &k : F) k %= MD;
   for (auto &k : G) k %= MD;
   int n = (int)F.size() - 1, m = (int)G.size() - 1;

@@ -26,8 +26,7 @@ namespace PAM{
           b = F[b];
         F[cur] = M[b][e];
       }
-      D[cur] = D[F[cur]] + 1;
-      last = cur;
+      D[cur] = D[F[cur]] + 1, last = cur;
     }
   }
 }

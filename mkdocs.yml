@@ -99,7 +99,10 @@ nav:
   - 仙人掌: cactus.md
   - 三元环计数: count-circle-3.md
   - 四元环计数: count-circle-4.md
+  - 支配树: dominate-tree.md
   - 基环树: graph-base-circle-tree.md
+  - 二分图最大匹配: matching-bipart.md
+  - 一般图最大匹配: matching-general.md
   - 2-SAT: tarjan-2sat.md
   - 割点: tarjan-cut-vertex.md
   - 边双连通分量: tarjan-edge-ecc.md
@@ -117,8 +120,8 @@ nav:
     - 高斯消元与求秩（实数）: mat-gauss1.md
     - 高斯消元与求秩（整数）: mat-gauss2.md
     - 矩阵求逆: mat-inv.md
-    - 矩阵树: mat-tree.md
   - 大步小步: math-bsgs.md
+  - 树图计数: math-count-graph.md
   - 中国剩余定理: math-crt.md
   - 狄利克雷前缀和: math-dirichlet.md
   - 万能欧几里得: math-exexgcd.md
@@ -136,11 +139,11 @@ nav:
   - min25 筛: math-seive-min25.md
   - 杜教筛: math-sieve-du.md
   - PN 筛: math-sieve-pn.md
-  - 常用数表: math-table.md
   - 二次剩余: math-twice.md
   - 单位根反演: math-unit-root.md
 - 多项式:
   - NTT 全家桶: poly-family.md
+  - 定系数短多项式卷积: poly-fwt-short.md
   - FWT 全家桶: poly-fwt.md
   - 任意模数 NTT: poly-mtt.md
 - 字符串:
@@ -155,14 +158,20 @@ nav:
   - 广义后缀自动机（在线）: sam-general-online.md
   - 后缀自动机: sam.md
 - 计算几何:
+  - 二维圆形: 2d-circle.md
   - 二维凸包: 2d-convex.md
-  - 最小圆覆盖: 2d-minimal-circle.md
+  - Delaunay 三角剖分: 2d-delaunay.md
+  - 动态凸包（不支持删除）: 2d-dynamic-hull.md
+  - 半平面交: 2d-hpi.md
+  - 二维线段: 2d-lines.md
   - 最左转线: 2d-planer-duel.md
+  - Voronoi 图: 2d-voronoi.md
   - 二维基础: 2d.md
 - 其他:
   - 笛卡尔树: cartesian-tree.md
   - CDQ 分治: cdq.md
+  - Python 提示: py-hint.md
   - 自适应辛普森: simpson.md
   - 模拟退火: simulate-anneal.md
   - 伪随机生成: xor-shift.md
-- header: header.md
+- 公共头文件: header.md

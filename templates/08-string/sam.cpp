@@ -6,8 +6,7 @@ namespace SAM{
   }
   void extend(char c){
     int cur = ++ s, e = c - 'a';
-    L[cur] = L[last] + 1;
-    S[cur] = 1;
+    L[cur] = L[last] + 1, S[cur] = 1;
     int p = last;
     while(p != -1 && !M[p][e])
       M[p][e] = cur, p = F[p];
@@ -19,8 +18,7 @@ namespace SAM{
         F[cur] = q;
       } else {
         int clone = ++ s;
-        L[clone] = L[p] + 1;
-        F[clone] = F[q];
+        L[clone] = L[p] + 1, F[clone] = F[q];
         S[clone] = 0;
         for(int i = 0;i <= h;++ i)
           M[clone][i] = M[q][i];

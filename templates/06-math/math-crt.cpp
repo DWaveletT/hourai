@@ -2,7 +2,6 @@
 ## 定理
 
 对于线性方程：
-
 $$
 \begin{cases}
 x \equiv a_1 \pmod {m_1} \\

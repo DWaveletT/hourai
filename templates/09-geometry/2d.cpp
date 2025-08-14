@@ -1,6 +1,5 @@
 #include "../header.cpp"
 
-using db = double;
 const db EPS = 1e-9, PI  = acos(-1);
 
 bool equal(db a, db b){ return fabs(a - b) < EPS; }
@@ -14,6 +13,14 @@ struct v2{   // 二维向量
   db abs() const {return sqrt(x * x + y * y);}
   db arg() const {return atan2(y, x); }
 };
+
+bool operator ==(v2 a, v2 b){
+  return a.x == b.x && a.y == b.y;
+}
+bool operator < (v2 a, v2 b){
+    return a.x == b.x ? a.y < b.y : a.x < b.x;
+}
+
 v2 r90(v2 x) { return {-x.y, x.x}; }
 v2 operator +(v2 a, v2 b){
   return {a.x + b.x, a.y + b.y}; }

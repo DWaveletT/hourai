@@ -57,6 +57,7 @@ class MkDocsBuilder:
 
     def add_file(self, layer: int, file_path: Path, parent_nav: List):
         name = file_path.stem
+        ext  = file_path.suffix[1:]
         title = self.config['title'].get(name, name)
         print(f"[FILE] {name}")
 
@@ -71,12 +72,12 @@ class MkDocsBuilder:
         out_path = self.website_dir / f"{name}.md"
         lines = file_path.read_text(encoding='utf-8').splitlines(keepends=True)
 
-        out_lines, code_lines = self.extract_content(lines, layer, is_wf)
+        out_lines, code_lines = self.extract_content(lines, layer, ext, is_wf)
         self.write_markdown(out_path, out_lines)
 
         self.generated_files[f"{name}.md"] = True
 
-    def extract_content(self, lines: List[str], layer: int, wf: bool):
+    def extract_content(self, lines: List[str], layer: int, ext: str, wf: bool):
         """Extract comment and code block"""
         out_lines = []
         doc_lines = []
@@ -100,12 +101,12 @@ class MkDocsBuilder:
 
         # 添加代码块
         code_content = [line for line in lines[p + 1:] if line.strip()]
-        out_lines.append('```cpp\n')
+        out_lines.append(f'```{ext}\n')
         out_lines.extend(code_content)
         out_lines.append('\n```\n')
 
         if len(code_content) > 0:
-            doc_lines.append('```cpp\n')
+            doc_lines.append(f'```{ext}\n')
             doc_lines.extend(code_content)
             doc_lines.append('\n```\n')
 
@@ -156,7 +157,7 @@ class MkDocsBuilder:
             if entry.is_dir():
                 sub_nav = self.add_dir_to_nav(layer, entry.name, parent_nav)
                 self.process_directory(entry, layer + 1, sub_nav)
-            elif entry.is_file() and entry.suffix == '.cpp':
+            elif entry.is_file():
                 self.add_file(layer, entry, parent_nav)
 
     def run(self):
