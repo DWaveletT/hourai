@@ -36,6 +36,7 @@ def build_pdf(md_file: Path, tex_file: Path, pdf_file: Path):
         f"--output={str(tex_file)}",
         f"--template={str(HOURAI_TEX)}",
         "--pdf-engine=xelatex",
+        "--shift-heading-level-by=-1",
         "--listing"
     ]
 

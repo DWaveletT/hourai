@@ -5,7 +5,7 @@ namespace PAM{
   int M[SIZ][MAXM];
   char S[SIZ];
   void init(){
-    S[0] = '$', n = 1;
+    S[0] = '#', n = 1;
     F[s = 0] = -1, L[0] = -1, D[0] = 0;
     F[s = 1] =  0, L[1] =  0, D[1] = 0;
   }

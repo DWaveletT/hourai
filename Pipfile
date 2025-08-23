@@ -6,10 +6,8 @@ name = "pypi"
 [packages]
 mkdocs = "*"
 pymdown-extensions = "*"
-pygments = "*"
 markdown = "*"
 mkdocs-material = "*"
-latexminted = "*"
 
 [dev-packages]
 

@@ -50,8 +50,8 @@ class MkDocsBuilder:
         title = self.config['title'].get(dirname, dirname)
         new_nav = {title: []}
         parent_nav.append(new_nav)
-        self.full_doc_lines.append(f"{'#' * layer} {title}\n\n")
-        self.  wf_doc_lines.append(f"{'#' * layer} {title}\n\n")
+        self.full_doc_lines.append(f"{'#' * (layer + 1)} {title}\n\n")
+        self.  wf_doc_lines.append(f"{'#' * (layer + 1)} {title}\n\n")
         print(f"[DIR] {dirname}")
         return new_nav[title]
 
@@ -65,9 +65,9 @@ class MkDocsBuilder:
 
         # nav 添加文件
         parent_nav.append({title: f"{name}.md"})
-        self.full_doc_lines.append(f"{'#' * layer} {title}\n\n")
+        self.full_doc_lines.append(f"{'#' * (layer + 1)} {title}\n\n")
         if is_wf:
-            self.wf_doc_lines.append(f"{'#' * layer} {title}\n\n")
+            self.wf_doc_lines.append(f"{'#' * (layer + 1)} {title}\n\n")
         
         out_path = self.website_dir / f"{name}.md"
         lines = file_path.read_text(encoding='utf-8').splitlines(keepends=True)
@@ -91,7 +91,7 @@ class MkDocsBuilder:
             if p > 0:
                 for line in lines[1:p]:
                     if line.startswith('#'):
-                        doc_lines.append('#' * (layer - 1) + line)
+                        doc_lines.append('#' * layer + line)
                     else:
                         doc_lines.append(line)
                 doc_lines.append('\n')
